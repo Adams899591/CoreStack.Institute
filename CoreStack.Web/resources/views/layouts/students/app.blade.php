@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js for dropdowns and interactivity -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @livewireStyles
     <style>
         /* Custom Colors */
         .bg-darkblue { background-color: #1A2B4C; } /* Dark Blue */
@@ -35,13 +36,13 @@
             background: #D4AF37;
         }
     </style>
-    @livewireStyles
+
 </head>
 <body class="bg-stone-100 font-sans antialiased">
     <div x-data="{ sidebarOpen: false, isDesktop: window.innerWidth >= 768 }" @resize.window="isDesktop = window.innerWidth >= 768" class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <aside x-cloak x-show="sidebarOpen || isDesktop"
-               class="fixed inset-y-0 left-0 z-50 w-64 bg-darkblue text-white transform transition-transform duration-200 ease-in-out md:relative md:flex md:flex-col md:translate-x-0"
+               class="fixed inset-y-0 left-0 z-50 w-64 bg-darkblue text-white transform transition-transform duration-200 ease-in-out flex flex-col md:relative md:translate-x-0"
                :class="{ '-translate-x-full': !sidebarOpen && !isDesktop, 'translate-x-0': sidebarOpen || isDesktop }"
                @click.away="sidebarOpen = false" {{-- Close sidebar when clicking outside --}}
                >
@@ -50,14 +51,15 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-darkblue-light/50 mt-2">CoreStack Academy</span> {{-- Moved CoreStack Academy here --}}
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar"> {{-- Main navigation --}}
-                <a href="#" class="flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg">
+                <a href="{{route("student.dashboard")}}" class="{{request()->routeIs("student.dashboard") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1s 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
                 </a>
 
                 <!-- My Program Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none">
+                    <button @click="open = !open" class="{{request()->routeIs("student.personal-data") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    {{-- <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none"> --}}
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             My Program
@@ -88,7 +90,7 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("student.semester-grade")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
                             Semester Grades
                         </a>
                         <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
@@ -98,7 +100,7 @@
                 </div>
 
                 <!-- My Personal Data (Direct Link) -->
-                <a href="#" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition">
+                <a href="{{route("student.personal-data")}}" class="{{request()->routeIs("student.personal-data") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     My Personal Data
                 </a>
@@ -120,10 +122,10 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("student.current-session-fee")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
                             Current Session Fee
                         </a>
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("student.payment-history")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
                             Payment History
                         </a>
                     </div>
@@ -133,7 +135,7 @@
             {{-- User Profile in Sidebar Footer --}}
             <div class="p-4 border-t border-darkblue-dark">
                 <div class="flex items-center space-x-3 p-2 rounded-lg bg-khaki/10 border border-gold/20">
-                    <div class="w-8 h-8 rounded-full bg-gold"></div>
+                    <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     <div class="flex-1 text-sm leading-tight">
                         <div class="flex items-center justify-between">
                             <p class="font-medium text-stone-100 text-xs">Usman Adams</p>
@@ -219,9 +221,6 @@
                         </div>
                     </div>
                     <div class="h-8 w-[1px] bg-stone-200"></div>
-                    {{-- <button class="px-4 py-2 bg-gold hover:bg-gold-dark text-stone-900 font-semibold rounded-md transition text-sm">
-                        Logout
-                    </button> --}}
                 </div>
             </header>
 
@@ -231,17 +230,19 @@
             </main>
 
             <!-- Footer -->
-            <footer class="h-16 bg-white border-t border-stone-200 flex items-center justify-between px-8 shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)]">
-                <div class="text-stone-500 text-xs font-medium italic">
-                    &copy; {{ date('Y') }} CoreStack Institute. <span class="ml-1 text-stone-400">"Excellence through Knowledge"</span>
-                    <span class="ml-4 text-stone-400">Developed by Usman Adams</span>
+            <footer class="h-auto md:h-16 py-6 md:py-0 bg-white border-t border-stone-200 flex flex-col md:flex-row items-center justify-between px-8 shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)] space-y-6 md:space-y-0">
+                <div class="text-stone-500 text-xs font-medium italic text-center md:text-left">
+                    <div>
+                        &copy; {{ date('Y') }} CoreStack Institute. <span class="block sm:inline sm:ml-1 text-stone-400">"Excellence through Knowledge"</span>
+                    </div>
+                    <div class="mt-1 md:mt-0 md:inline md:ml-4 text-stone-400">Developed by Usman Adams</div>
                 </div>
-                <div class="flex items-center space-x-6">
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <nav class="flex items-center space-x-4">
                         <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Privacy Policy</a>
                         <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Terms</a>
                     </nav>
-                    <div class="h-6 w-[1px] bg-stone-200"></div>
+                    <div class="hidden sm:block h-6 w-[1px] bg-stone-200"></div>
                     <a href="#" class="flex items-center text-[10px] font-bold text-stone-500 hover:text-gold uppercase tracking-widest transition">
                         <svg class="w-4 h-4 mr-1.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         Support Center
