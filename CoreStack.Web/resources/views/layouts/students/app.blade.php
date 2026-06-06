@@ -6,8 +6,6 @@
     <title>Student Portal - CoreStack Institute</title>
     <!-- Tailwind CSS (via CDN for demonstration) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js for dropdowns and interactivity -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @livewireStyles
     <style>
         /* Custom Colors */
@@ -68,10 +66,10 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("std.current-semester-reg")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("std.current-semester-reg")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
                             Current Semester Registration
                         </a>
-                        <a href="{{route("std.previous-registration")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("std.previous-registration")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
                             Previous Registration
                         </a>
                     </div>
@@ -92,19 +90,19 @@
                         {{-- <a href="{{route("std.semester-grade")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
                             Semester Grades
                         </a> --}}
-                        <a href="{{route("std.student-transcript")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("std.student-transcript")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
                             Transcript
                         </a>
                     </div>
                 </div>
 
                 <!-- My Personal Data (Direct Link) -->
-                <a href="{{route("std.personal-data")}}" class="{{request()->routeIs("std.personal-data") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                <a href="{{route("std.personal-data")}}" class="{{request()->routeIs("std.personal-data") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate>
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     My Personal Data
                 </a>
 
-                <a href="{{route("std.course-catolog")}}" class="{{request()->routeIs("std.course-catolog") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                <a href="{{route("std.course-catolog")}}" class="{{request()->routeIs("std.course-catolog") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate>
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
                     Course Catalog
                 </a>
@@ -121,10 +119,10 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("std.current-session-fee")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("std.current-session-fee")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
                             Current Session Fee
                         </a>
-                        <a href="{{route("std.payment-history")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
+                        <a href="{{route("std.payment-history")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
                             Payment History
                         </a>
                     </div>
