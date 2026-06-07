@@ -19,7 +19,7 @@ export default function HomeScreen() {
   const matricNumber = "CS-2024-0882";
   const department = "Web Cybersecurity";
   const studentLevel = "300L";
-  const gpa = "3.85";
+  const gpa = "4.85";
 
   const easyLinks = [
     { name: 'Attendance', icon: 'calendar-outline' },
@@ -36,16 +36,6 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}> 
       <StatusBar style="light" />
 
-      <View style={styles.header}>
-        <Text style={styles.brandName}>CoreStack</Text>
-        <TouchableOpacity style={styles.notificationContainer}>
-          <Ionicons name="notifications-outline" size={26} color="#ffffff" />
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>3</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.card, styles.studentInfoCard]}>
           <View style={styles.infoRow}>
@@ -110,31 +100,6 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f9fa' },
-  header: { 
-    backgroundColor: '#1A2B4C', 
-    paddingHorizontal: 20, 
-    paddingTop: 40, 
-    paddingBottom: 30, 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    alignItems: 'center',
-  },
-  brandName: { color: '#ffffff', fontSize: 24, fontWeight: 'bold', letterSpacing: 1 },
-  notificationContainer: { padding: 5 },
-  badge: { 
-    position: 'absolute', 
-    top: 0, 
-    right: 0, 
-    backgroundColor: '#ff4d4d', 
-    borderRadius: 10, 
-    width: 18, 
-    height: 18, 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    borderWidth: 1.5, 
-    borderColor: '#1A2B4C' 
-  },
-  badgeText: { color: 'white', fontSize: 10, fontWeight: 'bold' },
   card: {
     backgroundColor: '#ffffff', 
     marginHorizontal: 20, 

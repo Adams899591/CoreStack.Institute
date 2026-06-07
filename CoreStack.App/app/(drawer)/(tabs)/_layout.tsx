@@ -1,10 +1,28 @@
-import { Tabs } from "expo-router";
+import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
+import { Tabs } from 'expo-router';
 import { Ionicons } from "@expo/vector-icons";
+import * as NavigationBar from 'expo-navigation-bar';
 
 export default function TabLayout() {
+
+  useEffect(() => {
+    if (Platform.OS != 'android') return; 
+
+    const setNavBarStyles = async () => {
+      // Setting position to absolute allows the app to draw behind the system bar,
+      // making the color reach the very bottom edge of the device.
+      await NavigationBar.setPositionAsync('absolute');
+      await NavigationBar.setBackgroundColorAsync('#1A2B4C');
+      await NavigationBar.setButtonStyleAsync('light');
+    };
+    setNavBarStyles();
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
   return (
     <Tabs
       screenOptions={{
+        // tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: "#D4AF37",
         tabBarInactiveTintColor: "#ffffff" ,
         headerShown: false,
@@ -22,7 +40,7 @@ export default function TabLayout() {
         },
         tabBarLabelStyle: {
           fontSize: 12,
-          fontWeight: "500",
+          fontWeight: "500", 
         },
       }}>
       <Tabs.Screen
@@ -46,6 +64,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "person" : "person-outline"} size={24} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="qr-id"
+        options={{
+          title: "My QR ID",
+          tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? "qr-code" : "qr-code-outline"} size={24} color={color} />,
+        }}
+      />
+
     </Tabs>
   );
 }
