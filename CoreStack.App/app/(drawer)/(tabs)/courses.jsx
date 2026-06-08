@@ -11,6 +11,7 @@ const MOCK_COURSES = [
 
 const CourseCard = ({ course }) => (
   <View style={styles.card}>
+    <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
     <View style={styles.cardHeader}>
       <Text style={styles.courseCode}>{course.code}</Text>
       <View style={[styles.badge, course.status === 'Completed' ? styles.badgeSuccess : styles.badgeInfo]}>

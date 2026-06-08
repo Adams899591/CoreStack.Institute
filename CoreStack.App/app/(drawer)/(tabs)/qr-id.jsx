@@ -21,7 +21,7 @@ function QRIdScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+       <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
       <View style={styles.content}>
         <Text style={styles.headerTitle}>Digital ID</Text>
         <Text style={styles.description}>

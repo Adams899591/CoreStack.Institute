@@ -34,7 +34,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}> 
-      <StatusBar style="light" />
+           <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.card, styles.studentInfoCard]}>
