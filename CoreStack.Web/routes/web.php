@@ -11,6 +11,15 @@ use App\Livewire\Students\StudentDashboard;
 use App\Livewire\Students\StudentLogin;
 use App\Livewire\Students\StudentPersonalData;
 use App\Livewire\Students\StudentTranscript;
+use App\Livewire\Teachers\Assignments;
+use App\Livewire\Teachers\AttendanceReport;
+use App\Livewire\Teachers\AttendanceTracker;
+use App\Livewire\Teachers\CourseList;
+use App\Livewire\Teachers\GradeEntry;
+use App\Livewire\Teachers\LectureMaterials;
+use App\Livewire\Teachers\TeacherLogin;
+use App\Livewire\Teachers\TeacherProfile;
+use App\Livewire\Teachers\TeachersDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +29,7 @@ Route::get('/', function () {
 
 Route::prefix("auth")->group(function(){
     Route::get('/student-login', StudentLogin::class)->name("login");
+    Route::get('/teacher-login', TeacherLogin::class)->name("teacher-login");
 });
 
 
@@ -34,5 +44,20 @@ Route::get('/current-semester-reg', CurrentSemesterReg::class)->name("std.curren
 Route::get('/previous-registration', PreviousRegistration::class)->name("std.previous-registration");
 Route::get('/course-catolog', CourseCatolog::class)->name("std.course-catolog");
 Route::get('/course-details', CourseDetails::class)->name("std.course-details");
+
+});
+
+
+
+Route::prefix("teachers")->group(function(){
+
+Route::get('/dashboard', TeachersDashboard::class)->name("tchr.dashboard");
+Route::get('/grade-entry', GradeEntry::class)->name("tchr.grade-entry");
+Route::get('/course-list', CourseList::class)->name("tchr.course-list");
+Route::get('/attendance-tracker', AttendanceTracker::class)->name("tchr.attendance-tracker");
+Route::get('/attendance-report', AttendanceReport::class)->name("tchr.attendance-report");
+Route::get('/teacher-profile', TeacherProfile::class)->name("tchr.teacher-profile");
+Route::get('/lecture-materials', LectureMaterials::class)->name("tchr.lecture-materials");
+Route::get('/assignments', Assignments::class)->name("tchr.assignments");
 
 });

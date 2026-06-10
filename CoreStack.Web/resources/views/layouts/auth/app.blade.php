@@ -12,8 +12,10 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @livewireStyles
 </head>
-<body class="antialiased font-sans flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498243639359-2830bcb3c15d?q=80&w=1600&auto=format&fit=crop');">
-    {{ $slot }}
+<body class="antialiased font-sans">
+
+        {{ $slot }}
+
 
     @livewireScripts
 </body>
