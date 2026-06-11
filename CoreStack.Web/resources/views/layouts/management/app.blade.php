@@ -49,7 +49,7 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-gold mt-2">CoreStack Institute</span> {{-- Changed branding --}}
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar"> {{-- Main navigation --}}
-                <a href="#" class="{{request()->routeIs('mgt.dashboard') ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
+                <a href="{{route('mgt.dashboard')}}" class="{{request()->routeIs('mgt.dashboard') ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1s 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
                 </a>
@@ -100,8 +100,8 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Catalog</a>
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Crisscross</a>
+                        <a href="{{route("mgt.course-catalog")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Catalog</a>
+                        <a href="{{route("mgt.course-crisscross")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Crisscross</a>
                     </div>
                 </div>
 

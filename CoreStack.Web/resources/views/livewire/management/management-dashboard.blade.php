@@ -4,49 +4,57 @@
         <p class="text-stone-500 text-sm mt-1">Overview of institutional operations and statistics.</p>
     </div>
 
-    <!-- Stats Grid -->
+    <!-- Stats Grid --> 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Total Students -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex items-center">
-            <div class="p-3 bg-blue-50 rounded-xl mr-4">
-                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            </div>
-            <div>
-                <p class="text-stone-400 text-xs font-bold uppercase tracking-widest">Total Students</p>
-                <p class="text-2xl font-black text-stone-800">1,284</p>
+        <div class="bg-indigo-50 p-6 rounded-2xl border-t-4 border-indigo-500 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Total Students</p>
+                    <p class="text-3xl font-black text-indigo-900 mt-1">1,284</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl shadow-inner group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </div>
             </div>
         </div>
 
         <!-- Total Lecturers -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex items-center">
-            <div class="p-3 bg-gold/10 rounded-xl mr-4">
-                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            </div>
-            <div>
-                <p class="text-stone-400 text-xs font-bold uppercase tracking-widest">Lecturers</p>
-                <p class="text-2xl font-black text-stone-800">86</p>
+        <div class="bg-amber-50 p-6 rounded-2xl border-t-4 border-amber-500 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-amber-600 uppercase tracking-widest">Lecturers</p>
+                    <p class="text-3xl font-black text-amber-900 mt-1">86</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl shadow-inner group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
             </div>
         </div>
 
         <!-- Active Courses -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex items-center">
-            <div class="p-3 bg-stone-100 rounded-xl mr-4">
-                <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            </div>
-            <div>
-                <p class="text-stone-400 text-xs font-bold uppercase tracking-widest">Courses</p>
-                <p class="text-2xl font-black text-stone-800">42</p>
+        <div class="bg-emerald-50 p-6 rounded-2xl border-t-4 border-emerald-500 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Courses</p>
+                    <p class="text-3xl font-black text-emerald-900 mt-1">42</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl shadow-inner group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
             </div>
         </div>
 
         <!-- Fees Status -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex items-center">
-            <div class="p-3 bg-green-50 rounded-xl mr-4">
-                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            </div>
-            <div>
-                <p class="text-stone-400 text-xs font-bold uppercase tracking-widest">Fees Status</p>
-                <p class="text-2xl font-black text-stone-800">85%</p>
+        <div class="bg-rose-50 p-6 rounded-2xl border-t-4 border-rose-500 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-rose-600 uppercase tracking-widest">Fees Status</p>
+                    <p class="text-3xl font-black text-rose-900 mt-1">85%</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl shadow-inner group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
             </div>
         </div>
     </div>

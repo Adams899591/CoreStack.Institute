@@ -38,7 +38,7 @@
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="h-4 w-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </span>
-                <input type="text" placeholder="Search archives..." class="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-lg text-sm focus:ring-gold focus:border-gold outline-none">
+                <input type="text" placeholder="Search departments..." class="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-lg text-sm focus:ring-gold focus:border-gold outline-none">
             </div>
         </div>
 
@@ -46,10 +46,10 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-stone-50/50 text-stone-400 uppercase text-[10px] font-black tracking-widest border-b border-stone-100">
-                        <th class="px-6 py-4">Student Info</th>
                         <th class="px-6 py-4">Department</th>
                         <th class="px-6 py-4 text-center">Semester</th>
-                        <th class="px-6 py-4 text-center">GPA</th>
+                        <th class="px-6 py-4 text-center">Batch Size</th>
+                        <th class="px-6 py-4 text-center">Avg. GPA</th>
                         <th class="px-6 py-4 text-center">Published Date</th>
                         <th class="px-6 py-4 text-center">Status</th>
                         <th class="px-6 py-4"></th>
@@ -59,17 +59,14 @@
                     <!-- Mock Record 1 -->
                     <tr>
                         <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 font-bold text-xs mr-3">JD</div>
-                                <div>
-                                    <div class="text-sm font-bold text-stone-800">John Doe</div>
-                                    <div class="text-[10px] text-stone-500 font-medium uppercase tracking-tighter">CS-2024-0882</div>
-                                </div>
+                            <div>
+                                <div class="text-sm font-bold text-stone-800">Cyber Security</div>
+                                <div class="text-[10px] text-stone-500 font-medium uppercase tracking-tighter">Undergraduate</div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-sm font-medium text-stone-600">Cyber Security</td>
                         <td class="px-6 py-4 text-center text-xs font-bold text-stone-600">2023/2024 - 2nd</td>
-                        <td class="px-6 py-4 text-center text-sm font-black text-stone-800">4.50</td>
+                        <td class="px-6 py-4 text-center text-sm font-black text-stone-800">124</td>
+                        <td class="px-6 py-4 text-center text-sm font-black text-stone-800">3.45</td>
                         <td class="px-6 py-4 text-center text-xs font-medium text-stone-500">Jan 12, 2024</td>
                         <td class="px-6 py-4 text-center">
                             <span class="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-black uppercase rounded-md tracking-widest border border-green-100">Live</span>
@@ -81,17 +78,14 @@
                     <!-- Mock Record 2 -->
                     <tr>
                         <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 font-bold text-xs mr-3">JS</div>
-                                <div>
-                                    <div class="text-sm font-bold text-stone-800">Jane Smith</div>
-                                    <div class="text-[10px] text-stone-500 font-medium uppercase tracking-tighter">CS-2024-1104</div>
-                                </div>
+                            <div>
+                                <div class="text-sm font-bold text-stone-800">Computer Science</div>
+                                <div class="text-[10px] text-stone-500 font-medium uppercase tracking-tighter">Undergraduate</div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-sm font-medium text-stone-600">Computer Science</td>
                         <td class="px-6 py-4 text-center text-xs font-bold text-stone-600">2023/2024 - 2nd</td>
-                        <td class="px-6 py-4 text-center text-sm font-black text-stone-800">3.85</td>
+                        <td class="px-6 py-4 text-center text-sm font-black text-stone-800">98</td>
+                        <td class="px-6 py-4 text-center text-sm font-black text-stone-800">3.12</td>
                         <td class="px-6 py-4 text-center text-xs font-medium text-stone-500">Jan 12, 2024</td>
                         <td class="px-6 py-4 text-center">
                             <span class="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-black uppercase rounded-md tracking-widest border border-green-100">Live</span>

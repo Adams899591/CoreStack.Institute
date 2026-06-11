@@ -1,7 +1,10 @@
 <?php
 
 use App\Livewire\Management\ManagementDashboard;
+use App\Livewire\Management\ManagementLogin;
 use App\Livewire\Management\MgtApprovedResults;
+use App\Livewire\Management\MgtCourseCatalog;
+use App\Livewire\Management\MgtCourseCrisscross;
 use App\Livewire\Management\MgtDepartementManagement;
 use App\Livewire\Management\MgtEditStudentDetails;
 use App\Livewire\Management\MgtEditTeacherDetails;
@@ -34,13 +37,16 @@ use App\Livewire\Teachers\TeachersDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('premium-login');
 });
 
 
 Route::prefix("auth")->group(function(){
+    
     Route::get('/student-login', StudentLogin::class)->name("login");
     Route::get('/teacher-login', TeacherLogin::class)->name("teacher-login");
+    Route::get('/management-login', ManagementLogin::class)->name("management-login");
+
 });
 
 
@@ -82,8 +88,10 @@ Route::get('/student-management', MgtStudentManagement::class)->name("mgt.studen
 Route::get('/student-edit', MgtEditStudentDetails::class)->name("mgt.student-edit");
 Route::get('/teacher-list', MgtTeacherList::class)->name("mgt.teacher-list");
 Route::get('/teacher-edit', MgtEditTeacherDetails::class)->name("mgt.teacher-edit");
-Route::get('/Approved-results', MgtApprovedResults::class)->name("mgt.approved-results");
-Route::get('/Published-results', MgtPublishedResults::class)->name("mgt.published-results");
+Route::get('/course-catalog', MgtCourseCatalog::class)->name("mgt.course-catalog");
+Route::get('/course-crisscross', MgtCourseCrisscross::class)->name("mgt.course-crisscross");
+Route::get('/approved-results', MgtApprovedResults::class)->name("mgt.approved-results");
+Route::get('/published-results', MgtPublishedResults::class)->name("mgt.published-results");
 Route::get('/signed-course', MgtSignedCourse::class)->name("mgt.signed-course");
 Route::get('/departement-management', MgtDepartementManagement::class)->name("mgt.departement-management");
 Route::get('/fees-management', MgtFeesManagement::class)->name("mgt.fees-management");
