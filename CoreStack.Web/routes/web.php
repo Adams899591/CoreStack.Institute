@@ -1,5 +1,16 @@
 <?php
 
+use App\Livewire\Management\ManagementDashboard;
+use App\Livewire\Management\MgtApprovedResults;
+use App\Livewire\Management\MgtDepartementManagement;
+use App\Livewire\Management\MgtEditStudentDetails;
+use App\Livewire\Management\MgtEditTeacherDetails;
+use App\Livewire\Management\MgtFeesManagement;
+use App\Livewire\Management\MgtPublishedResults;
+use App\Livewire\Management\MgtSignedCourse;
+use App\Livewire\Management\MgtStudentList;
+use App\Livewire\Management\MgtStudentManagement;
+use App\Livewire\Management\MgtTeacherList;
 use App\Livewire\Students\CourseCatolog;
 use App\Livewire\Students\CourseDetails;
 use App\Livewire\Students\CurrentSemesterReg;
@@ -49,7 +60,7 @@ Route::get('/course-details', CourseDetails::class)->name("std.course-details");
 
 
 
-Route::prefix("teachers")->group(function(){
+Route::prefix("teacher")->group(function(){
 
 Route::get('/dashboard', TeachersDashboard::class)->name("tchr.dashboard");
 Route::get('/grade-entry', GradeEntry::class)->name("tchr.grade-entry");
@@ -60,4 +71,20 @@ Route::get('/teacher-profile', TeacherProfile::class)->name("tchr.teacher-profil
 Route::get('/lecture-materials', LectureMaterials::class)->name("tchr.lecture-materials");
 Route::get('/assignments', Assignments::class)->name("tchr.assignments");
 
+});
+
+
+Route::prefix("management")->group(function(){
+
+Route::get('/dashboard', ManagementDashboard::class)->name("mgt.dashboard");
+Route::get('/student-list', MgtStudentList::class)->name("mgt.student-list");
+Route::get('/student-management', MgtStudentManagement::class)->name("mgt.student-management");
+Route::get('/student-edit', MgtEditStudentDetails::class)->name("mgt.student-edit");
+Route::get('/teacher-list', MgtTeacherList::class)->name("mgt.teacher-list");
+Route::get('/teacher-edit', MgtEditTeacherDetails::class)->name("mgt.teacher-edit");
+Route::get('/Approved-results', MgtApprovedResults::class)->name("mgt.approved-results");
+Route::get('/Published-results', MgtPublishedResults::class)->name("mgt.published-results");
+Route::get('/signed-course', MgtSignedCourse::class)->name("mgt.signed-course");
+Route::get('/departement-management', MgtDepartementManagement::class)->name("mgt.departement-management");
+Route::get('/fees-management', MgtFeesManagement::class)->name("mgt.fees-management");
 });

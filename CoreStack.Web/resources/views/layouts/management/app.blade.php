@@ -45,73 +45,120 @@
                @click.away="sidebarOpen = false" {{-- Close sidebar when clicking outside --}}
                >
             <div class="p-8 border-b border-darkblue-dark flex flex-col items-center text-center">
-                <span class="text-2xl font-black tracking-tighter text-white uppercase">Web Portal</span> {{-- Main title --}}
-                <span class="text-xs font-bold uppercase tracking-widest text-darkblue-light/50 mt-2">CoreStack Academy</span> {{-- Moved CoreStack Academy here --}}
+                <span class="text-2xl font-black tracking-tighter text-white uppercase">Mgt Portal</span> {{-- Main title --}}
+                <span class="text-xs font-bold uppercase tracking-widest text-gold mt-2">CoreStack Institute</span> {{-- Changed branding --}}
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar"> {{-- Main navigation --}}
-                <a href="{{route("std.dashboard")}}" class="{{request()->routeIs("std.dashboard") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
+                <a href="#" class="{{request()->routeIs('mgt.dashboard') ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1s 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
                 </a>
 
-                <!-- My Program Dropdown -->
+                <!-- Students Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs(["std.current-semester-reg", "std.previous-registration"]) ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            Students
+                        </div>
+                        <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
+                        <a href="{{route("mgt.student-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Student List</a>
+                        <a href="{{route("mgt.student-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Student Management</a>
+                    </div>
+                </div>
+
+                <!-- Lecturers Dropdown -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Teachers
+                        </div>
+                        <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
+                        <a href="{{route("mgt.teacher-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Teacher List</a>
+                        <a href="{{route("mgt.signed-course")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Signed Course</a>
+                    </div>
+                </div>
+
+                <!-- Courses Dropdown -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            My Program
+                            Courses
                         </div>
                         <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("std.current-semester-reg")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
-                            Current Semester Registration
-                        </a>
-                        <a href="{{route("std.previous-registration")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
-                            Previous Registration
-                        </a>
+                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Catalog</a>
+                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Crisscross</a>
                     </div>
                 </div>
 
-                <!-- My Results Dropdown -->
+                <!-- Department Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs("std.student-transcript") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            Department
+                        </div>
+                        <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
+                        <a href="{{route("mgt.departement-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Department Management</a>
+                    </div>
+                </div>
+
+                <!-- Attendance Dropdown -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            Attendance
+                        </div>
+                        <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
+                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Attendance Reports</a>
+                    </div>
+                </div>
+
+                <!-- Results Dropdown -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            My Results
+                            Results
                         </div>
                         <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        {{-- <a href="{{route("std.semester-grade")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">
-                            Semester Grades
-                        </a> --}}
-                        <a href="{{route("std.student-transcript")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
-                            Transcript
-                        </a>
+                        <a href="{{route("mgt.approved-results")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Approved Results</a>
+                        <a href="{{route("mgt.published-results")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Published Results</a>
                     </div>
                 </div>
 
-                <!-- My Personal Data (Direct Link) -->
-                <a href="{{route("std.personal-data")}}" class="{{request()->routeIs("std.personal-data") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate>
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    My Personal Data
-                </a>
-
-                <a href="{{route("std.course-catolog")}}" class="{{request()->routeIs("std.course-catolog") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate>
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
-                    Course Catalog
-                </a>
-
-                <!-- School Fees / Charges Dropdown -->
+                <!-- School Fees Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs(["std.current-session-fee", "std.payment-history"]) ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
                         <div class="flex items-center">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             School Fees
                         </div>
                         <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,14 +166,15 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("std.current-session-fee")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
-                            Current Session Fee
-                        </a>
-                        <a href="{{route("std.payment-history")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
-                            Payment History
-                        </a>
+                        <a href="{{route("mgt.fees-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Fees Management</a>
                     </div>
                 </div>
+
+                <!-- Settings -->
+                <a href="#" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" wire:navigate>
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
             </nav>
 
             {{-- User Profile in Sidebar Footer --}}
@@ -135,12 +183,12 @@
                     <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     <div class="flex-1 text-sm leading-tight">
                         <div class="flex items-center justify-between">
-                            <p class="font-medium text-stone-100 text-xs">Usman Adams</p>
+                            <p class="font-medium text-stone-100 text-xs">Management</p>
                             <button class="text-stone-400 hover:text-gold transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                             </button>
                         </div>
-                        <p class="text-gold text-[10px]">Cyber Security</p>
+                        <p class="text-gold text-[10px]">Administrator</p>
                     </div>
                 </div>
             </div>
@@ -160,9 +208,9 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                     <div class="text-left">
-                        <p class="text-sm font-bold text-stone-800 leading-none">Usman Adams</p>
+                        <p class="text-sm font-bold text-stone-800 leading-none">Management Admin</p>
                         <p class="text-[10px] font-semibold text-gold uppercase tracking-tighter mt-1">
-                            CSE/2024/31714300 | Web Developer
+                            CoreStack Institute | System Admin
                         </p>
                     </div>
                 </div>
