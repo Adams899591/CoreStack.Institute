@@ -11,7 +11,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text onPress={() => router.push("/(tabs)/home")}>Edit app/index.tsx to edit this screen.
+      <Text onPress={() => router.push("/pages/views/login")}>Edit app/index.tsx to edit this screen.
 
 
       </Text>
