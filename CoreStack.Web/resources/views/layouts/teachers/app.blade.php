@@ -6,7 +6,7 @@
     <title>Teacher Portal - CoreStack Institute</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     @livewireStyles
     <style>
         .bg-darkblue { background-color: #1A2B4C; }
@@ -30,12 +30,12 @@
                :class="{ '-translate-x-full': !sidebarOpen && !isDesktop, 'translate-x-0': sidebarOpen || isDesktop }"
                @click.away="sidebarOpen = false">
             <div class="p-8 border-b border-darkblue-dark flex flex-col items-center text-center">
-                <span class="text-2xl font-black tracking-tighter text-white uppercase">Teacher Portal</span>
+                <span class="text-2xl font-black tracking-tighter text-white uppercase">TCHR Portal</span>
                 <span class="text-xs font-bold uppercase tracking-widest text-darkblue-light/50 mt-2">CoreStack Academy</span>
             </div>
             
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
-                <a href="#" class="flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg transition">
+                <a href="{{route("tchr.dashboard")}}" class="flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg transition"  wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
                 </a>
@@ -50,8 +50,8 @@
                         <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("tchr.course-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course List</a>
-                        <a href="{{route("tchr.lecture-materials")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Lecture Materials</a>
+                        <a href="{{route("tchr.course-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Course List</a>
+                        <a href="{{route("tchr.lecture-materials")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Lecture Materials</a>
                     </div>
                 </div>
 
@@ -65,12 +65,12 @@
                         <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("tchr.grade-entry")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Grade Entry</a>
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Result Approval</a>
+                        <a href="{{route("tchr.grade-entry")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Grade Entry</a>
+                        {{-- <a href="{{route("")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Result Approval</a> --}}
                     </div>
                 </div>
 
-                <a href="{{route("tchr.assignments")}}" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition">
+                <a href="{{route("tchr.assignments")}}" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition"  wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M6 7h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2zm0 0h12"></path></svg>
                     Assignments
                 </a>
@@ -85,12 +85,12 @@
                         <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("tchr.attendance-tracker")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Attendance Tracker</a>
-                        <a href="{{route("tchr.attendance-report")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Attendance Report</a>
+                        <a href="{{route("tchr.attendance-tracker")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Attendance Tracker</a>
+                        <a href="{{route("tchr.attendance-report")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate >Attendance Report</a>
                     </div>
                 </div>
 
-                <a href="{{route("tchr.teacher-profile")}}" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition">
+                <a href="{{route("tchr.teacher-profile")}}" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     My Profile
                 </a>

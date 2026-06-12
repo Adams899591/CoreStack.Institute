@@ -66,8 +66,8 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("mgt.student-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Student List</a>
-                        <a href="{{route("mgt.student-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Student Management</a>
+                        <a href="{{route("mgt.student-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate >Student List</a>
+                        <a href="{{route("mgt.student-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate >Student Management</a>
                     </div>
                 </div>
 
@@ -83,8 +83,8 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("mgt.teacher-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Teacher List</a>
-                        <a href="{{route("mgt.signed-course")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Signed Course</a>
+                        <a href="{{route("mgt.teacher-list")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Teacher List</a>
+                        <a href="{{route("mgt.signed-course")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Signed Course</a>
                     </div>
                 </div>
 
@@ -100,8 +100,8 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("mgt.course-catalog")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Catalog</a>
-                        <a href="{{route("mgt.course-crisscross")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Course Crisscross</a>
+                        <a href="{{route("mgt.course-catalog")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Course Catalog</a>
+                        <a href="{{route("mgt.course-crisscross")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Course Crisscross</a>
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("mgt.departement-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Department Management</a>
+                        <a href="{{route("mgt.departement-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Department Management</a>
                     </div>
                 </div>
 
@@ -133,7 +133,7 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Attendance Reports</a>
+                        <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Attendance Reports</a>
                     </div>
                 </div>
 
@@ -149,8 +149,8 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("mgt.approved-results")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Approved Results</a>
-                        <a href="{{route("mgt.published-results")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Published Results</a>
+                        <a href="{{route("mgt.approved-results")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Approved Results</a>
+                        <a href="{{route("mgt.published-results")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Published Results</a>
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@
                         </svg>
                     </button>
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
-                        <a href="{{route("mgt.fees-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition">Fees Management</a>
+                        <a href="{{route("mgt.fees-management")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Fees Management</a>
                     </div>
                 </div>
 

@@ -90,7 +90,7 @@ function CustomDrawerContent(props: any) {
               <Ionicons name="calendar-outline" size={size} color={colors.gold} />
             )}
             onPress={() => {
-              router.push("pages/navigate/time-table");
+              router.push("/screen/time-table")
             }}
           />
 
@@ -101,20 +101,20 @@ function CustomDrawerContent(props: any) {
               <Ionicons name="settings-outline" size={size} color={colors.gold} />
             )}
             onPress={() => {
-              router.push("pages/navigate/account-settings");
+              router.push("/screen/account-settings");
             }}
           />
 
-          {/* <DrawerItem
-            label="Account Settings"
+          <DrawerItem
+            label="Group Chat"
             labelStyle={styles.drawerLabel}
             icon={({ size }) => (
-              <Ionicons name="settings-outline" size={size} color={colors.gold} />
+              <Ionicons name="chatbox-outline" size={size} color={colors.gold} />
             )}
             onPress={() => {
-              console.log('Navigating to Settings');
+              router.push("/screen/chat");
             }}
-          /> */}
+          />
 
         </View>
       </DrawerContentScrollView>
