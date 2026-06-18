@@ -42,7 +42,7 @@ class StudentProfileFactory extends Factory
             'gender' => fake()->randomElement(['Male', 'Female']),
             'nationality' => fake()->country(),
             'state_of_origin' => fake()->state(),
-            'marital_status' => fake()->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
+            'marital_status' => fake()->randomElement(['Single', 'Married',]),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'department_id' => $department->id,

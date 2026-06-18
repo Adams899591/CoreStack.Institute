@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Department;
 use App\Models\Fee;
 use App\Models\ManagementProfile;
+use App\Models\Payment;
 use App\Models\StudentProfile;
 use App\Models\TeacherProfile;
 use App\Models\User;
@@ -173,8 +174,45 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        // 8. Generate Payment history for students (Ensures 500L has all previous level fees)
+        foreach ($students as $student) {
+            $profile = StudentProfile::where('user_id', $student->id)->first();
+            if (!$profile) continue;
+
+            $levels = ['100', '200', '300', '400', '500'];
+            $currentLevelIndex = array_search($profile->level, $levels);
+            
+            // Parse the admission session (e.g., "2021/2022") to get the starting year
+            $startYear = (int) explode('/', $profile->admission_year)[0];
+
+            // Create a payment for every level leading up to their current level
+            for ($i = 0; $i <= $currentLevelIndex; $i++) {
+                $targetLevel = $levels[$i];
+                $sessionStr = ($startYear + $i) . '/' . ($startYear + $i + 1);
+
+                // Find the specific fee matching department and historical level
+                $fee = Fee::where('department_id', $profile->department_id)
+                          ->where('level', $targetLevel)
+                          ->first();
+
+                if ($fee) {
+                    Payment::factory()->create([
+                        'user_id' => $student->id,
+                        'fee_id' => $fee->id,
+                        'amount_paid' => $fee->amount,
+                        'session' => $sessionStr,
+                        'status' => 'completed',
+                        'payment_date' => fake()->dateTimeBetween(
+                            ($startYear + $i) . "-01-01", 
+                            ($startYear + $i) . "-12-31"
+                        ),
+                    ]);
+                }
+            }
+        }
+
         //7. Create 100 student attendence
-         Attendance::factory(100)->create();
+        Attendance::factory(100)->create();
 
 
 
