@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('username')->unique();
+            // $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable(); 
             $table->string('password');
-            $table->string('matric_number')->nullable()->unique();
+            // Removed matric_number from users table, it will be in student_profiles
             $table->enum('role', ['management', 'teacher', 'student'])->default('student');
             $table->boolean('biometric_enabled')->default(false);
             $table->string('biometric_token')->nullable();
@@ -49,6 +49,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) { $table->dropColumn('matric_number'); });
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

@@ -364,7 +364,7 @@ $paymentFactory = [
     'reference_no' => strtoupper(fake()->bothify('PAY-#####')),
     'amount_paid' => fake()->randomFloat(2, 1000, 50000),
     'session' => '2023/2024',
-    'semester' => fake()->randomElement(['First', 'Second', 'Third']),
+    'semester' => fake()->randomElement(['First', 'Second']),
     'payment_date' => fake()->date(),
     'status' => fake()->randomElement(['pending', 'completed', 'failed']),
 ];
@@ -414,15 +414,15 @@ $lectureMaterialFactory = [
 ];
 
 // Attendance Factory
-$attendanceFactory = [
-    'user_id' => null,
-    'course_id' => null,
-    'attendance_date' => fake()->date(),
-    'status' => fake()->randomElement(['present', 'absent', 'late']),
-    'session' => '2023/2024',
-    'semester' => fake()->randomElement(['First', 'Second', 'Third']),
-    'remarks' => fake()->sentence(),
-];
+// $attendanceFactory = [
+//     'user_id' => null,
+//     'course_id' => null,
+//     'attendance_date' => fake()->date(),
+//     'status' => fake()->randomElement(['present', 'absent']),
+//     'session' => '2023/2024',
+//     'semester' => fake()->randomElement(['First', 'Second']),
+//     'remarks' => fake()->sentence(),
+// ];
 
 // Course Schedule Factory
 $courseScheduleFactory = [

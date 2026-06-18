@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained();
             $table->date('attendance_date');
-            $table->enum('status', ['present', 'absent', 'late'])->default('present');
+            $table->enum('status', ['present', 'absent'])->default('present');
             $table->string('session')->nullable();
             $table->string('semester')->nullable();
             $table->text('remarks')->nullable();

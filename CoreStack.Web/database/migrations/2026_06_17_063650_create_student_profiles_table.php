@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('student_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('matric_number')->unique()->nullable(); // Added matric_number to student_profiles
             $table->string('legal_name')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
             $table->string('nationality')->nullable();
             $table->string('state_of_origin')->nullable();
-            $table->enum('marital_status', ['Single', 'Married', 'Divorced', 'Widowed'])->nullable();
+            $table->enum('marital_status', ['Single', 'Married'])->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             // $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
@@ -40,6 +41,7 @@ return new class extends Migration
     public function down(): void
     {
         // Schema::dropColumns("student_profiles", ["user_id"]);
+        Schema::table('student_profiles', function (Blueprint $table) { $table->dropColumn('matric_number'); });
         Schema::dropIfExists('student_profiles');
     }
 };

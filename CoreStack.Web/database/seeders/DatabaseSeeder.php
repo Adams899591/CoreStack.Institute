@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Department;
 use App\Models\Fee;
@@ -68,12 +69,21 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         
-        //3.  get all the student 
-        $students = User::where('role', 'student')->get(); 
-        // loop througth the all the student on the User table and insect them into the student profile table  
+        //3.  get all the student
+        $students = User::where('role', 'student')->get();
+        $baseYear = 2025; // Base year for 100L students (2025/2026)
+
+        // loop through all the students and create profiles with consistent level/admission year logic
         foreach ($students as $student) {
+            $level = fake()->randomElement(['100', '200', '300', '400', '500']);
+            // Calculate admission year: 100L = base, 200L = base-1, etc.
+            $entryYear = $baseYear - (intval($level) / 100 - 1);
+            $admissionSession = $entryYear . '/' . ($entryYear + 1);
+
             StudentProfile::factory()->create([
                 'user_id' => $student->id,
+                'level' => $level,
+                'admission_year' => $admissionSession,
             ]);
         }
 
@@ -121,12 +131,17 @@ class DatabaseSeeder extends Seeder
                         $prefix = strtoupper(substr(str_replace(' ', '', $deptName), 0, 3));
                         $courseCode = $prefix . '-' . $level . '-' . str_pad($courseCounter++, 2, '0', STR_PAD_LEFT);
 
+                        // Adjust units based on level: 400L and 500L courses get higher units (3, 4, 5)
+                        $units = in_array($level, ['400', '500']) 
+                            ? fake()->randomElement([3, 4, 5]) 
+                            : fake()->numberBetween(2, 4);
+
                         Course::create([
                             'department_id' => $department->id,
                             'teacher_id' => $teacher->id,
                             'course_name' => $courseName,
                             'course_code' => $courseCode,
-                            'units' => fake()->numberBetween(2, 4),
+                            'units' => $units,
                             'level' => $level,
                             'semester' => fake()->randomElement(['First', 'Second']),
                             'description' => fake()->paragraph(),
@@ -157,6 +172,9 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        //7. Create 100 student attendence
+         Attendance::factory(100)->create();
 
 
 

@@ -24,25 +24,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'name' => fake()->name(),
-            // 'email' => fake()->unique()->safeEmail(),
-            // 'email_verified_at' => now(),
-            // 'password' => static::$password ??= Hash::make('password'),
-            // 'remember_token' => Str::random(10),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
             'role' => fake()->randomElement(['management', 'teacher', 'student']),
-            'username' => function (array $attributes) {
-                return $attributes['role'] === 'student'
-                    ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
-                    : fake()->userName();
-            },
-            'matric_number' => function (array $attributes) {
-                return $attributes['role'] === 'student'
-                    ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
-                    : null;
-            },
+            // matric_number is now handled by StudentProfileFactory
             'biometric_enabled' => fake()->boolean(20),
             'biometric_token' => function (array $attributes) {
                 return $attributes['biometric_enabled'] ? (string) Str::uuid() : null;
