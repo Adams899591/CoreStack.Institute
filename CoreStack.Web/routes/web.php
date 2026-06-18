@@ -8,6 +8,7 @@ use App\Livewire\Management\MgtCourseCrisscross;
 use App\Livewire\Management\MgtDepartementManagement;
 use App\Livewire\Management\MgtEditStudentDetails;
 use App\Livewire\Management\MgtEditTeacherDetails;
+use App\Livewire\Management\MgtFeesConfiguration;
 use App\Livewire\Management\MgtFeesManagement;
 use App\Livewire\Management\MgtPublishedResults;
 use App\Livewire\Management\MgtSignedCourse;
@@ -97,4 +98,5 @@ Route::get('/published-results', MgtPublishedResults::class)->name("mgt.publishe
 Route::get('/signed-course', MgtSignedCourse::class)->name("mgt.signed-course");
 Route::get('/departement-management', MgtDepartementManagement::class)->name("mgt.departement-management");
 Route::get('/fees-management', MgtFeesManagement::class)->name("mgt.fees-management");
+Route::get("/fee-configuration",MgtFeesConfiguration::class)->name("mgt.fee-configuration");
 });

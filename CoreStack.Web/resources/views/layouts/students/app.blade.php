@@ -226,26 +226,19 @@
                 {{ $slot }}
             </main>
 
-            <!-- Footer -->
-            <footer class="h-auto md:h-16 py-6 md:py-0 bg-white border-t border-stone-200 flex flex-col md:flex-row items-center justify-between px-8 shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)] space-y-6 md:space-y-0">
-                <div class="text-stone-500 text-xs font-medium italic text-center md:text-left">
-                    <div>
-                        &copy; {{ date('Y') }} CoreStack Institute. <span class="block sm:inline sm:ml-1 text-stone-400">"Excellence through Knowledge"</span>
-                    </div>
-                    <div class="mt-1 md:mt-0 md:inline md:ml-4 text-stone-400">Developed by Usman Adams</div>
+            {{-- footer --}}
+            <footer class="h-16 bg-white border-t border-stone-200 flex items-center justify-between px-8 shadow-sm">
+                <div class="text-stone-500 text-xs font-medium italic">
+                    &copy; {{ date('Y') }} CoreStack Institute - Academic Portal
                 </div>
-                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="flex items-center space-x-6">
                     <nav class="flex items-center space-x-4">
-                        <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Privacy Policy</a>
-                        <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Terms</a>
+                        <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Policy</a>
+                        <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Support</a>
                     </nav>
-                    <div class="hidden sm:block h-6 w-[1px] bg-stone-200"></div>
-                    <a href="#" class="flex items-center text-[10px] font-bold text-stone-500 hover:text-gold uppercase tracking-widest transition">
-                        <svg class="w-4 h-4 mr-1.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        Support Center
-                    </a>
                 </div>
             </footer>
+
         </div>
     </div>
     @livewireScripts

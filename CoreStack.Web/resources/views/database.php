@@ -142,6 +142,7 @@ Schema::create('courses', function (Blueprint $blueprint) {
 // 4. Fees Table
 Schema::create('fees', function (Blueprint $blueprint) {
     $blueprint->id();
+    $blueprint->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
     $blueprint->string('title'); // e.g., "Tuition Fee 2024"
     $blueprint->string('category')->nullable();
     $blueprint->decimal('amount', 10, 2);
@@ -345,16 +346,16 @@ Schema::create('course_schedules', function (Blueprint $blueprint) {
 // ];
 
 // Fee Factory
-$feeFactory = [
-    'title' => 'Academic Fee ' . fake()->word(),
-    'category' => fake()->word(),
-    'amount' => fake()->randomFloat(2, 5000, 50000),
-    'session' => '2023/2024',
-    'semester' => fake()->randomElement(['First', 'Second']),
-    'level' => fake()->randomElement(['100', '200', '300', '400', '500']),
-    'status' => 'active',
-    "departement"
-];
+// $feeFactory = [
+//     'title' => 'Academic Fee ' . fake()->word(),
+//     'category' => fake()->word(),
+//     'amount' => fake()->randomFloat(2, 5000, 50000),
+//     'session' => '2023/2024',
+//     'semester' => fake()->randomElement(['First', 'Second']),
+//     'level' => fake()->randomElement(['100', '200', '300', '400', '500']),
+//     'status' => 'active',
+//     'department_id' => null,
+// ];
 
 // Payment Factory
 $paymentFactory = [
@@ -436,11 +437,3 @@ $courseScheduleFactory = [
     'level' => fake()->randomElement(['100', '200', '300', '400', '500']),
     'status' => 'scheduled',
 ];
-
-
-
-
-
-
-
-

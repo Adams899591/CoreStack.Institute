@@ -24,39 +24,39 @@ class DatabaseSeeder extends Seeder
         // Define the curriculum directly in the seeder for controlled creation
         $curriculum = [
             'Web Development' => [
-                '100' => ['Introduction to HTML/CSS', 'Internet Fundamentals', 'Web Graphics & Assets'],
-                '200' => ['JavaScript Basics', 'UI/UX Design for Web', 'Responsive Design Patterns'],
-                '300' => ['Backend Patterns with PHP', 'Database Management', 'API Development & Integration'],
-                '400' => ['Advanced Frameworks (Laravel)', 'Fullstack Architecture', 'DevOps for Web'],
+                '100' => ['Introduction to HTML/CSS', 'Internet Fundamentals', 'Web Graphics & Assets', 'Basic Programming Concepts', 'Introduction to UI/UX', 'Digital Literacy', 'Introduction to Networking', 'Web Design Principles', 'Ethics in Technology'],
+                '200' => ['JavaScript Basics', 'UI/UX Design for Web', 'Responsive Design Patterns', 'Frontend Frameworks', 'Version Control with Git', 'Web APIs', 'Client-side Scripting', 'CSS Architecture'],
+                '300' => ['Backend Patterns with PHP', 'Database Management Systems', 'API Development & Integration', 'Server-side Logic', 'User Authentication Systems', 'Real-time Web with Sockets', 'Software Testing'],
+                '400' => ['Advanced Frameworks (Laravel)', 'Fullstack Architecture', 'DevOps for Web', 'Web Performance Optimization', 'Microservices'],
                 '500' => ['Web Security & Scalability', 'Final Web Project', 'Serverless Architectures'],
             ],
             'Mobile App Development' => [
-                '100' => ['Logic and Algorithms', 'Intro to Mobile Tech', 'Mobile UX Foundations'],
-                '200' => ['Swift & Kotlin Basics', 'Mobile UI Components', 'Mobile Data Storage'],
-                '300' => ['API Integration', 'State Management', 'Mobile Backend Services'],
-                '400' => ['Cross-Platform Dev (Flutter)', 'App Store Deployment', 'Native Bridge Development'],
-                '500' => ['Mobile Graphics & Games', 'Final App Project', 'Augmented Reality in Mobile'],
+                '100' => ['Logic and Algorithms', 'Intro to Mobile Tech', 'Mobile UX Foundations', 'Programming for Mobile', 'Mobile OS Overview', 'Introduction to Data Structures', 'Discrete Mathematics', 'Computational Thinking', 'App Design Fundamentals'],
+                '200' => ['Swift & Kotlin Basics', 'Mobile UI Components', 'Mobile Data Storage', 'Version Control for Mobile', 'Java for Android', 'Objective-C Basics', 'Mobile App Testing', 'Cross-platform Logic'],
+                '300' => ['API Integration', 'State Management', 'Mobile Backend Services', 'Native Device Features', 'Mobile App Security', 'Cloud Synchronization', 'Performance Profiling'],
+                '400' => ['Cross-Platform Dev (Flutter)', 'App Store Deployment', 'Native Bridge Development', 'Advanced UI Animation', 'Offline-first Applications'],
+                '500' => ['Mobile Graphics & Games', 'Final App Project'],
             ],
             'Cyber Security' => [
-                '100' => ['Computing Ethics', 'Introduction to Networking', 'Security Fundamentals'],
-                '200' => ['Linux Administration', 'Network Protocols', 'Defensive Security'],
-                '300' => ['Cryptography', 'Ethical Hacking Fundamentals', 'Incident Response'],
-                '400' => ['Penetration Testing', 'Digital Forensics', 'Cloud Security'],
-                '500' => ['Enterprise Security Strategy', 'Security Audit Thesis', 'Malware Analysis'],
+                '100' => ['Computing Ethics', 'Introduction to Networking', 'Security Fundamentals', 'Operating Systems Basics', 'Cyber Law and Policy', 'Threat Landscape', 'Computer Hardware', 'Network Essentials', 'Digital Literacy'],
+                '200' => ['Linux Administration', 'Network Protocols', 'Defensive Security', 'Security Architecture', 'PowerShell Scripting', 'Risk Management', 'Identity Management', 'Secure Coding'],
+                '300' => ['Cryptography', 'Ethical Hacking Fundamentals', 'Incident Response', 'Network Security', 'Web Application Security', 'Malware Analysis', 'Computer Forensics'],
+                '400' => ['Penetration Testing', 'Digital Forensics', 'Cloud Security', 'Governance and Compliance', 'Infrastructure Security'],
+                '500' => ['Enterprise Security Strategy', 'Security Audit Thesis', 'Advanced Malware Analysis'],
             ],
             'Data Science' => [
-                '100' => ['Calculus & Algebra', 'Introduction to Python', 'Data Literacy'],
-                '200' => ['Statistics & Probability', 'Data Structures', 'Exploratory Data Analysis'],
-                '300' => ['Data Visualization', 'SQL for Data Science', 'Feature Engineering'],
-                '400' => ['Machine Learning Models', 'Big Data Engineering', 'Deep Learning Basics'],
-                '500' => ['Predictive Analytics', 'AI Research Paper', 'Ethics in Data Science'],
+                '100' => ['Calculus & Algebra', 'Introduction to Python', 'Data Literacy', 'Foundations of Statistics', 'Programming for Data', 'Data Ethics', 'Discrete Mathematics', 'Introduction to Databases', 'Critical Thinking'],
+                '200' => ['Statistics & Probability', 'Data Structures', 'Exploratory Data Analysis', 'Data Cleaning and Preprocessing', 'Linear Algebra', 'Multivariable Calculus', 'SQL Basics', 'R Programming'],
+                '300' => ['Data Visualization', 'SQL for Data Science', 'Feature Engineering', 'Machine Learning Fundamentals', 'Time Series Analysis', 'Optimization Techniques', 'Big Data Intro'],
+                '400' => ['Machine Learning Models', 'Big Data Engineering', 'Deep Learning Basics', 'Natural Language Processing', 'MLOps'],
+                '500' => ['Predictive Analytics', 'AI Research Paper'],
             ],
             'AI Development' => [
-                '100' => ['Discrete Mathematics', 'Programming Logic', 'Philosophy of AI'],
-                '200' => ['Linear Algebra', 'Algorithms for AI', 'Probabilistic Reasoning'],
-                '300' => ['Neural Networks', 'Natural Language Processing', 'Knowledge Representation'],
-                '400' => ['Deep Learning Frameworks', 'Computer Vision'],
-                '500' => ['Reinforcement Learning', 'AI Ethics & Capsone'],
+                '100' => ['Discrete Mathematics', 'Programming Logic', 'Philosophy of AI', 'Introduction to Machine Learning', 'Computational Thinking', 'Problem Solving with AI', 'Logic Fundamentals', 'Introductory Python', 'Mathematics for AI'],
+                '200' => ['Linear Algebra', 'Algorithms for AI', 'Probabilistic Reasoning', 'Data for AI', 'Calculus for AI', 'Search Algorithms', 'Reinforcement Fundamentals', 'AI Programming'],
+                '300' => ['Neural Networks', 'Natural Language Processing', 'Knowledge Representation', 'Computer Vision Fundamentals', 'Robotic Systems', 'Genetic Algorithms', 'Fuzzy Logic'],
+                '400' => ['Deep Learning Frameworks', 'Computer Vision', 'AI in Healthcare', 'Speech Recognition', 'AI Ethics'],
+                '500' => ['Reinforcement Learning', 'AI Ethics & Capstone', 'AI Research Methods'],
             ],
         ];
 
@@ -137,6 +137,26 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        
+        // 7. Create unique fees for each department and level
+        // This ensures every department and level combination has a specific fee amount
+        $levels = ['100', '200', '300', '400', '500'];
+        
+        foreach ($departments as $department) {
+            foreach ($levels as $level) {
+                Fee::create([
+                    'department_id' => $department->id,
+                    'title' => "Academic Tuition Fee - {$department->name}",
+                    'category' => 'Tuition',
+                    // amount varies randomly between 25k and 85k for each record
+                    'amount' => fake()->randomFloat(2, 25000, 85000), 
+                    'session' => '2023/2024',
+                    'semester' => 'First',
+                    'level' => $level,
+                    'status' => 'active',
+                ]);
+            }
+        }
 
 
 

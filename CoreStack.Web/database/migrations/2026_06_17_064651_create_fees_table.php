@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
             $table->string('title'); // e.g., "Tuition Fee 2024"
             $table->string('category')->nullable();
             $table->decimal('amount', 10, 2);
