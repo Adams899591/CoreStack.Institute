@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#f0f0f0',
     backgroundColor: colors.white,
+    paddingBottom: 70, // Reduced from 20 to move the button slightly up
   },
   logoutBtn: { flexDirection: 'row', alignItems: 'center' },
   logoutText: { color: colors.danger, fontSize: 16, fontWeight: 'bold', marginLeft: 15 },

@@ -24,12 +24,31 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            // 'name' => fake()->name(),
+            // 'email' => fake()->unique()->safeEmail(),
+            // 'email_verified_at' => now(),
+            // 'password' => static::$password ??= Hash::make('password'),
+            // 'remember_token' => Str::random(10),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
+            'password' => bcrypt('password'),
+            'role' => fake()->randomElement(['management', 'teacher', 'student']),
+            'username' => function (array $attributes) {
+                return $attributes['role'] === 'student'
+                    ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
+                    : fake()->userName();
+            },
+            'matric_number' => function (array $attributes) {
+                return $attributes['role'] === 'student'
+                    ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
+                    : null;
+            },
+            'biometric_enabled' => fake()->boolean(20),
+            'biometric_token' => function (array $attributes) {
+                return $attributes['biometric_enabled'] ? (string) Str::uuid() : null;
+            },
+            'status' => fake()->randomElement(['active', 'inactive']),
+                ];
     }
 
     /**
@@ -41,4 +60,27 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the user should have the student role.
+     */
+    public function student(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'student',
+        ]);
+    }
+
+    /**
+     * Indicate that the user should have the student role.
+     */
+    public function teacher(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'teacher',
+        ]);
+    }
+
+
+
 }

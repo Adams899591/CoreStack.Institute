@@ -5,16 +5,17 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   StatusBar,
   Alert,
+  SafeAreaView,
 } from 'react-native';
 import { Link, useRouter } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as Haptics from 'expo-haptics';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const colors = {
   darkBlue: '#1A2B4C',
@@ -33,6 +34,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
  
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const handleBiometricLogin = async () => {
     try {
@@ -59,8 +61,10 @@ const Login = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.darkBlue} />
+    <>
+    <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" /> 
+    <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}> 
+      {/* <StatusBar barStyle="light-content" backgroundColor={colors.darkBlue} /> */}
 
       <View style={styles.topHeader}>
         <Text style={styles.topHeaderTitle}>CoreStack</Text>
@@ -135,7 +139,8 @@ const Login = () => {
           <Text style={styles.footerText}>Secured by CoreStack Auth</Text>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
+    </>
   );
 };
 

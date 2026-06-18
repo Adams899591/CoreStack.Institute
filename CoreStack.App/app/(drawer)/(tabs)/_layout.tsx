@@ -6,18 +6,18 @@ import * as NavigationBar from 'expo-navigation-bar';
 
 export default function TabLayout() {
 
-  useEffect(() => {
-    if (Platform.OS != 'android') return; 
+  // useEffect(() => {
+  //   if (Platform.OS != 'android') return; 
 
-    const setNavBarStyles = async () => {
-      // Setting position to absolute allows the app to draw behind the system bar,
-      // making the color reach the very bottom edge of the device.
-      await NavigationBar.setPositionAsync('absolute');
-      await NavigationBar.setBackgroundColorAsync('#1A2B4C');
-      await NavigationBar.setButtonStyleAsync('light');
-    };
-    setNavBarStyles();
-  }, []); // Empty dependency array means this effect runs once after the initial render
+  //   const setNavBarStyles = async () => {
+  //     // Setting position to absolute allows the app to draw behind the system bar,
+  //     // making the color reach the very bottom edge of the device.
+  //     await NavigationBar.setPositionAsync('absolute');
+  //     await NavigationBar.setBackgroundColorAsync('#1A2B4C');
+  //     await NavigationBar.setButtonStyleAsync('light');
+  //   };
+  //   setNavBarStyles();
+  // }, []); // Empty dependency array means this effect runs once after the initial render
 
   return (
     <Tabs
@@ -28,7 +28,7 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor:  "#1A2B4C",
           borderTopWidth: 0,
-          height: 70,
+          height: 100, // i change this from 70
           paddingBottom: 12,
           paddingTop: 10,
           elevation: 20,

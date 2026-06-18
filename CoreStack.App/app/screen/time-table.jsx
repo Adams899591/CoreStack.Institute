@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#1A2B4C',
     paddingHorizontal: 25,
-    paddingTop: 30,
+    paddingTop: 40,
     paddingBottom: 25,
     elevation: 5,
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: 0,
   },
   backButton: {
     marginRight: 12,

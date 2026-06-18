@@ -15,7 +15,7 @@ export default function HomeScreen() {
   const [isIdVisible, setIsIdVisible] = useState(false);
 
   // Mock student data
-  const studentName = "John Doe";
+  const studentName = "Dev John Doe";
   const matricNumber = "CS-2024-0882";
   const department = "Web Cybersecurity";
   const studentLevel = "300L";
@@ -33,68 +33,69 @@ export default function HomeScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.container}> 
-           <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={[styles.card, styles.studentInfoCard]}>
-          <View style={styles.infoRow}>
-            <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeText}>Welcome back,</Text>
-              <Text style={styles.studentName}>{studentName}</Text>
-            </View>
-            <View style={styles.levelBadge}>
-              <Text style={styles.levelText}>{studentLevel}</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailRow}>
-            <View style={styles.idContainer}>
-              <Text style={styles.idLabel}>Matric Number</Text>
-              <View style={styles.idRow}>
-                <Text style={styles.idText}>
-                  {isIdVisible ? matricNumber : '•••• •••• ••••'}
-                </Text>
-                <TouchableOpacity onPress={() => setIsIdVisible(!isIdVisible)}>
-                  <Ionicons
-                    name={isIdVisible ? "eye-off-outline" : "eye-outline"}
-                    size={16} 
-                    color={colors.darkBlue} 
-                    style={{ marginLeft: 5 }}
-                  />
-                </TouchableOpacity>
+    <>
+    <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" /> 
+      <SafeAreaView style={styles.container}> 
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={[styles.card, styles.studentInfoCard]}>
+            <View style={styles.infoRow}>
+              <View style={styles.welcomeContainer}>
+                <Text style={styles.welcomeText}>Welcome back,</Text>
+                <Text style={styles.studentName}>{studentName}</Text>
+              </View>
+              <View style={styles.levelBadge}>
+                <Text style={styles.levelText}>{studentLevel}</Text>
               </View>
             </View>
-            <View style={styles.departmentContainer}>
-              <Text style={styles.idLabel}>Department</Text>
-              <Text style={styles.departmentText}>{department}</Text>
+
+            <View style={styles.detailRow}>
+              <View style={styles.idContainer}>
+                <Text style={styles.idLabel}>Matric Number</Text>
+                <View style={styles.idRow}>
+                  <Text style={styles.idText}>
+                    {isIdVisible ? matricNumber : '•••• •••• ••••'}
+                  </Text>
+                  <TouchableOpacity onPress={() => setIsIdVisible(!isIdVisible)}>
+                    <Ionicons
+                      name={isIdVisible ? "eye-off-outline" : "eye-outline"}
+                      size={16} 
+                      color={colors.darkBlue} 
+                      style={{ marginLeft: 5 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.departmentContainer}>
+                <Text style={styles.idLabel}>Department</Text>
+                <Text style={styles.departmentText}>{department}</Text>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={[styles.card, styles.academicStatsCard]}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitleSmall}>Current CGPA</Text>
-            <TouchableOpacity>
-              <Text style={styles.viewAllText}>View Academic Progress</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.gpaAmount}>{gpa}</Text>
-        </View>
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Easy Links</Text>
-          <View style={styles.linksGrid}>
-            {easyLinks.map((link, index) => (
-              <TouchableOpacity key={index} style={styles.linkItem}>
-                <View style={styles.iconSquare}>
-                  <Ionicons name={link.icon as any} size={24} color={colors.darkBlue} />
-                </View>
-                <Text style={styles.linkText}>{link.name}</Text>
+          <View style={[styles.card, styles.academicStatsCard]}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitleSmall}>Current CGPA</Text>
+              <TouchableOpacity>
+                <Text style={styles.viewAllText}>View Academic Progress</Text>
               </TouchableOpacity>
-            ))}
+            </View>
+            <Text style={styles.gpaAmount}>{gpa}</Text>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Easy Links</Text>
+            <View style={styles.linksGrid}>
+              {easyLinks.map((link, index) => (
+                <TouchableOpacity key={index} style={styles.linkItem}>
+                  <View style={styles.iconSquare}>
+                    <Ionicons name={link.icon as any} size={24} color={colors.darkBlue} />
+                  </View>
+                  <Text style={styles.linkText}>{link.name}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
 

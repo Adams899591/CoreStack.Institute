@@ -36,6 +36,8 @@ use App\Livewire\Teachers\TeacherProfile;
 use App\Livewire\Teachers\TeachersDashboard;
 use Illuminate\Support\Facades\Route;
 
+//  Note => this is your android application id        com.dev_adams.CoreStackApp
+// com.dev_adams.CoreStackApp
 Route::get('/', function () {
     return view('premium-login');
 });
