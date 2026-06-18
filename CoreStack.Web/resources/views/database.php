@@ -254,27 +254,27 @@ Schema::create('course_schedules', function (Blueprint $blueprint) {
 */
 
 // User Factory
-$userFactory = [
-    'name' => fake()->name(),
-    'email' => fake()->unique()->safeEmail(),
-    'password' => bcrypt('password'),
-    'role' => fake()->randomElement(['management', 'teacher', 'student']),
-    'username' => function (array $attributes) {
-        return $attributes['role'] === 'student'
-            ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
-            : fake()->userName();
-    },
-    'matric_number' => function (array $attributes) {
-        return $attributes['role'] === 'student'
-            ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
-            : null;
-    },
-    'biometric_enabled' => fake()->boolean(20),
-    'biometric_token' => function (array $attributes) {
-        return $attributes['biometric_enabled'] ? (string) Str::uuid() : null;
-    },
-    'status' => fake()->randomElement(['active', 'inactive']),
-];
+// $userFactory = [
+//     'name' => fake()->name(),
+//     'email' => fake()->unique()->safeEmail(),
+//     'password' => bcrypt('password'),
+//     'role' => fake()->randomElement(['management', 'teacher', 'student']),
+//     'username' => function (array $attributes) {
+//         return $attributes['role'] === 'student'
+//             ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
+//             : fake()->userName();
+//     },
+//     'matric_number' => function (array $attributes) {
+//         return $attributes['role'] === 'student'
+//             ? 'CS-' . date('Y') . '-' . fake()->numerify('####')
+//             : null;
+//     },
+//     'biometric_enabled' => fake()->boolean(20),
+//     'biometric_token' => function (array $attributes) {
+//         return $attributes['biometric_enabled'] ? (string) Str::uuid() : null;
+//     },
+//     'status' => fake()->randomElement(['active', 'inactive']),
+// ];
 
 // Student Profile Factory
 // $studentProfileFactory = [
@@ -298,32 +298,32 @@ $userFactory = [
 // ];
 
 // Teacher Profile Factory
-$teacherProfileFactory = [
-    'user_id' => null,
-    'legal_name' => fake()->name(),
-    'date_of_birth' => fake()->date(),
-    'gender' => fake()->randomElement(['Male', 'Female', 'Other']),
-    'nationality' => fake()->country(),
-    'state_of_origin' => fake()->state(),
-    'marital_status' => fake()->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
-    'phone' => fake()->phoneNumber(),
-    'address' => fake()->address(),
-    'department_id' => null,
-    'faculty' => fake()->word(),
-    'designation' => fake()->jobTitle(),
-    'employment_date' => fake()->date(),
-    'profile_image' => null,
-];
+// $teacherProfileFactory = [
+//     'user_id' => null,
+//     'legal_name' => fake()->name(),
+//     'date_of_birth' => fake()->date(),
+//     'gender' => fake()->randomElement(['Male', 'Female', 'Other']),
+//     'nationality' => fake()->country(),
+//     'state_of_origin' => fake()->state(),
+//     'marital_status' => fake()->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
+//     'phone' => fake()->phoneNumber(),
+//     'address' => fake()->address(),
+//     'department_id' => null,
+//     'faculty' => fake()->word(),
+//     'designation' => fake()->jobTitle(),
+//     'employment_date' => fake()->date(),
+//     'profile_image' => null,
+// ];
 
 // Management Profile Factory
-$managementProfileFactory = [
-    'user_id' => null,
-    'legal_name' => fake()->name(),
-    'phone' => fake()->phoneNumber(),
-    'address' => fake()->address(),
-    'designation' => fake()->jobTitle(),
-    'profile_image' => null,
-];
+// $managementProfileFactory = [
+//     'user_id' => null,
+//     'legal_name' => fake()->name(),
+//     'phone' => fake()->phoneNumber(),
+//     'address' => fake()->address(),
+//     'designation' => fake()->jobTitle(),
+//     'profile_image' => null,
+// ];
 
 // Department Factory
 // $departmentFactory = [
@@ -350,9 +350,10 @@ $feeFactory = [
     'category' => fake()->word(),
     'amount' => fake()->randomFloat(2, 5000, 50000),
     'session' => '2023/2024',
-    'semester' => fake()->randomElement(['First', 'Second', 'Third']),
+    'semester' => fake()->randomElement(['First', 'Second']),
     'level' => fake()->randomElement(['100', '200', '300', '400', '500']),
     'status' => 'active',
+    "departement"
 ];
 
 // Payment Factory

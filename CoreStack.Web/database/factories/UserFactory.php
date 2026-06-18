@@ -72,12 +72,22 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the user should have the student role.
+     * Indicate that the user should have the teacher role.
      */
     public function teacher(): static
     {
         return $this->state(fn (array $attributes) => [
             'role' => 'teacher',
+        ]);
+    }
+
+    /**
+     * Indicate that the user should have the student role.
+     */
+    public function management(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'management',
         ]);
     }
 
