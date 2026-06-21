@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('matric_number')->unique()->nullable(); // Added matric_number to student_profiles
-            $table->string('legal_name')->nullable();
+            // $table->string('legal_name')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
             $table->string('nationality')->nullable();

@@ -24,6 +24,8 @@
 </head>
 <body class="bg-stone-100 font-sans antialiased">
     <div x-data="{ sidebarOpen: false, isDesktop: window.innerWidth >= 768 }" @resize.window="isDesktop = window.innerWidth >= 768" class="flex h-screen overflow-hidden">
+        
+        
         <!-- Sidebar -->
         <aside x-cloak x-show="sidebarOpen || isDesktop"
                class="fixed inset-y-0 left-0 z-50 w-64 bg-darkblue text-white transform transition-transform duration-200 ease-in-out flex flex-col md:relative md:translate-x-0"
@@ -35,14 +37,14 @@
             </div>
             
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
-                <a href="{{route("tchr.dashboard")}}" class="flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg transition"  wire:navigate >
+                <a href="{{route("tchr.dashboard")}}"  class="{{request()->routeIs("tchr.dashboard") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
                 </a>
 
                 <!-- Academic Management -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none">
+                    <button @click="open = !open" class="{{request()->routeIs(["tchr.course-list", "tchr.lecture-materials"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             My Courses
@@ -57,7 +59,7 @@
 
                 <!-- Students & Grading -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none">
+                    <button @click="open = !open" class="{{request()->routeIs(["tchr.grade-entry", "tchr.grade-entry"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             Students
@@ -70,14 +72,14 @@
                     </div>
                 </div>
 
-                <a href="{{route("tchr.assignments")}}" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition"  wire:navigate >
+                <a href="{{route("tchr.assignments")}}" class="{{request()->routeIs("tchr.assignments") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M6 7h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2zm0 0h12"></path></svg>
                     Assignments
                 </a>
 
                 <!-- Reports -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none">
+                    <button @click="open = !open" class="{{request()->routeIs(["tchr.attendance-tracker", "tchr.attendance-report"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             Reports
@@ -90,7 +92,7 @@
                     </div>
                 </div>
 
-                <a href="{{route("tchr.teacher-profile")}}" class="flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition" wire:navigate >
+                <a href="{{route("tchr.teacher-profile")}}" class="{{request()->routeIs("tchr.teacher-profile") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     My Profile
                 </a>
@@ -117,6 +119,8 @@
 
             {{-- header --}}
             <header class="h-16 bg-white border-b border-stone-200 flex items-center justify-between px-8 shadow-sm">
+
+                {{-- Main header --}}
                 <div class="flex items-center">
                     <button @click="sidebarOpen = !sidebarOpen" class="text-stone-500 hover:text-gold md:hidden mr-4">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -126,6 +130,8 @@
                         <p class="text-[10px] font-semibold text-gold uppercase tracking-tighter mt-1">Faculty of Computer Science</p>
                     </div>
                 </div>
+
+                {{-- Notification --}}
                 <div class="flex items-center space-x-4">
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" class="p-2 text-stone-400 hover:text-gold transition relative focus:outline-none">
@@ -154,6 +160,7 @@
                     </div>
                     <div class="h-8 w-[1px] bg-stone-200"></div>
                 </div>
+
             </header>
 
         
@@ -178,4 +185,4 @@
     </div>
     @livewireScripts
 </body>
-</html>
+</html> 

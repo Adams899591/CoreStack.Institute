@@ -21,7 +21,8 @@ class AttendanceFactory extends Factory
     public function definition(): array
     {
         // 1. Create a student user
-        $studentUser = User::factory()->student()->create();
+        // $studentUser = User::factory()->student()->create();
+        $studentUser = User::where("role", "student")->first();      
 
         // 2. Create a StudentProfile for this user and get its level
         // We need to ensure a StudentProfile exists for the student.

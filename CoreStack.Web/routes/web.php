@@ -63,7 +63,7 @@ Route::get('/student-transcript', StudentTranscript::class)->name("std.student-t
 Route::get('/current-semester-reg', CurrentSemesterReg::class)->name("std.current-semester-reg");
 Route::get('/previous-registration', PreviousRegistration::class)->name("std.previous-registration");
 Route::get('/course-catolog', CourseCatolog::class)->name("std.course-catolog");
-Route::get('/course-details', CourseDetails::class)->name("std.course-details");
+Route::get('/course-details/{level}/{semester}', CourseDetails::class)->name("std.course-details");
 
 });
 

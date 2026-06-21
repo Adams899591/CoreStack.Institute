@@ -178,7 +178,7 @@ Schema::create('registrations', function (Blueprint $blueprint) {
     $blueprint->enum('status', ['pending', 'approved', 'declined'])->default('pending');
     $blueprint->timestamps();
 });
-
+https://images.unsplash.com/photo-1776248783518-400b6d0da64c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 // 7. Results Table (Transcripts & Grades)
 Schema::create('results', function (Blueprint $blueprint) {
     $blueprint->id();
@@ -358,16 +358,16 @@ Schema::create('course_schedules', function (Blueprint $blueprint) {
 // ];
 
 // Payment Factory
-$paymentFactory = [
-    'user_id' => null,
-    'fee_id' => null,
-    'reference_no' => strtoupper(fake()->bothify('PAY-#####')),
-    'amount_paid' => fake()->randomFloat(2, 1000, 50000),
-    'session' => '2023/2024',
-    'semester' => fake()->randomElement(['First', 'Second']),
-    'payment_date' => fake()->date(),
-    'status' => fake()->randomElement(['pending', 'completed', 'failed']),
-];
+// $paymentFactory = [
+//     'user_id' => null,
+//     'fee_id' => null,
+//     'reference_no' => strtoupper(fake()->bothify('PAY-#####')),
+//     'amount_paid' => fake()->randomFloat(2, 1000, 50000),
+//     'session' => '2023/2024',
+//     'semester' => fake()->randomElement(['First', 'Second']),
+//     'payment_date' => fake()->date(),
+//     'status' => fake()->randomElement(['pending', 'completed', 'failed']),
+// ];
 
 // Registration Factory
 $registrationFactory = [
@@ -395,14 +395,14 @@ $resultFactory = [
 ];
 
 // Assignment Factory
-$assignmentFactory = [
-    'course_id' => null,
-    'teacher_id' => null,
-    'title' => fake()->sentence(4),
-    'description' => fake()->paragraph(),
-    'due_date' => fake()->date(),
-    'status' => fake()->randomElement(['pending', 'graded', 'closed']),
-];
+// $assignmentFactory = [
+//     'course_id' => null, 
+//     'teacher_id' => null,
+//     'title' => fake()->sentence(4),
+//     'description' => fake()->paragraph(),
+//     'due_date' => fake()->date(),
+//     'status' => fake()->randomElement(['pending', 'graded', 'closed']),
+// ];
 
 // Lecture Material Factory
 $lectureMaterialFactory = [

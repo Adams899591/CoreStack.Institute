@@ -19,7 +19,7 @@
             </div>
             <div>
                 <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Academic Year</p>
-                <p class="text-lg font-black text-stone-800">2023/2024 Session</p>
+                <p class="text-lg font-black text-stone-800">{{$academicFee->session}} Session</p>
             </div>
         </div>
         
@@ -27,18 +27,30 @@
 
         <div class="text-center md:text-left">
             <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Current Level</p>
-            <p class="text-lg font-black text-stone-800 uppercase">300 Level</p>
+            <p class="text-lg font-black text-stone-800 uppercase">{{Auth::user()->StudentProfile->level}} Level</p>
         </div>
 
         <div class="hidden md:block h-10 w-[1px] bg-stone-100"></div>
 
         <div class="text-center md:text-left">
             <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Matric Number</p>
-            <p class="text-lg font-black text-stone-800 uppercase">CSE/2024/31714300</p>
+            <p class="text-lg font-black text-stone-800 uppercase">{{Auth::user()->StudentProfile->matric_number}}</p>
         </div>
     </div>
 
     <!-- Fee Breakdown Table -->
+    @php
+        // $deductedAmount = $academicFee->amount - 10000;
+        // $formattedOriginal = number_format($academicFee->amount, 2);
+        // $formattedDeducted = number_format($deductedAmount, 2);
+
+
+        $split_amount =  floor(($academicFee->amount / 3) * 100) / 100;
+        $fee_part_1 = $split_amount; 
+        $fee_part_2 = $split_amount; 
+        $fee_part_3 = $split_amount; 
+
+    @endphp
     <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
         <div class="p-6 border-b border-stone-100 flex items-center justify-between">
             <h2 class="text-xs font-bold text-stone-400 uppercase tracking-widest">Fee Breakdown</h2>
@@ -55,6 +67,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-100">
+
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
                             <p class="text-sm font-bold text-stone-800 leading-tight text-left">Tuition Fee</p>
@@ -64,9 +77,10 @@
                             <span class="text-xs text-stone-500 uppercase font-bold tracking-tight">Academic</span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <span class="text-sm font-black text-stone-800">₦150,000.00</span>
+                            <span class="text-sm font-black text-stone-800">₦{{$fee_part_1}}</span>
                         </td>
                     </tr>
+
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
                             <p class="text-sm font-bold text-stone-800 leading-tight text-left">ICT & Library Maintenance</p>
@@ -76,9 +90,10 @@
                             <span class="text-xs text-stone-500 uppercase font-bold tracking-tight">Utility</span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <span class="text-sm font-black text-stone-800">₦45,000.00</span>
+                            <span class="text-sm font-black text-stone-800">₦{{ $fee_part_2}}</span>
                         </td>
                     </tr>
+
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
                             <p class="text-sm font-bold text-stone-800 leading-tight text-left">Student Union Dues</p>
@@ -88,9 +103,10 @@
                             <span class="text-xs text-stone-500 uppercase font-bold tracking-tight">Social</span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <span class="text-sm font-black text-stone-800">₦15,000.00</span>
+                            <span class="text-sm font-black text-stone-800">₦{{ $fee_part_3}}</span>
                         </td>
                     </tr>
+
                 </tbody>
             </table>
         </div>
@@ -99,11 +115,11 @@
         <div class="p-6 bg-stone-50/30 border-t border-stone-100 flex flex-col items-end space-y-3">
             <div class="flex justify-between w-full max-w-xs text-sm">
                 <span class="text-stone-500 font-medium">Sub-Total:</span>
-                <span class="font-bold text-stone-800">₦210,000.00</span>
+                <span class="font-bold text-stone-800">₦{{$academicFee->amount}}</span>
             </div>
             <div class="flex justify-between w-full max-w-xs pt-3 border-t border-stone-200">
                 <span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Total Due:</span>
-                <span class="text-xl font-black text-darkblue">₦210,000.00</span>
+                <span class="text-xl font-black text-darkblue">₦{{$academicFee->amount}}</span>
             </div>
         </div>
     </div>

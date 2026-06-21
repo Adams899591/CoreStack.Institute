@@ -11,4 +11,14 @@ class StudentProfile extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+    // =================== Relationship =====================
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function Department(){
+        return $this->belongsTo(Department::class);
+    }  
 }

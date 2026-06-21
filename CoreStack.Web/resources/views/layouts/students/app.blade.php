@@ -38,6 +38,7 @@
 </head>
 <body class="bg-stone-100 font-sans antialiased">
     <div x-data="{ sidebarOpen: false, isDesktop: window.innerWidth >= 768 }" @resize.window="isDesktop = window.innerWidth >= 768" class="flex h-screen overflow-hidden">
+
         <!-- Sidebar -->
         <aside x-cloak x-show="sidebarOpen || isDesktop"
                class="fixed inset-y-0 left-0 z-50 w-64 bg-darkblue text-white transform transition-transform duration-200 ease-in-out flex flex-col md:relative md:translate-x-0"
@@ -49,6 +50,8 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-darkblue-light/50 mt-2">CoreStack Academy</span> {{-- Moved CoreStack Academy here --}}
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar"> {{-- Main navigation --}}
+
+                {{-- Dashboard --}}
                 <a href="{{route("std.dashboard")}}" class="{{request()->routeIs("std.dashboard") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1s 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
@@ -56,7 +59,7 @@
 
                 <!-- My Program Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs(["std.current-semester-reg", "std.previous-registration"]) ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="{{request()->routeIs(["std.current-semester-reg", "std.previous-registration"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             My Program
@@ -77,7 +80,7 @@
 
                 <!-- My Results Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs("std.student-transcript") ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="{{request()->routeIs("std.student-transcript") ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             My Results
@@ -109,7 +112,7 @@
 
                 <!-- School Fees / Charges Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs(["std.current-session-fee", "std.payment-history"]) ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="{{request()->routeIs(["std.current-session-fee", "std.payment-history"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             School Fees
@@ -135,12 +138,12 @@
                     <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     <div class="flex-1 text-sm leading-tight">
                         <div class="flex items-center justify-between">
-                            <p class="font-medium text-stone-100 text-xs">Usman Adams</p>
+                            <p class="font-medium text-stone-100 text-xs">{{Auth::user()->StudentProfile->matric_number}}</p>
                             <button class="text-stone-400 hover:text-gold transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                             </button>
                         </div>
-                        <p class="text-gold text-[10px]">Cyber Security</p>
+                        <p class="text-gold text-[10px]">{{Auth::user()->StudentProfile->Department->name}}</p>
                     </div>
                 </div>
             </div>
@@ -160,9 +163,9 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                     <div class="text-left">
-                        <p class="text-sm font-bold text-stone-800 leading-none">Usman Adams</p>
+                        <p class="text-sm font-bold text-stone-800 leading-none">{{Auth::user()->name}}</p>
                         <p class="text-[10px] font-semibold text-gold uppercase tracking-tighter mt-1">
-                            CSE/2024/31714300 | Web Developer
+                            {{Auth::user()->StudentProfile->matric_number}} | {{Auth::user()->StudentProfile->Department->name}}
                         </p>
                     </div>
                 </div>
@@ -240,7 +243,8 @@
             </footer>
 
         </div>
+        
     </div>
     @livewireScripts
 </body>
-</html>
+</html> 

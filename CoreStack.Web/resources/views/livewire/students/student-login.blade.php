@@ -14,7 +14,9 @@
         @endif
 
         {{-- Livewire Form --}}
-        <form wire:submit.prevent="login" class="space-y-4">
+        <form wire:submit.prevent="StudentLogin" class="space-y-4">
+
+
             {{-- Matric Number Input --}}
             <div class="text-left">
                 <label for="matric_number" class="block text-gray-700 text-sm font-bold mb-2">Matric Number</label>
@@ -27,7 +29,7 @@
                         id="matric_number"
                         wire:model.defer="matric_number"
                         class="shadow appearance-none border rounded-md w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('matric_number') border-red-500 @enderror"
-                        required
+                        {{-- required --}}
                         autofocus
                     >
                 </div>
@@ -48,7 +50,7 @@
                         id="password"
                         wire:model.defer="password"
                         class="shadow appearance-none border rounded-md w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('password') border-red-500 @enderror"
-                        required
+                        {{-- required --}}
                     >
                 </div>
                 @error('password')
@@ -68,10 +70,12 @@
             {{-- Submit Button --}}
             <div>
                 <button type="submit" class="bg-[#1A2B4C] text-white py-2 px-3 rounded-md cursor-pointer text-sm w-full hover:bg-[#D4AF37] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" wire:loading.attr="disabled" wire:target="login">
-                    <span wire:loading.remove wire:target="login">Login</span>
-                    <span wire:loading wire:target="login">Logging in...</span>
+                    <span wire:loading.remove wire:target="StudentLogin">Login</span>
+                    <span wire:loading wire:target="StudentLogin">Logging in...</span>
                 </button>
             </div>
+
+
         </form>
     </div>
 </div>

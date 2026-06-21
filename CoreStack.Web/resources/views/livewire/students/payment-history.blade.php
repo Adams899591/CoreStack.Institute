@@ -19,7 +19,7 @@
             </div>
             <div>
                 <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Total Paid</p>
-                <p class="text-xl font-black text-stone-800">₦245,000.00</p>
+                <p class="text-xl font-black text-stone-800">₦{{$totalPayment}}</p>
             </div>
         </div>
         
@@ -29,7 +29,7 @@
             </div>
             <div>
                 <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Outstanding</p>
-                <p class="text-xl font-black text-stone-800">₦15,000.00</p>
+                <p class="text-xl font-black text-stone-800">₦{{$outStanding}}</p>
             </div>
         </div>
 
@@ -39,13 +39,15 @@
             </div>
             <div>
                 <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Last Payment</p>
-                <p class="text-xl font-black text-stone-800">12 May, 2024</p>
+                <p class="text-xl font-black text-stone-800">{{$lastPayment->created_at->format("d F Y")}}</p>
             </div>
         </div>
     </div>
 
     <!-- Table Section -->
     <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+
+         {{-- Search Section  --}}
         <div class="p-6 border-b border-stone-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="relative flex-1 max-w-sm">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400">
@@ -64,76 +66,56 @@
 
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse whitespace-nowrap">
+
+                {{-- table header --}}
                 <thead>
                     <tr class="bg-stone-50/50">
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">Date</th>
-                        <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">Transaction ID</th>
+                        <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">Refrence ID</th>
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">Description</th>
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">Amount</th>
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest text-center">Status</th>
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest text-right">Action</th>
                     </tr>
                 </thead>
+
+                 {{-- table body --}}
                 <tbody class="divide-y divide-stone-100">
+
                     <!-- Row 1 -->
-                    <tr class="hover:bg-stone-50/50 transition">
-                        <td class="px-6 py-4">
-                            <span class="text-sm font-semibold text-stone-700">May 15, 2024</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-xs font-mono text-stone-500">CS-TX-991204</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="text-sm font-bold text-stone-800 leading-tight">Tuition Fee</p>
-                            <p class="text-[10px] text-stone-400 uppercase font-semibold mt-0.5">2023/2024 Session • 1st Semester</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-sm font-black text-stone-800">₦150,000.00</span>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <span class="inline-flex px-2 py-1 text-[9px] font-bold uppercase tracking-tighter bg-green-100 text-green-700 rounded-md">Successful</span>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <button class="text-darkblue hover:text-gold transition font-bold text-[10px] uppercase tracking-widest">View Receipt</button>
-                        </td>
-                    </tr>
-                    <!-- Row 2 -->
-                    <tr class="hover:bg-stone-50/50 transition">
-                        <td class="px-6 py-4">
-                            <span class="text-sm font-semibold text-stone-700">Jan 10, 2024</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-xs font-mono text-stone-500">CS-TX-882110</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="text-sm font-bold text-stone-800 leading-tight">ICT & Library Fee</p>
-                            <p class="text-[10px] text-stone-400 uppercase font-semibold mt-0.5">2023/2024 Session • 1st Semester</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-sm font-black text-stone-800">₦45,000.00</span>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <span class="inline-flex px-2 py-1 text-[9px] font-bold uppercase tracking-tighter bg-green-100 text-green-700 rounded-md">Successful</span>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <button class="text-darkblue hover:text-gold transition font-bold text-[10px] uppercase tracking-widest">View Receipt</button>
-                        </td>
-                    </tr>
+                    @foreach ($payments as $payment) 
+                        <tr class="hover:bg-stone-50/50 transition">
+                            <td class="px-6 py-4">
+                                <span class="text-sm font-semibold text-stone-700">{{$payment->created_at->format("F j, Y")}}</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="text-xs font-mono text-stone-500">{{$payment->reference_no}}</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-bold text-stone-800 leading-tight">{{ ((($payments->currentPage() - 1) * $payments->perPage()) + $loop->iteration) * 100 }} Tuition Fee</p>
+                                <p class="text-[10px] text-stone-400 uppercase font-semibold mt-0.5">{{$payment->session}} Session • 1st & 2nd Semester</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="text-sm font-black text-stone-800">₦{{$payment->amount_paid}}</span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="inline-flex px-2 py-1 text-[9px] font-bold uppercase tracking-tighter bg-green-100 text-green-700 rounded-md">Successful</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-darkblue hover:text-gold transition font-bold text-[10px] uppercase tracking-widest">View Receipt</button>
+                            </td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
+
             </table>
         </div>
         
         <!-- Pagination -->
         <div class="px-6 py-4 bg-stone-50/30 border-t border-stone-100 flex items-center justify-between">
-            <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Showing 1 to 2 of 2 entries</p>
-            <div class="flex items-center space-x-2">
-                <button class="p-2 rounded border border-stone-200 text-stone-400 hover:bg-white transition disabled:opacity-50" disabled>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                <button class="p-2 rounded border border-stone-200 text-stone-400 hover:bg-white transition disabled:opacity-50" disabled>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
-            </div>
+            {{$payments->links()}}
         </div>
+
     </div>
 </div>

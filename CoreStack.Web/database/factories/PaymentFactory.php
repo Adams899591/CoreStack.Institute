@@ -21,8 +21,8 @@ class PaymentFactory extends Factory
     {
         return [
             'user_id' => function () {
-                return User::where('role', 'student')->inRandomOrder()->first()->id 
-                    ?? User::factory()->student()->create()->id;
+                return User::where('role', 'student')->inRandomOrder()->first()->id;
+                    // ?? User::factory()->student()->create()->id;
             },
             'fee_id' => function (array $attributes) {
                 $profile = StudentProfile::where('user_id', $attributes['user_id'])->first();

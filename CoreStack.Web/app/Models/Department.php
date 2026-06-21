@@ -11,4 +11,12 @@ class Department extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+
+    
+    // =================== Relationship =====================
+    // public function StudentProfile(){
+    //     return $this->hasOne(StudentProfile::class);
+    // }  
 }

@@ -4,7 +4,7 @@
             <h1 class="text-2xl font-black tracking-tight text-stone-800 uppercase">Course Details</h1>
             <p class="text-sm text-stone-500">List of registered courses for 100 Level - First Semester.</p>
         </div>
-        <a href="{{ route('std.course-catolog') }}" class="inline-flex items-center px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all shadow-sm focus:outline-none w-fit">
+        <a href="{{ route('std.course-catolog') }}" class="inline-flex items-center px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all shadow-sm focus:outline-none w-fit"  wire:navigate>
             <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
@@ -25,75 +25,31 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-100">
-                    <!-- Static Row 1 -->
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-500">01</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C] uppercase tracking-tight">CSC 101</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-medium">Introduction to Computer Science</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-black text-center">3</td>
-                        <td class="px-6 py-4">
-                            <span class="px-2.5 py-1 text-[10px] font-bold bg-blue-50 text-blue-600 rounded-md uppercase border border-blue-100">
-                                Core
-                            </span>
-                        </td>
-                    </tr>
+                    
+                    @php
+                        $SN = 1; // used to declear SN number to start from 1 
+                    @endphp
 
-                    <!-- Static Row 2 -->
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-500">02</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C] uppercase tracking-tight">MTH 101</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-medium">Elementary Mathematics I</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-black text-center">3</td>
-                        <td class="px-6 py-4">
-                            <span class="px-2.5 py-1 text-[10px] font-bold bg-blue-50 text-blue-600 rounded-md uppercase border border-blue-100">
-                                Core
-                            </span>
-                        </td>
-                    </tr>
+                   <!-- Static Row 1 -->
+                   @foreach ($courses as $course)
+                        <tr class="hover:bg-stone-50/50 transition-colors group">
+                            <td class="px-6 py-4 text-sm font-medium text-stone-500">0{{$SN++}}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C] uppercase tracking-tight">{{$course->course_code}}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600 font-medium">{{$course->course_name}}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600 font-black text-center">{{$course->units}}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 text-[10px] font-bold bg-blue-50 text-blue-600 rounded-md uppercase border border-blue-100">
+                                    Core
+                                </span>
+                            </td>
+                        </tr>
+                   @endforeach
 
-                    <!-- Static Row 3 -->
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-500">03</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C] uppercase tracking-tight">PHY 101</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-medium">General Physics I</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-black text-center">3</td>
-                        <td class="px-6 py-4">
-                            <span class="px-2.5 py-1 text-[10px] font-bold bg-blue-50 text-blue-600 rounded-md uppercase border border-blue-100">
-                                Core
-                            </span>
-                        </td>
-                    </tr>
-
-                    <!-- Static Row 4 -->
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-500">04</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C] uppercase tracking-tight">GST 101</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-medium">Use of English & Communication Skills I</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-black text-center">2</td>
-                        <td class="px-6 py-4">
-                            <span class="px-2.5 py-1 text-[10px] font-bold bg-amber-50 text-amber-600 rounded-md uppercase border border-amber-100">
-                                Elective
-                            </span>
-                        </td>
-                    </tr>
-
-                    <!-- Static Row 5 -->
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-500">05</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C] uppercase tracking-tight">CSC 103</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-medium">Introduction to Problem Solving</td>
-                        <td class="px-6 py-4 text-sm text-stone-600 font-black text-center">2</td>
-                        <td class="px-6 py-4">
-                            <span class="px-2.5 py-1 text-[10px] font-bold bg-blue-50 text-blue-600 rounded-md uppercase border border-blue-100">
-                                Core
-                            </span>
-                        </td>
-                    </tr>
                 </tbody>
                 <tfoot>
                     <tr class="bg-stone-50/80">
                         <td colspan="3" class="px-6 py-4 text-right text-[10px] font-black uppercase tracking-widest text-stone-400">Total Units:</td>
-                        <td class="px-6 py-4 text-sm font-black text-[#1A2B4C] text-center">13</td>
+                        <td class="px-6 py-4 text-sm font-black text-[#1A2B4C] text-center">{{$totalCreditUnit}}.0</td>
                         <td></td>
                     </tr>
                 </tfoot>

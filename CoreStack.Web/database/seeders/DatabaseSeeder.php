@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Department;
@@ -67,7 +68,7 @@ class DatabaseSeeder extends Seeder
      
 
         //2.  Create 10 users to e.g teacher management and student to user table
-        User::factory(10)->create();
+        User::factory(100)->create();
 
         
         //3.  get all the student
@@ -84,7 +85,7 @@ class DatabaseSeeder extends Seeder
             StudentProfile::factory()->create([
                 'user_id' => $student->id,
                 'level' => $level,
-                'admission_year' => $admissionSession,
+                'admission_year' => $admissionSession, 
             ]);
         }
 
@@ -113,10 +114,10 @@ class DatabaseSeeder extends Seeder
         $teachers = User::where('role', 'teacher')->get();
 
         // Ensure there are teachers, otherwise create some
-        if ($teachers->isEmpty()) {
-            User::factory(5)->teacher()->create();
-            $teachers = User::where('role', 'teacher')->get();
-        }
+        // if ($teachers->isEmpty()) {
+        //     User::factory(5)->teacher()->create();
+        //     $teachers = User::where('role', 'teacher')->get();
+        // }
 
         $courseCounter = 1; // Reset counter for course codes
 
@@ -155,6 +156,9 @@ class DatabaseSeeder extends Seeder
 
         
         // 7. Create unique fees for each department and level
+        //  set sql_safe_updates = 0;
+        // Update core_stack_db.payments set status = "pending" where session = "2025/2026";
+        // SELECT * FROM core_stack_db.payments ;
         // This ensures every department and level combination has a specific fee amount
         $levels = ['100', '200', '300', '400', '500'];
         
@@ -166,7 +170,7 @@ class DatabaseSeeder extends Seeder
                     'category' => 'Tuition',
                     // amount varies randomly between 25k and 85k for each record
                     'amount' => fake()->randomFloat(2, 25000, 85000), 
-                    'session' => '2023/2024',
+                    'session' => '2025/2026',
                     'semester' => 'First',
                     'level' => $level,
                     'status' => 'active',
@@ -211,8 +215,11 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        //7. Create 100 student attendence
-        Attendance::factory(100)->create();
+        //9. Create 100 student attendence
+        // Attendance::factory(10)->create();
+
+        // //10. Create 25 assignment record
+        // Assignment::factory(25)->create();
 
 
 

@@ -12,10 +12,10 @@
                 <span class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white rounded-full" title="Profile Active"></span>
             </div>
             <div class="flex-1 pb-2 text-center md:text-left">
-                <h1 class="text-2xl font-bold text-stone-900 uppercase">Usman Adams</h1>
+                <h1 class="text-2xl font-bold text-stone-900 uppercase">{{Auth::user()->name}}</h1>
                 <p class="text-stone-500 font-medium text-sm flex items-center justify-center md:justify-start">
                     <svg class="w-4 h-4 mr-1.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    Matric No: CSE/2024/31714300
+                    Matric No: {{Auth::user()->StudentProfile->Department->name}}
                 </p>
             </div>
             <div class="flex space-x-3 pb-2">
@@ -43,27 +43,27 @@
                 <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12">
                     <div>
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Legal Name</p>
-                        <p class="text-sm font-bold text-stone-800 uppercase">Usman Adams</p>
+                        <p class="text-sm font-bold text-stone-800 uppercase">{{Auth::user()->name}}</p>
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Date of Birth</p>
-                        <p class="text-sm font-bold text-stone-800">14th September, 2002</p>
+                        <p class="text-sm font-bold text-stone-800">{{\Carbon\Carbon::parse(Auth::user()->StudentProfile->date_of_birth)->format('jS F Y')}}</p>
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Gender</p>
-                        <p class="text-sm font-bold text-stone-800">Male</p>
+                        <p class="text-sm font-bold text-stone-800">{{Auth::user()->StudentProfile->gender}}</p>
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Nationality</p>
-                        <p class="text-sm font-bold text-stone-800">Nigerian</p>
+                        <p class="text-sm font-bold text-stone-800">{{Auth::user()->StudentProfile->nationality}}</p>
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">State of Origin</p>
-                        <p class="text-sm font-bold text-stone-800">Lagos State</p>
+                        <p class="text-sm font-bold text-stone-800">{{Auth::user()->StudentProfile->state_of_origin}}</p>
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Marital Status</p>
-                        <p class="text-sm font-bold text-stone-800">Single</p>
+                        <p class="text-sm font-bold text-stone-800">{{Auth::user()->StudentProfile->marital_status}}</p>
                     </div>
                 </div>
             </div>
@@ -80,17 +80,17 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Student Email</p>
-                            <p class="text-sm font-bold text-stone-800">u.adams@corestack.edu.ng</p>
+                            <p class="text-sm font-bold text-stone-800">{{Auth::user()->email}}</p>
                         </div>
                         <div>
                             <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Mobile Number</p>
-                            <p class="text-sm font-bold text-stone-800">+234 812 345 6789</p>
+                            <p class="text-sm font-bold text-stone-800">{{Auth::user()->StudentProfile->phone}}</p>
                         </div>
                     </div>
                     <div class="pt-4 border-t border-stone-50">
                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Residential Address</p>
                         <p class="text-sm font-bold text-stone-800 leading-relaxed uppercase">
-                            No 12, Innovation Hub Drive, Victoria Island,<br>Lagos, Nigeria.
+                           {{Auth::user()->StudentProfile->address}}
                         </p>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                 <div class="p-6 space-y-5">
                     <div class="flex justify-between items-center pb-3 border-b border-stone-50">
                         <span class="text-stone-500 font-medium text-xs">Program</span>
-                        <span class="text-darkblue font-black text-xs uppercase">Cyber Security</span>
+                        <span class="text-darkblue font-black text-xs uppercase">{{Auth::user()->StudentProfile->Department->name}}</span>
                     </div>
                     <div class="flex justify-between items-center pb-3 border-b border-stone-50">
                         <span class="text-stone-500 font-medium text-xs">Faculty</span>
@@ -117,11 +117,11 @@
                     </div>
                     <div class="flex justify-between items-center pb-3 border-b border-stone-50">
                         <span class="text-stone-500 font-medium text-xs">Level</span>
-                        <span class="text-stone-800 font-bold text-xs">300 Level</span>
+                        <span class="text-stone-800 font-bold text-xs">{{Auth::user()->StudentProfile->level}}  level</span>
                     </div>
                     <div class="flex justify-between items-center pb-3 border-b border-stone-50">
                         <span class="text-stone-500 font-medium text-xs">Current GPA</span>
-                        <span class="text-emerald-600 font-black text-xs">4.85 / 5.0</span>
+                        <span class="text-emerald-600 font-black text-xs">{{Auth::user()->StudentProfile->current_gpa}} / 5.0</span>
                     </div>
                     
                     <div class="pt-2">

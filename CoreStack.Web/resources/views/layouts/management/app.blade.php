@@ -49,6 +49,8 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-gold mt-2">CoreStack Institute</span> {{-- Changed branding --}}
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar"> {{-- Main navigation --}}
+
+                {{-- Dashboard --}}
                 <a href="{{route('mgt.dashboard')}}" class="{{request()->routeIs('mgt.dashboard') ? 'flex items-center px-4 py-3 bg-darkblue-light text-gold rounded-lg' : 'flex items-center px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" wire:navigate >
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1s 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
@@ -56,7 +58,7 @@
 
                 <!-- Students Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                     <button @click="open = !open"   class="{{request()->routeIs(["mgt.student-list", "mgt.student-management"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                             Students
@@ -73,7 +75,7 @@
 
                 <!-- Lecturers Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                    <button @click="open = !open" class="{{request()->routeIs(["mgt.teacher-list", "mgt.signed-course"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             Teachers
@@ -90,7 +92,7 @@
 
                 <!-- Courses Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                    <button @click="open = !open" class="{{request()->routeIs(["mgt.course-catalog", "mgt.course-crisscross"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             Courses
@@ -107,7 +109,7 @@
 
                 <!-- Department Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                    <button @click="open = !open" class="{{request()->routeIs("mgt.departement-management") ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                             Department
@@ -122,8 +124,8 @@
                 </div>
 
                 <!-- Attendance Dropdown -->
-                <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                {{-- <div x-data="{ open: false }">
+                    <button @click="open = !open" class="{{request()->routeIs(["mgt.course-catalog", "mgt.course-crisscross"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                             Attendance
@@ -135,11 +137,11 @@
                     <div x-show="open" x-cloak x-transition class="mt-1 ml-8 space-y-1">
                         <a href="#" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition"  wire:navigate >Attendance Reports</a>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Results Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                    <button @click="open = !open" class="{{request()->routeIs(["mgt.approved-results", "mgt.published-results"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             Results
@@ -156,7 +158,7 @@
 
                 <!-- School Fees Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none" >
+                    <button @click="open = !open" class="{{request()->routeIs(["mgt.fees-management", "mgt.fee-configuration"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             School Fees
@@ -202,6 +204,7 @@
         <!-- Main Content Wrapper -->
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
             <!-- Topbar -->
+
             <header class="h-16 bg-white border-b border-stone-200 flex items-center justify-between px-8 shadow-sm">
                 <div class="flex items-center">
                     {{-- Hamburger Icon for Mobile --}}
@@ -216,6 +219,7 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
+                    
                     <!-- Notification Dropdown -->
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" class="p-2 text-stone-400 hover:text-gold transition relative focus:outline-none">
@@ -275,26 +279,6 @@
                 {{ $slot }}
             </main>
 
-            <!-- Footer -->
-            {{-- <footer class="h-auto md:h-16 py-6 md:py-0 bg-white border-t border-stone-200 flex flex-col md:flex-row items-center justify-between px-8 shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)] space-y-6 md:space-y-0">
-                <div class="text-stone-500 text-xs font-medium italic text-center md:text-left">
-                    <div>
-                        &copy; {{ date('Y') }} CoreStack Institute. <span class="block sm:inline sm:ml-1 text-stone-400">"Excellence through Knowledge"</span>
-                    </div>
-                    <div class="mt-1 md:mt-0 md:inline md:ml-4 text-stone-400">Developed by Usman Adams</div>
-                </div>
-                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-                    <nav class="flex items-center space-x-4">
-                        <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Privacy Policy</a>
-                        <a href="#" class="text-[10px] font-bold text-stone-400 hover:text-gold uppercase tracking-widest transition">Terms</a>
-                    </nav>
-                    <div class="hidden sm:block h-6 w-[1px] bg-stone-200"></div>
-                    <a href="#" class="flex items-center text-[10px] font-bold text-stone-500 hover:text-gold uppercase tracking-widest transition">
-                        <svg class="w-4 h-4 mr-1.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        Support Center
-                    </a>
-                </div>
-            </footer> --}}
             {{-- footer --}}
             <footer class="h-16 bg-white border-t border-stone-200 flex items-center justify-between px-8 shadow-sm">
                 <div class="text-stone-500 text-xs font-medium italic">
@@ -311,4 +295,4 @@
     </div>
     @livewireScripts
 </body>
-</html>
+</html> 

@@ -37,7 +37,7 @@ class StudentProfileFactory extends Factory
             'user_id' => User::factory()->student(),
                    'matric_number' => $prefix . '-' . date('Y') . '-' . fake()->unique()->numerify('####'),
      
-            'legal_name' => fake()->name(),
+            // 'legal_name' => fake()->name(),
             'date_of_birth' => fake()->date(),
             'gender' => fake()->randomElement(['Male', 'Female']),
             'nationality' => fake()->country(),
@@ -49,7 +49,7 @@ class StudentProfileFactory extends Factory
             'faculty' => "Computing",
             'level' => fake()->randomElement(['100', '200', '300', '400', '500']),
             'enrollment_date' => fake()->date(),
-            'admission_year' => (string) fake()->year(),
+            'admission_year' => ($year  = fake()->numberBetween(2021, 2025)) . "/" . ($year + 1),
             'current_gpa' => fake()->randomFloat(2, 1.00, 5.00),
             'profile_image' => null,
             'qr_code' => null,
