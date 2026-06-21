@@ -25,7 +25,6 @@ return new class extends Migration
             $table->decimal('total_units_passed', 10, 1)->default(0.0); // CCE total
             $table->decimal('grade_point_average_gpa', 4, 2)->nullable(); // GPA
             $table->decimal('total_tgp', 12, 2)->default(0.00); // Running sum of TGPs
-            //  Semester Units Sum (CCR)     Note: this will be calculated manualy
             $table->decimal('cumulative_gpa', 4, 2)->nullable(); // CGPA
             $table->boolean('is_approved')->default(false); // Management approval
             $table->boolean('is_published')->default(false); // Visible to Student

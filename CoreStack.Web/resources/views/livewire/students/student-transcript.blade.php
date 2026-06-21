@@ -9,7 +9,7 @@
        - 40 - 44 : E (Grade Point = 1)
        - 00 - 39 : F (Grade Point = 0)
 
-    2. DEFINITIONS:
+    2. DEFINITIONS: 
        - CU (Credit Unit): The weight of the course (e.g., 3 units).
        - GP (Grade Point): Based on the score (e.g., A = 5).
        - TGP (Total Grade Point): CU * GP.

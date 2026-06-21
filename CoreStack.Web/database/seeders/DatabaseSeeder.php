@@ -9,6 +9,8 @@ use App\Models\Department;
 use App\Models\Fee;
 use App\Models\ManagementProfile;
 use App\Models\Payment;
+use App\Models\Result;
+use App\Models\SemesterResult;
 use App\Models\StudentProfile;
 use App\Models\TeacherProfile;
 use App\Models\User;
@@ -68,7 +70,7 @@ class DatabaseSeeder extends Seeder
      
 
         //2.  Create 10 users to e.g teacher management and student to user table
-        User::factory(100)->create();
+        User::factory(10)->create();
 
         
         //3.  get all the student
@@ -178,7 +180,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // 8. Generate Payment history for students (Ensures 500L has all previous level fees)
+        // 8. Generate Payment history, Results, and Semester Results for students
         foreach ($students as $student) {
             $profile = StudentProfile::where('user_id', $student->id)->first();
             if (!$profile) continue;
@@ -189,7 +191,10 @@ class DatabaseSeeder extends Seeder
             // Parse the admission session (e.g., "2021/2022") to get the starting year
             $startYear = (int) explode('/', $profile->admission_year)[0];
 
-            // Create a payment for every level leading up to their current level
+            $runningTgp = 0.0;
+            $runningUnits = 0.0;
+
+            // Create a payment and results for every level leading up to their current level
             for ($i = 0; $i <= $currentLevelIndex; $i++) {
                 $targetLevel = $levels[$i];
                 $sessionStr = ($startYear + $i) . '/' . ($startYear + $i + 1);
@@ -199,8 +204,9 @@ class DatabaseSeeder extends Seeder
                           ->where('level', $targetLevel)
                           ->first();
 
+                $payment = null;
                 if ($fee) {
-                    Payment::factory()->create([
+                    $payment = Payment::factory()->create([
                         'user_id' => $student->id,
                         'fee_id' => $fee->id,
                         'amount_paid' => $fee->amount,
@@ -210,6 +216,144 @@ class DatabaseSeeder extends Seeder
                             ($startYear + $i) . "-01-01", 
                             ($startYear + $i) . "-12-31"
                         ),
+                    ]);
+                } else {
+                    // Fallback payment creation if fee is missing
+                    $fallbackFee = Fee::first() ?: Fee::create([
+                        'department_id' => $profile->department_id,
+                        'title' => 'Tuition Fee Fallback',
+                        'category' => 'Tuition',
+                        'amount' => 50000.00,
+                        'session' => $sessionStr,
+                        'semester' => 'First',
+                        'level' => $targetLevel,
+                        'status' => 'active'
+                    ]);
+                    $payment = Payment::factory()->create([
+                        'user_id' => $student->id,
+                        'fee_id' => $fallbackFee->id,
+                        'amount_paid' => $fallbackFee->amount,
+                        'session' => $sessionStr,
+                        'status' => 'completed',
+                        'payment_date' => fake()->dateTimeBetween(
+                            ($startYear + $i) . "-01-01", 
+                            ($startYear + $i) . "-12-31"
+                        ),
+                    ]);
+                }
+
+                // Generate results for both semesters (First and Second)
+                foreach (['First', 'Second'] as $semesterName) {
+                    // Find all courses matching department, target level, and semester
+                    $courses = Course::where('department_id', $profile->department_id)
+                                     ->where('level', $targetLevel)
+                                     ->where('semester', $semesterName)
+                                     ->get();
+
+                    // If courses is empty, create fallback courses
+                    if ($courses->isEmpty()) {
+                        $teachers = User::where('role', 'teacher')->get();
+                        if ($teachers->isEmpty()) {
+                            $teacherUser = User::factory()->create(['role' => 'teacher']);
+                            TeacherProfile::factory()->create(['user_id' => $teacherUser->id]);
+                            $teachers = collect([$teacherUser]);
+                        }
+
+                        for ($c = 1; $c <= 2; $c++) {
+                            $prefix = strtoupper(substr(str_replace(' ', '', Department::find($profile->department_id)?->name ?? 'WED'), 0, 3));
+                            $courseCode = $prefix . '-' . $targetLevel . '-FB' . $c;
+                            Course::create([
+                                'department_id' => $profile->department_id,
+                                'teacher_id' => $teachers->random()->id,
+                                'course_name' => "Fallback Course {$c} for {$targetLevel}L {$semesterName} Sem",
+                                'course_code' => $courseCode,
+                                'units' => in_array($targetLevel, ['400', '500']) ? fake()->randomElement([3, 4, 5]) : fake()->numberBetween(2, 4),
+                                'level' => $targetLevel,
+                                'semester' => $semesterName,
+                                'description' => fake()->paragraph(),
+                                'status' => 'active',
+                            ]);
+                        }
+
+                        $courses = Course::where('department_id', $profile->department_id)
+                                         ->where('level', $targetLevel)
+                                         ->where('semester', $semesterName)
+                                         ->get();
+                    }
+
+                    $semesterTgp = 0.0;
+                    $semesterUnitsRegistered = 0.0;
+                    $semesterUnitsPassed = 0.0;
+
+                    foreach ($courses as $course) {
+                        $grade1 = fake()->numberBetween(5, 20); // First CA
+                        $grade2 = fake()->numberBetween(5, 20); // Second CA
+                        $grade3 = fake()->numberBetween(5, 20); // Third CA
+                        $examScore = fake()->numberBetween(20, 70); // Exam
+                        $totalScore = min(100, $grade1 + $grade2 + $grade3 + $examScore);
+
+                        $grade = 'F';
+                        $gp = 0.0;
+                        if ($totalScore >= 70) {
+                            $grade = 'A';
+                            $gp = 5.0;
+                        } elseif ($totalScore >= 60) {
+                            $grade = 'B';
+                            $gp = 4.0;
+                        } elseif ($totalScore >= 50) {
+                            $grade = 'C';
+                            $gp = 3.0;
+                        } elseif ($totalScore >= 45) {
+                            $grade = 'D';
+                            $gp = 2.0;
+                        } elseif ($totalScore >= 40) {
+                            $grade = 'E';
+                            $gp = 1.0;
+                        }
+
+                        // Create Course Result
+                        Result::create([
+                            'user_id' => $student->id,
+                            'course_id' => $course->id,
+                            'grade_1' => $grade1,
+                            'grade_2' => $grade2,
+                            'grade_3' => $grade3,
+                            'score' => $examScore,
+                            'total_score' => $totalScore,
+                            'grade' => $grade,
+                            'approved' => true,
+                            'pending' => false,
+                        ]);
+
+                        $semesterTgp += $course->units * $gp;
+                        $semesterUnitsRegistered += $course->units;
+                        if ($grade !== 'F') {
+                            $semesterUnitsPassed += $course->units;
+                        }
+                    }
+
+                    $semesterGpa = $semesterUnitsRegistered > 0 ? ($semesterTgp / $semesterUnitsRegistered) : 0.0;
+                    $runningTgp += $semesterTgp;
+                    $runningUnits += $semesterUnitsRegistered;
+                    $cgpa = $runningUnits > 0 ? ($runningTgp / $runningUnits) : 0.0;
+
+                    // Create SemesterResult
+                    SemesterResult::create([
+                        'user_id' => $student->id,
+                        'student_profile_id' => $profile->id,
+                        'payment_id' => $payment->id,
+                        'semester' => $semesterName,
+                        'session' => $sessionStr,
+                        'level' => $targetLevel,
+                        'grade_point' => round($semesterGpa, 2),
+                        'total_grade_point' => round($semesterTgp, 2),
+                        'total_units_registered' => round($semesterUnitsRegistered, 1),
+                        'total_units_passed' => round($semesterUnitsPassed, 1),
+                        'grade_point_average_gpa' => round($semesterGpa, 2),
+                        'total_tgp' => round($runningTgp, 2),
+                        'cumulative_gpa' => round($cgpa, 2),
+                        'is_approved' => true,
+                        'is_published' => true,
                     ]);
                 }
             }
