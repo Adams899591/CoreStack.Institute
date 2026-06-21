@@ -215,6 +215,11 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+
+
+
+
+        
         //9. Create 100 student attendence
         // Attendance::factory(10)->create();
 

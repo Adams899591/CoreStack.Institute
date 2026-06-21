@@ -53,7 +53,7 @@ Route::prefix("auth")->group(function(){
 });
 
 
-Route::prefix("student")->group(function(){
+Route::middleware(["auth", "student"])->prefix("student")->group(function(){
 
 Route::get('/dashboard', StudentDashboard::class)->name("std.dashboard");
 Route::get('/personal-data', StudentPersonalData::class)->name("std.personal-data");
@@ -69,7 +69,7 @@ Route::get('/course-details/{level}/{semester}', CourseDetails::class)->name("st
 
 
 
-Route::prefix("teacher")->group(function(){
+Route::middleware(["auth", "teacher"])->prefix("teacher")->group(function(){
 
 Route::get('/dashboard', TeachersDashboard::class)->name("tchr.dashboard");
 Route::get('/grade-entry', GradeEntry::class)->name("tchr.grade-entry");
@@ -83,7 +83,7 @@ Route::get('/assignments', Assignments::class)->name("tchr.assignments");
 });
 
 
-Route::prefix("management")->group(function(){
+Route::middleware(["auth", "management"])->prefix("management")->group(function(){
 
 Route::get('/dashboard', ManagementDashboard::class)->name("mgt.dashboard");
 Route::get('/student-list', MgtStudentList::class)->name("mgt.student-list");

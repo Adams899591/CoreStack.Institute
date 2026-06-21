@@ -2,7 +2,7 @@
     <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <h1 class="text-2xl font-black tracking-tight text-stone-800 uppercase">Course Details</h1>
-            <p class="text-sm text-stone-500">List of registered courses for 100 Level - First Semester.</p>
+            <p class="text-sm text-stone-500">List of registered courses for {{$level}} Level - {{$semester}} Semester.</p>
         </div>
         <a href="{{ route('std.course-catolog') }}" class="inline-flex items-center px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all shadow-sm focus:outline-none w-fit"  wire:navigate>
             <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

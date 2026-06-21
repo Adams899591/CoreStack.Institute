@@ -18,7 +18,7 @@ class CourseDetails extends Component
    }
 
 
-
+ 
     public function render()
     {
         // 1. get the login user departement id 
@@ -31,6 +31,6 @@ class CourseDetails extends Component
         $totalCreditUnit = $courses->sum("units");
 
 
-        return view('livewire.students.course-details', ["courses" => $courses, "totalCreditUnit" => $totalCreditUnit])->layout("layouts.students.app");
+        return view('livewire.students.course-details', ["courses" => $courses, "totalCreditUnit" => $totalCreditUnit, "level" => $this->level, "semester" => $this->semester])->layout("layouts.students.app");
     }
 }

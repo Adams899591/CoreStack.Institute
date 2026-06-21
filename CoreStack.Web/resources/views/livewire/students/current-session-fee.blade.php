@@ -38,19 +38,7 @@
         </div>
     </div>
 
-    <!-- Fee Breakdown Table -->
-    @php
-        // $deductedAmount = $academicFee->amount - 10000;
-        // $formattedOriginal = number_format($academicFee->amount, 2);
-        // $formattedDeducted = number_format($deductedAmount, 2);
 
-
-        $split_amount =  floor(($academicFee->amount / 3) * 100) / 100;
-        $fee_part_1 = $split_amount; 
-        $fee_part_2 = $split_amount; 
-        $fee_part_3 = $split_amount; 
-
-    @endphp
     <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
         <div class="p-6 border-b border-stone-100 flex items-center justify-between">
             <h2 class="text-xs font-bold text-stone-400 uppercase tracking-widest">Fee Breakdown</h2>
@@ -59,6 +47,8 @@
 
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
+
+                {{-- table header --}}
                 <thead>
                     <tr class="bg-stone-50/50">
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">Description</th>
@@ -66,8 +56,19 @@
                         <th class="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest text-right">Amount</th>
                     </tr>
                 </thead>
+
+                {{-- table body --}}
                 <tbody class="divide-y divide-stone-100">
 
+                    <!-- Fee Breakdown Table -->
+                    @php
+                        $split_amount =  floor(($academicFee->amount / 4) * 100) / 100;
+                        $fee_part_1 = $fee_1 = $split_amount +  $fee_2 = $split_amount; 
+                        $fee_part_2 = $split_amount; 
+                        $fee_part_3 = $split_amount;
+                    @endphp
+
+                    {{-- Tuition Fee --}}
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
                             <p class="text-sm font-bold text-stone-800 leading-tight text-left">Tuition Fee</p>
@@ -81,6 +82,7 @@
                         </td>
                     </tr>
 
+                    {{-- ICT & Library Maintenance --}}
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
                             <p class="text-sm font-bold text-stone-800 leading-tight text-left">ICT & Library Maintenance</p>
@@ -94,6 +96,7 @@
                         </td>
                     </tr>
 
+                    {{-- Student Union Dues --}}
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
                             <p class="text-sm font-bold text-stone-800 leading-tight text-left">Student Union Dues</p>
@@ -108,6 +111,7 @@
                     </tr>
 
                 </tbody>
+
             </table>
         </div>
 
