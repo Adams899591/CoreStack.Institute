@@ -193,6 +193,7 @@ class DatabaseSeeder extends Seeder
 
             $runningTgp = 0.0;
             $runningUnits = 0.0;
+            $previousCgpa = null;
 
             // Create a payment and results for every level leading up to their current level
             for ($i = 0; $i <= $currentLevelIndex; $i++) {
@@ -286,11 +287,12 @@ class DatabaseSeeder extends Seeder
                     $semesterUnitsPassed = 0.0;
 
                     foreach ($courses as $course) {
-                        $grade1 = fake()->numberBetween(5, 20); // First CA
-                        $grade2 = fake()->numberBetween(5, 20); // Second CA
-                        $grade3 = fake()->numberBetween(5, 20); // Third CA
-                        $examScore = fake()->numberBetween(20, 70); // Exam
-                        $totalScore = min(100, $grade1 + $grade2 + $grade3 + $examScore);
+                        $grade1 = fake()->randomFloat(1, 5, 10); // First CA (10 max)
+                        $grade2 = fake()->randomFloat(1, 5, 10); // Second CA (10 max)
+                        $grade3 = fake()->randomFloat(1, 5, 10); // Third CA (10 max)
+                        $grade4 = fake()->randomFloat(1, 5, 10); // Fourth CA (10 max)
+                        $examScore = fake()->randomFloat(2, 20, 60); // Exam (60 max, since CA sum is 40)
+                        $totalScore = min(100.0, floatval($grade1) + floatval($grade2) + floatval($grade3) + floatval($grade4) + floatval($examScore));
 
                         $grade = 'F';
                         $gp = 0.0;
@@ -318,9 +320,13 @@ class DatabaseSeeder extends Seeder
                             'grade_1' => $grade1,
                             'grade_2' => $grade2,
                             'grade_3' => $grade3,
-                            'score' => $examScore,
+                            'grade_4' => $grade4,
+                            'exam_score' => $examScore,
                             'total_score' => $totalScore,
                             'grade' => $grade,
+                            'semester' => $semesterName,
+                            'session' => $sessionStr,
+                            'level' => $targetLevel,
                             'approved' => true,
                             'pending' => false,
                         ]);
@@ -335,7 +341,14 @@ class DatabaseSeeder extends Seeder
                     $semesterGpa = $semesterUnitsRegistered > 0 ? ($semesterTgp / $semesterUnitsRegistered) : 0.0;
                     $runningTgp += $semesterTgp;
                     $runningUnits += $semesterUnitsRegistered;
-                    $cgpa = $runningUnits > 0 ? ($runningTgp / $runningUnits) : 0.0;
+
+                    // Custom CGPA calculation: average of CGPA so far and current semester GPA
+                    if ($previousCgpa === null) {
+                        $cgpa = $semesterGpa;
+                    } else {
+                        $cgpa = ($previousCgpa + $semesterGpa) / 2.0;
+                    }
+                    $previousCgpa = $cgpa;
 
                     // Create SemesterResult
                     SemesterResult::create([

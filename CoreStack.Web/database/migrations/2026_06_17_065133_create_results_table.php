@@ -15,12 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Student
             $table->foreignId('course_id')->constrained(); // Course   Note: get the credit unit using course table
-            $table->decimal('grade_1', 5, 2)->nullable();  // First  CA
-            $table->decimal('grade_2', 5, 2)->nullable();  // Second  CA
-            $table->decimal('grade_3', 5, 2)->nullable();  // Third  CA
-            $table->decimal('score', 5, 2)->nullable();  // Exam Score
-            $table->decimal("total_score", 5, 2)->nullable();  // CA + Exam
+            $table->decimal('grade_1', 5, 1)->nullable();  // First  CA 10\10
+            $table->decimal('grade_2', 5, 1)->nullable();  // Second  CA 10\10
+            $table->decimal('grade_3', 5, 1)->nullable();  // Third  CA 10\10
+            $table->decimal('grade_4', 5, 1)->nullable();  // Forth  CA 10\10
+            $table->decimal('exam_score', 5, 2)->nullable();  // Exam Score 70/70
+            $table->decimal("total_score", 5, 2)->nullable();  // CA + Exam  100/100
             $table->string("grade")->nullable(); // A, B, C, D, E, F
+            $table->string("semester");
+            $table->string('session')->nullable();  // 
+            $table->string("level"); 
             $table->boolean('approved')->default(false); // Teacher approval
             $table->boolean('pending')->default(false); // Pending to Student
             // $table->decimal('credit_units', 4, 1)->default(0.0); // CU: Snapshot of course units
