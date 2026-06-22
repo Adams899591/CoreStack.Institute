@@ -24,8 +24,10 @@ return new class extends Migration
             $table->decimal('total_units_registered', 10, 1)->default(0.0); // CCR total
             $table->decimal('total_units_passed', 10, 1)->default(0.0); // CCE total
             $table->decimal('grade_point_average_gpa', 4, 2)->nullable(); // GPA
+            $table->decimal('credit_units', 4, 1)->default(0.0); // CU: Snapshot of total course units for this semester
             $table->decimal('total_tgp', 12, 2)->default(0.00); // Running sum of TGPs
-            $table->decimal('cumulative_gpa', 4, 2)->nullable(); // CGPA
+            $table->decimal('last_cumulative_cgpa', 4, 2)->nullable(); // LCGPA: snapshot of CGPA before this semester
+            $table->decimal('cumulative_cgpa', 4, 2)->nullable(); // CGPA: (last_cumulative_cgpa + semester GPA) / 2
             $table->boolean('is_approved')->default(false); // Management approval
             $table->boolean('is_published')->default(false); // Visible to Student
             $table->timestamps();

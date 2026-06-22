@@ -47,8 +47,10 @@ class SemesterResultFactory extends Factory
             'total_units_registered' => round($totalUnitsRegistered, 1),
             'total_units_passed' => round($totalUnitsPassed, 1),
             'grade_point_average_gpa' => round($gpa, 2),
+            'credit_units' => round($totalUnitsRegistered, 1), // CU: Snapshot of course units from courses table
             'total_tgp' => $totalTgp,
-            'cumulative_gpa' => round(min(5.00, max(0.00, $gpa + fake()->randomFloat(2, 0.10, 0.50))) / 1.1, 2),
+            'cumulative_cgpa' => round(min(5.00, max(0.00, $gpa + fake()->randomFloat(2, 0.10, 0.50))) / 1.1, 2),
+            'last_cumulative_cgpa' => round(max(0.00, $gpa - fake()->randomFloat(2, 0.10, 0.50)), 2), // Simulated previous CGPA snapshot
             'is_approved' => fake()->boolean(70),
             'is_published' => fake()->boolean(50),
         ];

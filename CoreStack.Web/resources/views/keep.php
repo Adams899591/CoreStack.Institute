@@ -117,10 +117,7 @@ class DatabaseSeeder extends Seeder
 
         // Ensure there are teachers, otherwise create some
         // if ($teachers->isEmpty()) {
-        //     User::factory(5)->create(['role' => 'teacher']);
-        //     foreach (User::where('role', 'teacher')->get() as $teacher) {
-        //         TeacherProfile::factory()->create(['user_id' => $teacher->id]);
-        //     }
+        //     User::factory(5)->teacher()->create();
         //     $teachers = User::where('role', 'teacher')->get();
         // }
 
@@ -374,7 +371,6 @@ class DatabaseSeeder extends Seeder
                         'total_units_registered' => round($semesterUnitsRegistered, 1),
                         'total_units_passed' => round($semesterUnitsPassed, 1),
                         'grade_point_average_gpa' => round($semesterGpa, 2),
-                        'credit_units' => round($semesterUnitsRegistered, 1), // CU: Snapshot of total course units pulled directly from courses table
                         'total_tgp' => round($runningTgp, 2),
                         'last_cumulative_cgpa' => $lastCgpa, // Previous CGPA before this semester (NULL for 100L 1st sem)
                         'cumulative_cgpa' => round($cgpa, 2), // (last_cumulative_cgpa + semester GPA) / 2
