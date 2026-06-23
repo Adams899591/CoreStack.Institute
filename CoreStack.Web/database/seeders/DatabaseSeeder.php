@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AcademicPeriod;
 use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Course;
@@ -124,6 +125,33 @@ class DatabaseSeeder extends Seeder
         //     $teachers = User::where('role', 'teacher')->get();
         // }
 
+       // 7 creat facker record for Academic record
+        $baseYear = 2020;
+            $records = [];
+            for ($i = 0; $i < 6; $i++) {
+
+                $startYear = $baseYear + $i;
+                $endYear = $startYear + 1;
+
+                $session = "{$startYear}/{$endYear}";
+
+                foreach (['First', 'Second'] as $semester) {
+
+                    $records[] = [
+                        'session' => $session,
+                        'semester' => $semester,
+                        'is_current' => 'false',
+                    ];
+                }
+            }
+        // make LAST record current = true
+        $records[count($records) - 1]['is_current'] = 'true';
+        foreach ($records as $record) {
+            AcademicPeriod::create($record);
+        }
+
+
+       // 8
         $courseCounter = 1; // Reset counter for course codes
 
         foreach ($departments as $department) {
@@ -150,6 +178,7 @@ class DatabaseSeeder extends Seeder
                             'course_code' => $courseCode,
                             'units' => $units,
                             'level' => $level,
+                            'category' => fake()->randomElement(['Core',"Core","Core",'Elective']),
                             'semester' => fake()->randomElement(['First', 'Second']),
                             'description' => fake()->paragraph(),
                             'status' => 'active',
@@ -160,7 +189,7 @@ class DatabaseSeeder extends Seeder
         }
 
         
-        // 7. Create unique fees for each department and level
+        // 8. Create unique fees for each department and level
         //  set sql_safe_updates = 0;
         // Update core_stack_db.payments set status = "pending" where session = "2025/2026";
         // SELECT * FROM core_stack_db.payments ;
@@ -384,7 +413,6 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
-
 
 
 

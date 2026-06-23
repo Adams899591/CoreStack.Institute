@@ -1,5 +1,4 @@
 <div class="space-y-8">
-    <!-- Page Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <h1 class="text-2xl font-black text-stone-800 tracking-tight uppercase">Payment History</h1>
@@ -11,8 +10,7 @@
         </button>
     </div>
 
-    <!-- Financial Summary Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-4">
             <div class="p-3 bg-green-50 text-green-600 rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -33,7 +31,7 @@
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-4">
+        <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-4 md:col-span-2 lg:col-span-1">
             <div class="p-3 bg-darkblue text-gold rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
@@ -44,7 +42,6 @@
         </div>
     </div>
 
-    <!-- Table Section -->
     <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
 
          {{-- Search Section  --}}
@@ -82,7 +79,6 @@
                  {{-- table body --}}
                 <tbody class="divide-y divide-stone-100">
 
-                    <!-- Row 1 -->
                     @foreach ($payments as $payment) 
                         <tr class="hover:bg-stone-50/50 transition">
                             <td class="px-6 py-4">
@@ -112,7 +108,6 @@
             </table>
         </div>
         
-        <!-- Pagination -->
         <div class="px-6 py-4 bg-stone-50/30 border-t border-stone-100 flex items-center justify-between">
             {{$payments->links()}}
         </div>

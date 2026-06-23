@@ -35,7 +35,7 @@ class StudentProfileFactory extends Factory
 
         return [
             'user_id' => User::factory()->student(),
-                   'matric_number' => $prefix . '-' . date('Y') . '-' . fake()->unique()->numerify('####'),
+                   'matric_number' => $prefix . '/' . date('Y') . '/' . fake()->unique()->numerify('####'),
      
             // 'legal_name' => fake()->name(),
             'date_of_birth' => fake()->date(),

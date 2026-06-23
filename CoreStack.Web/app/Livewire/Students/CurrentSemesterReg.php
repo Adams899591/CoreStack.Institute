@@ -11,3 +11,4 @@ class CurrentSemesterReg extends Component
         return view('livewire.students.current-semester-reg')->layout("layouts.students.app");
     }
 }
+ 

@@ -17,15 +17,18 @@ use App\Livewire\Management\MgtStudentManagement;
 use App\Livewire\Management\MgtTeacherList;
 use App\Livewire\Students\CourseCatolog;
 use App\Livewire\Students\CourseDetails;
+use App\Livewire\Students\CourseRegistration;
 use App\Livewire\Students\CurrentSemesterReg;
 use App\Livewire\Students\CurrentSessionFee;
 use App\Livewire\Students\PaymentHistory;
 use App\Livewire\Students\PreviousRegistration;
+use App\Livewire\Students\PreviousRegistrationDetails;
 use App\Livewire\Students\SemesterGrade;
 use App\Livewire\Students\StudentDashboard;
 use App\Livewire\Students\StudentLogin;
 use App\Livewire\Students\StudentPersonalData;
 use App\Livewire\Students\StudentTranscript;
+use App\Livewire\Students\StudentTranscriptDetails;
 use App\Livewire\Teachers\Assignments;
 use App\Livewire\Teachers\AttendanceReport;
 use App\Livewire\Teachers\AttendanceTracker;
@@ -60,16 +63,19 @@ Route::get('/personal-data', StudentPersonalData::class)->name("std.personal-dat
 Route::get('/payment-history', PaymentHistory::class)->name("std.payment-history");
 Route::get('/current-session-fee', CurrentSessionFee::class)->name("std.current-session-fee");
 Route::get('/student-transcript', StudentTranscript::class)->name("std.student-transcript");
+Route::get('/student-transcript-details', StudentTranscriptDetails::class)->name("std.student-transcript-details");
 Route::get('/current-semester-reg', CurrentSemesterReg::class)->name("std.current-semester-reg");
 Route::get('/previous-registration', PreviousRegistration::class)->name("std.previous-registration");
+Route::get('/course-registration', CourseRegistration::class)->name("std.course-registration");
+Route::get('/previous-registration-details', PreviousRegistrationDetails::class)->name("std.previous-registration-details");
 Route::get('/course-catolog', CourseCatolog::class)->name("std.course-catolog");
 Route::get('/course-details/{level}/{semester}', CourseDetails::class)->name("std.course-details");
 
 });
 
 
-
-Route::middleware(["auth", "teacher"])->prefix("teacher")->group(function(){
+// middleware(["auth", "teacher"])->
+Route::prefix("teacher")->group(function(){
 
 Route::get('/dashboard', TeachersDashboard::class)->name("tchr.dashboard");
 Route::get('/grade-entry', GradeEntry::class)->name("tchr.grade-entry");
@@ -82,8 +88,8 @@ Route::get('/assignments', Assignments::class)->name("tchr.assignments");
 
 });
 
-
-Route::middleware(["auth", "management"])->prefix("management")->group(function(){
+// middleware(["auth", "management"])->
+Route::prefix("management")->group(function(){
 
 Route::get('/dashboard', ManagementDashboard::class)->name("mgt.dashboard");
 Route::get('/student-list', MgtStudentList::class)->name("mgt.student-list");

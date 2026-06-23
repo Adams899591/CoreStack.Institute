@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('course_code')->unique();
             $table->decimal('units', 4, 1)->unsigned()->default(3.0);
             $table->string('level')->nullable();
-            $table->enum('semester', ['First', 'Second', 'Third'])->nullable();
+            $table->enum('category', ['Core', 'Elective'])->nullable();
+            $table->enum('semester', ['First', 'Second'])->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'archived'])->default('active');
             $table->timestamps();
