@@ -63,11 +63,11 @@ Route::get('/personal-data', StudentPersonalData::class)->name("std.personal-dat
 Route::get('/payment-history', PaymentHistory::class)->name("std.payment-history");
 Route::get('/current-session-fee', CurrentSessionFee::class)->name("std.current-session-fee");
 Route::get('/student-transcript', StudentTranscript::class)->name("std.student-transcript");
-Route::get('/student-transcript-details', StudentTranscriptDetails::class)->name("std.student-transcript-details");
+Route::get('/student-transcript-details/{semester}/{level}', StudentTranscriptDetails::class)->name("std.student-transcript-details");
 Route::get('/current-semester-reg', CurrentSemesterReg::class)->name("std.current-semester-reg");
 Route::get('/previous-registration', PreviousRegistration::class)->name("std.previous-registration");
 Route::get('/course-registration', CourseRegistration::class)->name("std.course-registration");
-Route::get('/previous-registration-details', PreviousRegistrationDetails::class)->name("std.previous-registration-details");
+Route::get('/previous-registration-details/{semester}/{level}', PreviousRegistrationDetails::class)->name("std.previous-registration-details");
 Route::get('/course-catolog', CourseCatolog::class)->name("std.course-catolog");
 Route::get('/course-details/{level}/{semester}', CourseDetails::class)->name("std.course-details");
 

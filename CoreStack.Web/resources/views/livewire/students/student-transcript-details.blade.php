@@ -1,38 +1,3 @@
-{{-- 
-    ACADEMIC CALCULATION LOGIC (5.00 SCALE)
-    ---------------------------------------
-    1. GRADING SYSTEM:
-       - 70 - 100: A (Grade Point = 5)
-       - 60 - 69 : B (Grade Point = 4)
-       - 50 - 59 : C (Grade Point = 3)
-       - 45 - 49 : D (Grade Point = 2)
-       - 40 - 44 : E (Grade Point = 1)
-       - 00 - 39 : F (Grade Point = 0)
-
-    2. DEFINITIONS: 
-       - CU (Credit Unit): The weight of the course (e.g., 3 units).
-       - GP (Grade Point): Based on the score (e.g., A = 5).
-       - TGP (Total Grade Point): CU * GP.
-       - CCR (Credit Units Registered): Sum of all units taken in a semester.
-       - CCE (Credit Units Earned): Sum of units where student passed (A to E).
-
-    3. SEMESTER GPA CALCULATION:
-       Example Semester 1:
-       - CSC 101 (3 units): Score 75 -> A -> GP 5. TGP = 3 * 5 = 15
-       - MTH 101 (3 units): Score 62 -> B -> GP 4. TGP = 3 * 4 = 12
-       - GST 101 (2 units): Score 71 -> A -> GP 5. TGP = 2 * 5 = 10
-       
-       Semester TGP Sum = 15 + 12 + 10 = 37
-       Semester Units Sum (CCR) = 3 + 3 + 2 = 8
-       GPA = 37 / 8 = 4.63
-
-    4. CUMULATIVE GPA (CGPA) CALCULATION:
-       CGPA = (Sum of TGPs from ALL Semesters) / (Sum of Credit Units from ALL Semesters)
-       
-       This ensures that the weight of every course is carried over. Because the max 
-       GP is 5.0, the result will naturally stay between 0.00 and 5.00.
---}}
-
 <div class="space-y-6">
     {{-- Header Section --}}
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-xl shadow-sm border border-stone-200">
@@ -135,13 +100,7 @@
             </div>
         </section>
 
-        {{-- Empty State or Message for No Results --}}
-        <div class="py-12 flex flex-col items-center justify-center bg-white rounded-xl border-2 border-dashed border-stone-200 opacity-60">
-            <svg class="w-12 h-12 text-stone-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-            <p class="text-sm font-bold text-stone-400 uppercase tracking-tighter">Subsequent levels will appear here upon result publication</p>
-        </div>
+
     </div>
 
     {{-- Print Footer (Hidden on screen) --}}
@@ -156,4 +115,5 @@
             </div>
         </div>
     </div>
+
 </div>

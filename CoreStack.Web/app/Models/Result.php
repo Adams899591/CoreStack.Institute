@@ -9,6 +9,14 @@ class Result extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
-
+ 
     protected $guarded = [];
+
+
+    // =================== Relationship =====================
+    public function Course(){
+        return $this->belongsTo(Course::class);
+    }
+
+    
 }

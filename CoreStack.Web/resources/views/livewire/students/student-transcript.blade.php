@@ -8,61 +8,60 @@
         <button class="bg-[#1A2B4C] hover:bg-[#2A3B5C] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-sm flex items-center justify-center w-full md:w-auto focus:outline-none">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
             Print Summary
-        </button>
+        </button> 
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse whitespace-nowrap">
+
+                {{-- Table Header --}}
                 <thead>
                     <tr class="bg-stone-50 border-b border-stone-200">
+                        <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">S/N</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Session</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Semester</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Level</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider" title="Total Credit Registered">TCR</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider" title="Total Credit Earned">TCE</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider" title="Total Grade Points">TGP</th>
+                        <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider" title="Last Cumulative Grade Point Average">LCGPA</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider" title="Grade Point Average">GPA</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider" title="Cumulative Grade Point Average">CGPA</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider text-right">Action</th>
                     </tr>
                 </thead>
+
+                {{-- Table Body --}}
                 <tbody class="divide-y divide-stone-200">
                     
-                    <tr class="hover:bg-stone-50/80 transition">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-800">2023/2024</td>
-                        <td class="px-6 py-4 text-sm text-stone-600">First</td>
-                        <td class="px-6 py-4 text-sm text-stone-600">100</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">8</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">8</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">37.0</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#D4AF37]">4.63</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C]">4.63</td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="{{route("std.student-transcript-details")}}" class="inline-flex items-center px-4 py-1.5 bg-[#F0E68C]/30 text-[#B8860B] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] rounded-md text-xs font-bold transition shadow-sm focus:outline-none" wire:navigate>
-                                View
-                                <svg class="w-3 h-3 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
-                        </td>
-                    </tr>
+                   @php
+                       $SN = 1;
+                   @endphp
 
-                    <tr class="hover:bg-stone-50/80 transition">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-800">2023/2024</td>
-                        <td class="px-6 py-4 text-sm text-stone-600">Second</td>
-                        <td class="px-6 py-4 text-sm text-stone-600">100</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">8</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">8</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">36.5</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#D4AF37]">4.71</td>
-                        <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C]">4.70</td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="inline-flex items-center px-4 py-1.5 bg-[#F0E68C]/30 text-[#B8860B] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] rounded-md text-xs font-bold transition shadow-sm focus:outline-none">
-                                View
-                                <svg class="w-3 h-3 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
-                        </td>
-                    </tr>
 
+                    @foreach ($semesterResults as $semesterResult)
+                         
+                        <tr class="hover:bg-stone-50/80 transition">
+                            <td class="px-6 py-4 text-sm font-semibold text-stone-800">{{$SN++}}</td>
+                            <td class="px-6 py-4 text-sm font-medium text-stone-800">{{$semesterResult->session}}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600">{{$semesterResult->level}}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600">{{$semesterResult->total_units_registered}}</td>
+                            <td class="px-6 py-4 text-sm font-semibold text-stone-800">{{$semesterResult->total_units_registered}}</td>
+                            <td class="px-6 py-4 text-sm font-semibold text-stone-800">{{$semesterResult->total_units_passed}}</td>
+                            <td class="px-6 py-4 text-sm font-semibold text-stone-800">{{$semesterResult->total_tgp}}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C]">{{$semesterResult->last_cumulative_cgpa}}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-[#D4AF37]">{{$semesterResult->grade_point_average_gpa}}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-[#1A2B4C]">{{$semesterResult->cumulative_cgpa}}</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{{route("std.student-transcript-details", ["semester" => $semesterResult->semester, "level" => $semesterResult->level, "session" => $semesterResult->session])}}" class="inline-flex items-center px-4 py-1.5 bg-[#F0E68C]/30 text-[#B8860B] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] rounded-md text-xs font-bold transition shadow-sm focus:outline-none" wire:navigate>
+                                    View
+                                    <svg class="w-3 h-3 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+                            </td>
+                        </tr>
+
+                    @endforeach
                 </tbody>
             </table>
         </div>

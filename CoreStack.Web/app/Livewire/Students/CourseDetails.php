@@ -10,7 +10,7 @@ class CourseDetails extends Component
 {
     // $level and $semester are coming from the pass parameter from the Url
     public $level;  
-    public $semester;
+    public $semester; 
 
    public function mount($level, $semester){
      $this->level = $level;

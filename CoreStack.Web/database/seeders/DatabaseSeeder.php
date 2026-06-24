@@ -407,8 +407,8 @@ class DatabaseSeeder extends Seeder
                         'total_tgp' => round($runningTgp, 2),
                         'last_cumulative_cgpa' => $lastCgpa, // Previous CGPA before this semester (NULL for 100L 1st sem)
                         'cumulative_cgpa' => round($cgpa, 2), // (last_cumulative_cgpa + semester GPA) / 2
-                        'is_approved' => true,
-                        'is_published' => true,
+                        'senate_approved' => true,
+                        'ict_published' => true,
                     ]);
                 }
             }

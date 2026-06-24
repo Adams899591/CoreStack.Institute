@@ -347,3 +347,50 @@
 // =============================================================================
 //  END OF EXPLANATION FILE
 // =============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+// {{-- 
+//     ACADEMIC CALCULATION LOGIC (5.00 SCALE)
+//     --------------------------------------- 
+//     1. GRADING SYSTEM:
+//        - 70 - 100: A (Grade Point = 5)
+//        - 60 - 69 : B (Grade Point = 4)
+//        - 50 - 59 : C (Grade Point = 3)
+//        - 45 - 49 : D (Grade Point = 2)
+//        - 40 - 44 : E (Grade Point = 1)
+//        - 00 - 39 : F (Grade Point = 0)
+
+//     2. DEFINITIONS: 
+//        - CU (Credit Unit): The weight of the course (e.g., 3 units).
+//        - GP (Grade Point): Based on the score (e.g., A = 5).
+//        - TGP (Total Grade Point): CU * GP.
+//        - CCR (Credit Units Registered): Sum of all units taken in a semester.
+//        - CCE (Credit Units Earned): Sum of units where student passed (A to E).
+
+//     3. SEMESTER GPA CALCULATION:
+//        Example Semester 1:
+//        - CSC 101 (3 units): Score 75 -> A -> GP 5. TGP = 3 * 5 = 15
+//        - MTH 101 (3 units): Score 62 -> B -> GP 4. TGP = 3 * 4 = 12
+//        - GST 101 (2 units): Score 71 -> A -> GP 5. TGP = 2 * 5 = 10
+       
+//        Semester TGP Sum = 15 + 12 + 10 = 37
+//        Semester Units Sum (CCR) = 3 + 3 + 2 = 8
+//        GPA = 37 / 8 = 4.63
+
+//     4. CUMULATIVE GPA (CGPA) CALCULATION:
+//        CGPA = (Sum of TGPs from ALL Semesters) / (Sum of Credit Units from ALL Semesters)
+       
+//        This ensures that the weight of every course is carried over. Because the max 
+//        GP is 5.0, the result will naturally stay between 0.00 and 5.00.
+// --}}

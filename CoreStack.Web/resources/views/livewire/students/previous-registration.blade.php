@@ -14,51 +14,66 @@
     <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse whitespace-nowrap">
+
+                {{-- Table header --}}
                 <thead>
                     <tr class="bg-stone-50 border-b border-stone-200">
+                        <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">S/N</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Session</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Semester</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Level</th>
-                        <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Total Courses</th>
-                        <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Total Credits</th>
+                        <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Remarks</th>
+                        {{-- <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Total Credits</th> --}}
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider">Status</th>
                         <th class="px-6 py-4 text-xs font-bold text-[#1A2B4C] uppercase tracking-wider text-right">Action</th>
                     </tr>
                 </thead>
+
+                {{-- Table Body --}}
                 <tbody class="divide-y divide-stone-200">
+
+                    @php
+                        $SN = 1
+                    @endphp
                     
-                    <tr class="hover:bg-stone-50/80 transition">
-                        <td class="px-6 py-4 text-sm font-medium text-stone-800">2023/2024</td>
-                        <td class="px-6 py-4 text-sm text-stone-600">First Semester</td>
-                        <td class="px-6 py-4 text-sm text-stone-600">100 Level</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">4</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-stone-800">13 Units</td>
-                        <td class="px-6 py-4 text-sm">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">
-                                Approved
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="{{route("std.previous-registration-details")}}" class="inline-flex items-center px-4 py-1.5 bg-[#F0E68C]/30 text-[#B8860B] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] rounded-md text-xs font-bold transition shadow-sm focus:outline-none" wire:navigate>
-                                View Details
-                                <svg class="w-3 h-3 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </a>
-                        </td>
-                    </tr>
+                    @foreach ($results as $result)                     
+                   
+                        <tr class="hover:bg-stone-50/80 transition">
+                            <td class="px-6 py-4 text-sm font-medium text-stone-800">{{$SN++}}</td>
+                            <td class="px-6 py-4 text-sm font-medium text-stone-800">{{$result->session}}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600">{{$result->semester}} Semester</td>
+                            <td class="px-6 py-4 text-sm text-stone-600">{{$result->level}} Level</td>
+                            <td class="px-6 py-4 text-sm font-semibold text-stone-800">✔</td>
+                            {{-- <td class="px-6 py-4 text-sm font-semibold text-stone-800">13 Units</td> --}}
+                            <td class="px-6 py-4 text-sm">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">
+                                    Approved
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{{route("std.previous-registration-details", ["semester" => $result->semester, "level" => $result->level, "session" => $result->session])}}" class="inline-flex items-center px-4 py-1.5 bg-[#F0E68C]/30 text-[#B8860B] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] rounded-md text-xs font-bold transition shadow-sm focus:outline-none" wire:navigate>
+                                    View Details
+                                    <svg class="w-3 h-3 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+                            </td>
+                        </tr>
+
+                    @endforeach
 
                 </tbody>
+
             </table>
         </div>
         
         <div class="bg-stone-50 p-5 border-t border-stone-200 flex flex-col md:flex-row items-center justify-between">
-            <span class="text-sm font-medium text-stone-500 mb-2 md:mb-0">Showing 1 semester record</span>
+            <span class="text-sm font-medium text-stone-500 mb-2 md:mb-0">Showing semester records</span>
             <div class="flex items-center space-x-6 text-sm text-stone-800 bg-white px-4 py-2 rounded-lg border border-stone-200 shadow-sm">
                 <div>
-                    Total Registered Semesters: <span class="font-bold text-[#1A2B4C] ml-1">1</span>
+                    Total Registered Semesters: <span class="font-bold text-[#1A2B4C] ml-1">{{$totalSemesterReg}}</span>
                 </div>
                 <div class="h-4 w-px bg-stone-300"></div>
                 <div>
-                    Cumulative Credits Registered: <span class="font-black text-base text-[#B8860B] ml-1">13 Units</span>
+                    Senate Approver <span class="font-black text-base text-[#B8860B] ml-1">✔</span>
                 </div>
             </div>
         </div>

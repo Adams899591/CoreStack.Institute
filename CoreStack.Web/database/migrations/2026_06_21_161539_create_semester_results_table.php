@@ -28,8 +28,8 @@ return new class extends Migration
             $table->decimal('total_tgp', 12, 2)->default(0.00); // Running sum of TGPs
             $table->decimal('last_cumulative_cgpa', 4, 2)->nullable(); // LCGPA: snapshot of CGPA before this semester
             $table->decimal('cumulative_cgpa', 4, 2)->nullable(); // CGPA: (last_cumulative_cgpa + semester GPA) / 2
-            $table->boolean('is_approved')->default(false); // Management approval
-            $table->boolean('is_published')->default(false); // Visible to Student
+            $table->boolean('senate_approved')->default(true); // Management approval
+            $table->boolean('ict_published')->default(true); // Visible to Student only when ict approved
             $table->timestamps();
         });
     }
