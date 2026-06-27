@@ -6,6 +6,7 @@ use App\Models\AcademicPeriod;
 use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Course;
+use App\Models\DegreeClassification;
 use App\Models\Department;
 use App\Models\Fee;
 use App\Models\ManagementProfile;
@@ -116,16 +117,16 @@ class DatabaseSeeder extends Seeder
         $departments = Department::all();
         $teachers = User::where('role', 'teacher')->get();
 
-        // Ensure there are teachers, otherwise create some
-        // if ($teachers->isEmpty()) {
-        //     User::factory(5)->create(['role' => 'teacher']);
-        //     foreach (User::where('role', 'teacher')->get() as $teacher) {
-        //         TeacherProfile::factory()->create(['user_id' => $teacher->id]);
-        //     }
-        //     $teachers = User::where('role', 'teacher')->get();
-        // }
+        //7.  create record for degree classification
+        DegreeClassification::insert([
+            ['name' => 'First Class', 'min_cgpa' => 4.50, 'max_cgpa' => 5.00],
+            ['name' => 'Second Class Upper', 'min_cgpa' => 3.50, 'max_cgpa' => 4.49],
+            ['name' => 'Second Class Lower', 'min_cgpa' => 2.40, 'max_cgpa' => 3.49],
+            ['name' => 'Third Class', 'min_cgpa' => 1.50, 'max_cgpa' => 2.39],
+            ['name' => 'Pass', 'min_cgpa' => 1.00, 'max_cgpa' => 1.49],
+        ]);
 
-       // 7 creat facker record for Academic record
+       //8.  create facker record for Academic record
         $baseYear = 2020;
             $records = [];
             for ($i = 0; $i < 6; $i++) {
@@ -151,7 +152,7 @@ class DatabaseSeeder extends Seeder
         }
 
 
-       // 8
+       // 9
         $courseCounter = 1; // Reset counter for course codes
 
         foreach ($departments as $department) {
@@ -391,10 +392,17 @@ class DatabaseSeeder extends Seeder
                     $previousCgpa = $cgpa;
 
                     // Create SemesterResult
+                    $lastResultId = Result::where('user_id', $student->id)
+                        ->where('session', $sessionStr)
+                        ->where('semester', $semesterName)
+                        ->latest('id')
+                        ->value('id');
+
                     SemesterResult::create([
                         'user_id' => $student->id,
                         'student_profile_id' => $profile->id,
                         'payment_id' => $payment->id,
+                        'result_id' => $lastResultId,
                         'semester' => $semesterName,
                         'session' => $sessionStr,
                         'level' => $targetLevel,
@@ -413,6 +421,7 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
+
 
 
 

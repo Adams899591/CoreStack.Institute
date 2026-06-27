@@ -1,21 +1,27 @@
 <div class="space-y-8">
-    <!-- Warning Alert -->
-    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-xl shadow-sm flex items-start space-x-3">
-        <div class="p-1.5 bg-white rounded-lg shadow-sm text-red-500">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-            </svg>
-        </div>
-        <div class="flex-1">
-            <h3 class="text-sm font-bold text-red-800 uppercase tracking-wider">Pending Action Required</h3>
-            <p class="text-xs text-red-700 mt-1 font-medium leading-relaxed">
-                You are yet to complete your school fees payment for the current session. Please pay your school fees to proceed. Additionally, your registered courses are currently pending approval.
-            </p>
-        </div>
-    </div>
+
+    <!-- Warning Alert  NOTE: Only show payment alert if payment is null -->
+    @if ($payment == null)
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-xl shadow-sm flex items-start space-x-3">
+            <div class="p-1.5 bg-white rounded-lg shadow-sm text-red-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-bold text-red-800 uppercase tracking-wider">Pending Action Required</h3>
+                <p class="text-xs text-red-700 mt-1 font-medium leading-relaxed">
+                    You are yet to complete your school fees payment for the current session. Please pay your school fees to proceed. Additionally, your registered courses are currently pending approval.
+                </p>
+            </div>
+        </div>       
+    @endif
+
 
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+
         <!-- Card 1: Enrolled Courses (Indigo) -->
         <div class="bg-indigo-50 p-6 rounded-2xl border-t-4 border-indigo-500 shadow-sm hover:shadow-md transition-shadow group">
             <div class="flex items-center justify-between">
@@ -67,6 +73,8 @@
                 </div>
             </div>
         </div>
+
+        
     </div>
 
     <!-- Recent Grades: All-Card View -->
@@ -120,4 +128,6 @@
             </div>
         </div>
     </div>
+
+
 </div>

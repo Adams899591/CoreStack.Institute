@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Students;
 
+use App\Models\Result;
 use App\Models\SemesterResult;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -25,8 +26,12 @@ class StudentTranscriptDetails extends Component
     public function render()
     {
        // 1.  fetch the record based on the $semester, $level, $session using the authenticated user id 
-       $semesterResult = SemesterResult::where("user_id", Auth::id())->where("semester", $this->semester)->where("level", $this->level)->where("session", $this->session)->get();
+       $semesterResult = SemesterResult::where("user_id", Auth::id())->where("semester", $this->semester)->where("level", $this->level)->where("session", $this->session)->first();
         
-        return view('livewire.students.student-transcript-details', ["semesterResult" => $semesterResult])->layout("layouts.students.app");
+       // 2.  fetch the record based on the $semester, $level, $session using the authenticated user id 
+       $results = Result::with("Course")->where("user_id", Auth::id())->where("semester", $this->semester)->where("level", $this->level)->where("session", $this->session)->get();
+       
+
+        return view('livewire.students.student-transcript-details', ["semesterResult" => $semesterResult, "results" => $results, "semester" => $this->semester, "level" => $this->level, "session" => $this->session])->layout("layouts.students.app");
     }
 }

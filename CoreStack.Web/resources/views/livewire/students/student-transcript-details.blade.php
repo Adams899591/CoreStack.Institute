@@ -20,56 +20,62 @@
 
     {{-- Transcript Content - Grouped by Session/Level --}}
     <div class="space-y-8 print:space-y-4">
+
         {{-- Example Block: 100 Level --}}
         <section class="bg-white border border-stone-200 rounded-xl shadow-sm overflow-hidden">
             <div class="bg-stone-50/50 px-6 py-4 border-b border-stone-200 flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center space-x-4">
-                    <span class="bg-darkblue text-gold text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-tighter">2023/2024 Session</span>
-                    <h2 class="text-sm font-bold text-stone-800 uppercase tracking-tight">100 Level - First Semester</h2>
+                    <span class="bg-darkblue text-gold text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-tighter">{{$session}} Session</span>
+                    <h2 class="text-sm font-bold text-stone-800 uppercase tracking-tight">{{$level}} Level - {{$semester}} Semester</h2>
                 </div>
                 <span class="text-[10px] font-bold text-stone-400 uppercase">Academic Summary Available</span>
             </div>
-
+ 
+            {{-- Table Section --}}
             <div class="overflow-x-auto">
+
+                {{-- Table --}}
                 <table class="min-w-full border-separate border-spacing-0">
+
+                    {{-- Table Header --}}
                     <thead>
                         <tr class="bg-white">
+                            <th class="px-6 py-3 text-left text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">S/N</th>
                             <th class="px-6 py-3 text-left text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">Course Code</th>
                             <th class="px-6 py-3 text-left text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">Course Title</th>
                             <th class="px-6 py-3 text-center text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">Unit</th>
+                            <th class="px-6 py-3 text-center text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">Exam Score</th>
+                            <th class="px-6 py-3 text-center text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">Total Score</th>
                             <th class="px-6 py-3 text-center text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">Grade</th>
-                            <th class="px-6 py-3 text-center text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">GP</th>
-                            <th class="px-6 py-3 text-center text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-100">TGP</th>
                         </tr>
                     </thead>
+
+                    {{-- Table Body --}}
                     <tbody class="divide-y divide-stone-100">
+
+                        @php
+                            $SN = 1;
+                        @endphp
+
                         {{-- These would be dynamic in a real app --}}
-                        <tr class="hover:bg-stone-50/30 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-xs font-bold text-stone-800">CSC 101</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-stone-600">Introduction to Computer Science</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-medium">3</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-black text-darkblue">A</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center">5.0</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-bold text-stone-900">15.0</td>
-                        </tr>
-                        <tr class="hover:bg-stone-50/30 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-xs font-bold text-stone-800">MTH 101</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-stone-600">Algebra and Trigonometry</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-medium">3</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-black text-darkblue">B</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center">4.0</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-bold text-stone-900">12.0</td>
-                        </tr>
-                        <tr class="hover:bg-stone-50/30 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-xs font-bold text-stone-800">GST 101</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-stone-600">Use of English & Communication Skills</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-medium">2</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-black text-darkblue">A</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center">5.0</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-bold text-stone-900">10.0</td>
-                        </tr>
+                        @foreach ($results as $result)
+
+                            <tr class="hover:bg-stone-50/30 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-xs font-bold text-stone-600">{{$SN++}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs font-bold text-stone-800">{{$result->Course->course_code}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-stone-600">{{$result->Course->course_name}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-medium">{{ rtrim(rtrim($result->Course->units, "0"), '.')}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-center">{{ $result->exam_score > 0 ? round($result->exam_score) : "0.0"}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-bold text-stone-900">{{$result->total_score}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-xs text-center font-black text-darkblue">{{$result->grade}}</td>
+                            </tr>  
+
+                        @endforeach
+ 
                     </tbody>
+
                 </table>
+                
             </div>
 
             {{-- Semester Summary Statistics --}}
@@ -77,27 +83,29 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     <div class="bg-white p-3 rounded-lg border border-stone-200/60 shadow-sm">
                         <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Semester CCR</p>
-                        <p class="text-lg font-black text-stone-800 mt-1">8</p>
+                        <p class="text-lg font-black text-stone-800 mt-1">{{$semesterResult->total_units_registered}}</p>
                     </div>
                     <div class="bg-white p-3 rounded-lg border border-stone-200/60 shadow-sm">
                         <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Semester CCE</p>
-                        <p class="text-lg font-black text-stone-800 mt-1">8</p>
+                        <p class="text-lg font-black text-stone-800 mt-1">{{$semesterResult->total_units_passed}}</p>
                     </div>
                     <div class="bg-white p-3 rounded-lg border border-stone-200/60 shadow-sm">
                         <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Semester TGP</p>
-                        <p class="text-lg font-black text-stone-800 mt-1">37.0</p>
+                        <p class="text-lg font-black text-stone-800 mt-1">{{$semesterResult->total_grade_point}}</p>
                     </div>
                     <div class="bg-white p-3 rounded-lg border border-stone-200/60 shadow-sm">
                         <p class="text-[9px] font-black text-darkblue uppercase tracking-widest">Semester GPA</p>
-                        <p class="text-lg font-black text-darkblue mt-1">4.63</p>
+                        <p class="text-lg font-black text-darkblue mt-1">{{$semesterResult->grade_point_average_gpa}}</p>
                     </div>
                     {{-- Cumulative Column --}}
                     <div class="bg-khaki/5 p-3 rounded-lg border border-gold/20 shadow-sm md:col-span-2 lg:col-span-1">
                         <p class="text-[9px] font-black text-gold uppercase tracking-widest">Cumulative GPA</p>
-                        <p class="text-lg font-black text-stone-900 mt-1">4.63</p>
+                        <p class="text-lg font-black text-stone-900 mt-1">{{$semesterResult->cumulative_cgpa}}</p>
                     </div>
                 </div>
             </div>
+
+
         </section>
 
 

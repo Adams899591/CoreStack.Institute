@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Brand Colors moved outside the component so styles can access them
 const colors = {
@@ -12,6 +13,8 @@ const colors = {
 };
 
 export default function HomeScreen() {
+   const insets = useSafeAreaInsets();
+   
   const [isIdVisible, setIsIdVisible] = useState(false);
 
   // Mock student data

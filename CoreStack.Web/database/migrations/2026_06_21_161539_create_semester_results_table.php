@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Student
             $table->foreignId('student_profile_id')->constrained()->onDelete('cascade'); // Student
             $table->foreignId('payment_id')->constrained()->onDelete('cascade'); // payment table contain session colume and each session colume e.g 2024/2025 on payment table consist of 2 semester 1st and 2nd
+            $table->foreignId('result_id')->constrained()->onDelete('cascade'); // Result just helps pass the result id to it
             $table->string("semester"); // seprate the semester by generating result for each 1st and 2nd
             $table->string('session')->nullable();  // 
             $table->string("level");  // which can be either 100, 200, 300, 400, 500,  and must have all result up to the current level on student_profile_id

@@ -60,21 +60,22 @@
                                 </a>
                             </td>
                         </tr>
-
+ 
                     @endforeach
+                    
                 </tbody>
             </table>
         </div>
         
         <div class="bg-stone-50 p-5 border-t border-stone-200 flex flex-col md:flex-row items-center justify-between">
-            <span class="text-sm font-medium text-stone-500 mb-2 md:mb-0">Showing 2 records</span>
+            <span class="text-sm font-medium text-stone-500 mb-2 md:mb-0">Showing {{$SN - 1 }} records</span>
             <div class="flex items-center space-x-6 text-sm text-stone-800 bg-white px-4 py-2 rounded-lg border border-stone-200 shadow-sm">
                 <div>
-                    Degree Class: <span class="font-bold text-[#B8860B] ml-1 uppercase">First Class</span>
+                    Degree Class: <span class="font-bold text-[#B8860B] ml-1 uppercase">{{$cgpaDegree->name}}</span>
                 </div>
                 <div class="h-4 w-px bg-stone-300"></div>
                 <div>
-                    Current CGPA: <span class="font-black text-lg text-[#1A2B4C] ml-1">4.70</span>
+                    Current CGPA: <span class="font-black text-lg text-[#1A2B4C] ml-1">{{$semesterResults->last()?->cumulative_cgpa}}</span>
                 </div>
             </div>
         </div>
