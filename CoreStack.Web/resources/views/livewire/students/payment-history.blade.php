@@ -108,9 +108,9 @@
             </table>
         </div>
         
-        <div class="px-6 py-4 bg-stone-50/30 border-t border-stone-100 flex items-center justify-between">
+        {{-- <div class="px-6 py-4 bg-stone-50/30 border-t border-stone-100 flex items-center justify-between">
             {{$payments->links()}}
-        </div>
+        </div> --}}
 
     </div>
 </div>

@@ -20,7 +20,9 @@ use App\Livewire\Students\CourseDetails;
 use App\Livewire\Students\CourseRegistration;
 use App\Livewire\Students\CurrentSemesterReg;
 use App\Livewire\Students\CurrentSessionFee;
+use App\Livewire\Students\FeeSlipBreakdown;
 use App\Livewire\Students\PaymentHistory;
+use App\Livewire\Students\PaymentReceipt;
 use App\Livewire\Students\PreviousRegistration;
 use App\Livewire\Students\PreviousRegistrationDetails;
 use App\Livewire\Students\SemesterGrade;
@@ -65,6 +67,8 @@ Route::get('/current-session-fee', CurrentSessionFee::class)->name("std.current-
 Route::get('/student-transcript', StudentTranscript::class)->name("std.student-transcript");
 Route::get('/student-transcript-details/{semester}/{level}', StudentTranscriptDetails::class)->name("std.student-transcript-details");
 Route::get('/current-semester-reg', CurrentSemesterReg::class)->name("std.current-semester-reg");
+Route::get('/fee-slip-breakdown', FeeSlipBreakdown::class)->name("std.fee-slip-breakdown");
+Route::get('/payment-receipt', PaymentReceipt::class)->name("std.payment-receipt");
 Route::get('/previous-registration', PreviousRegistration::class)->name("std.previous-registration");
 Route::get('/course-registration', CourseRegistration::class)->name("std.course-registration");
 Route::get('/previous-registration-details/{semester}/{level}', PreviousRegistrationDetails::class)->name("std.previous-registration-details");

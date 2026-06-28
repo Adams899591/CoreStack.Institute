@@ -60,14 +60,6 @@
                 {{-- table body --}}
                 <tbody class="divide-y divide-stone-100">
 
-                    <!-- Fee Breakdown Table -->
-                    @php
-                        $split_amount =  floor(($academicFee->amount / 4) * 100) / 100;
-                        $fee_part_1 = $fee_1 = $split_amount +  $fee_2 = $split_amount; 
-                        $fee_part_2 = $split_amount; 
-                        $fee_part_3 = $split_amount;
-                    @endphp
-
                     {{-- Tuition Fee --}}
                     <tr class="hover:bg-stone-50/30 transition">
                         <td class="px-6 py-4">
@@ -78,60 +70,23 @@
                             <span class="text-xs text-stone-500 uppercase font-bold tracking-tight">Academic</span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <span class="text-sm font-black text-stone-800">₦{{$fee_part_1}}</span>
+                            <span class="text-sm font-black text-stone-800">₦{{$academicFee->amount}}</span>
                         </td>
                     </tr>
 
-                    {{-- ICT & Library Maintenance --}}
-                    <tr class="hover:bg-stone-50/30 transition">
-                        <td class="px-6 py-4">
-                            <p class="text-sm font-bold text-stone-800 leading-tight text-left">ICT & Library Maintenance</p>
-                            <p class="text-[10px] text-stone-400 uppercase font-semibold mt-0.5 text-left">Technological Services</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-xs text-stone-500 uppercase font-bold tracking-tight">Utility</span>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <span class="text-sm font-black text-stone-800">₦{{ $fee_part_2}}</span>
-                        </td>
-                    </tr>
-
-                    {{-- Student Union Dues --}}
-                    <tr class="hover:bg-stone-50/30 transition">
-                        <td class="px-6 py-4">
-                            <p class="text-sm font-bold text-stone-800 leading-tight text-left">Student Union Dues</p>
-                            <p class="text-[10px] text-stone-400 uppercase font-semibold mt-0.5 text-left">Association Fees</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-xs text-stone-500 uppercase font-bold tracking-tight">Social</span>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <span class="text-sm font-black text-stone-800">₦{{ $fee_part_3}}</span>
-                        </td>
-                    </tr>
+             
 
                 </tbody>
 
             </table>
         </div>
 
-        <!-- Summary Footer -->
-        <div class="p-6 bg-stone-50/30 border-t border-stone-100 flex flex-col items-end space-y-3">
-            <div class="flex justify-between w-full max-w-xs text-sm">
-                <span class="text-stone-500 font-medium">Sub-Total:</span>
-                <span class="font-bold text-stone-800">₦{{$academicFee->amount}}</span>
-            </div>
-            <div class="flex justify-between w-full max-w-xs pt-3 border-t border-stone-200">
-                <span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Total Due:</span>
-                <span class="text-xl font-black text-darkblue">₦{{$academicFee->amount}}</span>
-            </div>
-        </div>
     </div>
 
     <div class="flex justify-end pt-4">
-        <button class="px-8 py-3 bg-darkblue text-gold text-xs font-black uppercase tracking-widest rounded-xl hover:bg-darkblue-light transition shadow-lg flex items-center">
+        <a href="{{route("std.fee-slip-breakdown")}}" class="px-8 py-3 bg-darkblue text-gold text-xs font-black uppercase tracking-widest rounded-xl hover:bg-darkblue-light transition shadow-lg flex items-center" wire:navigate>
             Proceed to Payment
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-        </button>
+        </a>
     </div>
 </div>

@@ -14,7 +14,7 @@ const colors = {
 
 export default function HomeScreen() {
    const insets = useSafeAreaInsets();
-   
+
   const [isIdVisible, setIsIdVisible] = useState(false);
 
   // Mock student data
@@ -34,10 +34,10 @@ export default function HomeScreen() {
     { name: 'Resources', icon: 'cloud-download-outline' },
     { name: 'Support', icon: 'help-circle-outline' },
   ];
-
+ 
   return (
     <>
-    <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" /> 
+    <StatusBar barStyle="light-content" backgroundColor="transparent" translucent  /> 
       <SafeAreaView style={styles.container}> 
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={[styles.card, styles.studentInfoCard]}>
@@ -150,4 +150,6 @@ const styles = StyleSheet.create({
   linkItem: { width: '23%', alignItems: 'center', marginBottom: 20 },
   iconSquare: { width: 50, height: 50, borderRadius: 8, backgroundColor: '#ffffff', justifyContent: 'center', alignItems: 'center', elevation: 2, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, marginBottom: 8 },
   linkText: { fontSize: 11, color: '#555', textAlign: 'center' },
-});
+}); 
+
+

@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { GlobalHeader } from "../../components/GlobalHeader";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const colors = {
   darkBlue: '#1A2B4C',
@@ -18,6 +20,7 @@ const colors = {
 
 function CustomDrawerContent(props: any) {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   // Mock student data
   const student = {
@@ -120,7 +123,7 @@ function CustomDrawerContent(props: any) {
       </DrawerContentScrollView>
 
       {/* Logout Section */}
-      <View style={styles.footer}>
+      <View style={[styles.footer,{paddingBottom: 20 + insets.bottom}]}>
         <TouchableOpacity 
           style={styles.logoutBtn} 
           onPress={() => console.log('User logging out...')}
@@ -135,6 +138,7 @@ function CustomDrawerContent(props: any) {
 
 export default function DrawerLayout() {
   return (
+
     <Drawer
       screenOptions={{
         headerShown: true,
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#f0f0f0',
     backgroundColor: colors.white,
-    paddingBottom: 20, // Reduced from 20 to move the button slightly up
+    // paddingBottom: 20, // Reduced from 20 to move the button slightly up
   },
   logoutBtn: { flexDirection: 'row', alignItems: 'center' },
   logoutText: { color: colors.danger, fontSize: 16, fontWeight: 'bold', marginLeft: 15 },

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, StatusBar, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 /**
  * TimetableScreen: Displays the student's weekly class schedule.
  */
 function TimetableScreen() {
+  const insets = useSafeAreaInsets();
   const [selectedDay, setSelectedDay] = useState('Mon');
   const router = useRouter();
 
@@ -45,7 +47,7 @@ function TimetableScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
-      <View style={styles.header}>
+      <View style={[styles.header, {paddingTop: insets.top }]}>
         <View style={styles.headerMain}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <Ionicons name="arrow-back" size={26} color="#FFFFFF" />
@@ -95,8 +97,8 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#1A2B4C',
     paddingHorizontal: 25,
-    paddingTop: 40,
-    paddingBottom: 25,
+    // paddingTop: 40,
+    paddingBottom: 10, // before 25
     elevation: 5,
   },
   headerMain: {

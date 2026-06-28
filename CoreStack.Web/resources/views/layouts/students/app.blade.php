@@ -6,6 +6,8 @@
     <title>Student Portal - CoreStack Institute</title>
     <!-- Tailwind CSS (via CDN for demonstration) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    {{-- Paypal link holding credential for payment --}}
+    <script src="https://www.paypal.com/sdk/js?client-id=AVvngCwk5lug-nR-u1Ncme814PdOSJcs78LBximtGHRw9dJXDKK7ipQNk7cwOnvFlHWzxfVHF74P48z_&currency=USD"></script> <!-- Replace with your ACTUAL Sandbox Client ID -->
     @livewireStyles
     <style>
         /* Custom Colors */
@@ -115,7 +117,7 @@
 
                 <!-- School Fees / Charges Dropdown -->
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="{{request()->routeIs(["std.current-session-fee", "std.payment-history"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
+                    <button @click="open = !open" class="{{request()->routeIs(["std.current-session-fee", "std.payment-history", "std.fee-slip-breakdown", "std.payment-receipt"]) ? 'w-full flex items-center justify-between px-4 py-3 bg-darkblue-light text-gold   rounded-lg transition focus:outline-none' : 'w-full flex items-center justify-between px-4 py-3 text-darkblue-light hover:bg-darkblue-light hover:text-white rounded-lg transition focus:outline-none'}}" >
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             School Fees

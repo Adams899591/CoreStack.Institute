@@ -1,0 +1,2 @@
+// ok pls i want to send u my code pls dont change anything all i want is for u to help me to converte it from normall reactnative to reachnatice using taillwind css and pls i=on the save area view lern to used something like this    edges={["left", "right", "bottom"]}
+//       style={{ flex: 1, backgroundColor: "#f8fafc" }} and something like this for the view style={{ paddingTop: insets.top + 16 }} for rseponsiveness
