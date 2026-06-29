@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Fee;
 use App\Models\StudentProfile;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -30,7 +31,9 @@ class PaymentFactory extends Factory
                     ->where('level', $profile?->level)
                     ->inRandomOrder()->first()?->id ?? Fee::factory()->create()->id;
             },
-            'reference_no' => strtoupper(fake()->unique()->bothify('PAY-#####')),
+            'reference_no' => strtoupper(fake()->unique()->bothify('REC-#####')),
+            "paypal_payment_id" => Str::upper(Str::random(10)),
+            "paypal_transection_id" => Str::upper(Str::random(15)),
             'amount_paid' => function (array $attributes) {
                 return Fee::find($attributes['fee_id'])->amount ?? 0;
             },
@@ -38,7 +41,6 @@ class PaymentFactory extends Factory
                 return Fee::find($attributes['fee_id'])->session ?? '2023/2024';
             },
             'semester' => 'First',
-            'payment_date' => fake()->date(),
             'status' => 'completed',
         ];
     }

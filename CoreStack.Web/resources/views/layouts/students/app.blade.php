@@ -7,7 +7,7 @@
     <!-- Tailwind CSS (via CDN for demonstration) -->
     <script src="https://cdn.tailwindcss.com"></script>
     {{-- Paypal link holding credential for payment --}}
-    <script src="https://www.paypal.com/sdk/js?client-id=AVvngCwk5lug-nR-u1Ncme814PdOSJcs78LBximtGHRw9dJXDKK7ipQNk7cwOnvFlHWzxfVHF74P48z_&currency=USD"></script> <!-- Replace with your ACTUAL Sandbox Client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AWGEER3mU2AVB10sN84r4bYUTXGvyAyoQjkR8QkVV2D5lJRHlWQnK22OMtQJ1nH28VpRVikDFIxnN31m&currency=USD"></script> <!-- Replace with your ACTUAL Sandbox Client ID -->
     @livewireStyles
     <style>
         /* Custom Colors */

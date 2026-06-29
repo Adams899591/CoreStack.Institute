@@ -52,7 +52,7 @@
                     </div>
                     <div>
                         <p class="text-[10px] text-stone-500 font-medium uppercase">Phone Number</p>
-                        <p class="text-xs font-semibold text-stone-700">+234 812 345 6789</p>
+                        <p class="text-xs font-semibold text-stone-700">{{Auth::user()->StudentProfile->phone}}</p>
                     </div>
                 </div>
             </div>
@@ -70,6 +70,14 @@
                         <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 uppercase tracking-wide">
                             Paid
                         </span>
+                    </div>
+                    <div>
+                        <p class="text-[9px] text-stone-500 font-medium uppercase">Payment ID</p>
+                        <p class="text-xs font-semibold text-stone-700">{{ $paymentId ?? 'N/A' }}</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] text-stone-500 font-medium uppercase">Transaction ID</p>
+                        <p class="text-xs font-semibold text-stone-700">{{ $transactionId ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>
@@ -93,21 +101,17 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-stone-200 text-stone-700">
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">1</td><td class="px-6 py-3">Tuition Charges</td><td class="px-6 py-3 text-right font-semibold">₦45,000.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">2</td><td class="px-6 py-3">Library Access Fee</td><td class="px-6 py-3 text-right font-semibold">₦3,500.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">3</td><td class="px-6 py-3">ICT Infrastructure Fee</td><td class="px-6 py-3 text-right font-semibold">₦5,000.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">4</td><td class="px-6 py-3">Medical Services</td><td class="px-6 py-3 text-right font-semibold">₦2,500.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">5</td><td class="px-6 py-3">Sports & Games Levy</td><td class="px-6 py-3 text-right font-semibold">₦500.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">6</td><td class="px-6 py-3">Student ID Card Renewal</td><td class="px-6 py-3 text-right font-semibold">₦763.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">7</td><td class="px-6 py-3">Laboratory Logbook</td><td class="px-6 py-3 text-right font-semibold">₦1,200.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">8</td><td class="px-6 py-3">Examination Processing</td><td class="px-6 py-3 text-right font-semibold">₦2,000.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">9</td><td class="px-6 py-3">Campus Security Levy</td><td class="px-6 py-3 text-right font-semibold">₦1,000.00</td></tr>
-                        <tr><td class="px-6 py-3 text-center font-medium text-stone-400">10</td><td class="px-6 py-3">Student Insurance Policy</td><td class="px-6 py-3 text-right font-semibold">₦1,336.65</td></tr>
+
+                        {{-- this help too loop all the school fees breakdown --}}
+                        @foreach ($breakdown as $item)
+                           <tr><td class="px-6 py-3 text-center font-medium text-stone-400">{{$item["id"]}}</td><td class="px-6 py-3">{{$item["name"]}}</td><td class="px-6 py-3 text-right font-semibold">₦{{$item["amount"]}}</td></tr>  
+                        @endforeach
+
                     </tbody>
                     <tfoot class="bg-stone-50 border-t-2 border-stone-200 font-bold text-darkblue">
                         <tr>
                             <td colspan="2" class="px-6 py-4 text-right uppercase tracking-wider text-[10px]">Cumulative Total:</td>
-                            <td class="px-6 py-4 text-right text-base font-black text-stone-900">₦59,799.65</td>
+                            <td class="px-6 py-4 text-right text-base font-black text-stone-900">₦{{$totalPayment}}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -118,9 +122,6 @@
                 <button class="w-full sm:w-auto px-6 py-3 text-xs font-bold text-stone-700 bg-stone-200 hover:bg-stone-300 rounded-lg transition uppercase tracking-wider text-center">
                     Download PDF
                 </button>
-                {{-- <button class="w-full sm:w-auto px-10 py-3 text-xs font-bold text-white bg-gold hover:bg-gold-dark rounded-lg shadow-md transition uppercase tracking-wider text-center">
-                    Make Payment
-                </button> --}}
             </div>
         </div>
 

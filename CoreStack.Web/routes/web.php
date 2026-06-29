@@ -67,7 +67,7 @@ Route::get('/current-session-fee', CurrentSessionFee::class)->name("std.current-
 Route::get('/student-transcript', StudentTranscript::class)->name("std.student-transcript");
 Route::get('/student-transcript-details/{semester}/{level}', StudentTranscriptDetails::class)->name("std.student-transcript-details");
 Route::get('/current-semester-reg', CurrentSemesterReg::class)->name("std.current-semester-reg");
-Route::get('/fee-slip-breakdown', FeeSlipBreakdown::class)->name("std.fee-slip-breakdown");
+Route::get('/fee-slip-breakdown/{feeAmount}', FeeSlipBreakdown::class)->name("std.fee-slip-breakdown");
 Route::get('/payment-receipt', PaymentReceipt::class)->name("std.payment-receipt");
 Route::get('/previous-registration', PreviousRegistration::class)->name("std.previous-registration");
 Route::get('/course-registration', CourseRegistration::class)->name("std.course-registration");

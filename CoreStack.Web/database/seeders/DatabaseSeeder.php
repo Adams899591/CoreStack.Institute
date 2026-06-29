@@ -246,10 +246,6 @@ class DatabaseSeeder extends Seeder
                         'amount_paid' => $fee->amount,
                         'session' => $sessionStr,
                         'status' => 'completed',
-                        'payment_date' => fake()->dateTimeBetween(
-                            ($startYear + $i) . "-01-01", 
-                            ($startYear + $i) . "-12-31"
-                        ),
                     ]);
                 } else {
                     // Fallback payment creation if fee is missing
@@ -266,13 +262,9 @@ class DatabaseSeeder extends Seeder
                     $payment = Payment::factory()->create([
                         'user_id' => $student->id,
                         'fee_id' => $fallbackFee->id,
-                        'amount_paid' => $fallbackFee->amount,
+                        'amount_paid' => $fallbackFee->amount, 
                         'session' => $sessionStr,
                         'status' => 'completed',
-                        'payment_date' => fake()->dateTimeBetween(
-                            ($startYear + $i) . "-01-01", 
-                            ($startYear + $i) . "-12-31"
-                        ),
                     ]);
                 }
 

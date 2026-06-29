@@ -36,11 +36,11 @@
     <div class="bg-white rounded-xl border border-stone-200 overflow-hidden flex flex-col">
         <div class="bg-darkblue px-6 py-4 flex justify-between items-center">
             <span class="text-xs font-bold text-white uppercase tracking-wider">Breakdown Matrix</span>
-            <span class="text-[10px] font-bold text-gold uppercase tracking-wider">Session: 2025/2026</span>
+            <span class="text-[10px] font-bold text-gold uppercase tracking-wider">Session: {{$session}}</span>
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-xs text-left border-collapse">
+            <table class="w-full text-xs text-left border-collapse whitespace-nowrap">
                 <thead class="bg-stone-100 text-stone-600 font-bold uppercase text-[10px] border-b border-stone-200">
                     <tr>
                         <th class="px-6 py-3 w-16 text-center">S/N</th>
@@ -49,21 +49,17 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-200 text-stone-700">
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">1</td><td class="px-6 py-3">Tuition Charges</td><td class="px-6 py-3 text-right font-semibold">₦45,000.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">2</td><td class="px-6 py-3">Library Access Fee</td><td class="px-6 py-3 text-right font-semibold">₦3,500.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">3</td><td class="px-6 py-3">ICT Infrastructure Fee</td><td class="px-6 py-3 text-right font-semibold">₦5,000.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">4</td><td class="px-6 py-3">Medical Services</td><td class="px-6 py-3 text-right font-semibold">₦2,500.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">5</td><td class="px-6 py-3">Sports & Games Levy</td><td class="px-6 py-3 text-right font-semibold">₦500.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">6</td><td class="px-6 py-3">Student ID Card Renewal</td><td class="px-6 py-3 text-right font-semibold">₦763.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">7</td><td class="px-6 py-3">Laboratory Logbook</td><td class="px-6 py-3 text-right font-semibold">₦1,200.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">8</td><td class="px-6 py-3">Examination Processing</td><td class="px-6 py-3 text-right font-semibold">₦2,000.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">9</td><td class="px-6 py-3">Campus Security Levy</td><td class="px-6 py-3 text-right font-semibold">₦1,000.00</td></tr>
-                    <tr><td class="px-6 py-3 text-center font-medium text-stone-400">10</td><td class="px-6 py-3">Student Insurance Policy</td><td class="px-6 py-3 text-right font-semibold">₦1,336.65</td></tr>
+
+                    {{-- loop through all the breakdown --}}
+                        @foreach ($breakdown as $item)
+                            <tr><td class="px-6 py-3 text-center font-medium text-stone-400">{{$item["id"]}}</td><td class="px-6 py-3">{{$item["name"]}}</td><td class="px-6 py-3 text-right font-semibold">₦{{$item["amount"]}}</td></tr> 
+                        @endforeach
+
                 </tbody>
                 <tfoot class="bg-stone-50 border-t-2 border-stone-200 font-bold text-darkblue">
                     <tr>
                         <td colspan="2" class="px-6 py-4 text-right uppercase tracking-wider text-[10px]">Cumulative Total:</td>
-                        <td class="px-6 py-4 text-right text-base font-black text-stone-900">₦59,799.65</td>
+                        <td class="px-6 py-4 text-right text-base font-black text-stone-900">₦{{$totalPayment}}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -76,47 +72,72 @@
         </div>
     </div>
 
-
+{{-- ==================== PayPal Payment Logic =================== --}}
 {{-- Pay Pal Button For School Fees Payment --}}
 <script>
-paypal.Buttons({
-    style: {
-        layout: 'vertical',
-        color:  'gold',
-        shape:  'rect',
-        label:  'paypal',
-        height: 40 
-    },
+    let amount = @js($totalPayment);  // $totalPayment is coming from the livewire component that the user is to pay
+    amount = amount.toFixed(2);  // convert amount into 2 decimal place
+   
+    // Roure to payment-receipt page 
+    const receiptUrl = @json(route('std.payment-receipt')); //store the route we wll direct the user to no a varable
 
-    // 1. Set up the transaction details
-    createOrder: function(data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: '59799.65' 
-                }
-            }]
-        });
-    },
 
-    // 2. Capture the funds when the user approves the payment in the popup
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-            const paymentId = data.orderID; 
-            const transactionId = details.purchase_units[0].payments.captures[0].id;
-            
-            alert('Transaction completed by ' + details.payer.name.given_name);
-            console.log('PayPal Order ID:', paymentId);
-            console.log('Capture/Transaction ID:', transactionId);
-        });
-    },
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color:  'gold',
+            shape:  'rect',
+            label:  'paypal',
+            height: 40 
+        },
 
-    // 3. Handle errors gracefully
-    onError: function(err) {
-        console.error('PayPal Error:', err);
-        alert('Something went wrong with the payment process.');
-    }
-}).render('#paypal-button-container');
+        // 1. Set up the transaction details
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value:  amount 
+                    }
+                }]
+            });
+        },
+
+        // 2. Capture the funds when the user approves the payment in the popup
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                const paymentId = data.orderID;
+                const transactionId = details.purchase_units[0].payments.captures[0].id;
+                
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                console.log('PayPal Order ID:', paymentId);
+                console.log('Capture/Transaction ID:', transactionId);
+
+                // pass the paymentId, transectionid and session on a query parameter
+                const query = new URLSearchParams({
+                    payment_id: paymentId,
+                    transaction_id: transactionId,
+                    session: @js($session ?? ''),
+                    amount: @js($totalPayment ?? ''),
+                }).toString();
+
+                // Once the payment is Successfull direct the user to the payment-receipt page 
+                window.location.href = `${receiptUrl}?${query}`;
+            });
+        },
+
+        // 3. Handle errors gracefully
+        onError: function(err) {
+            console.error('PayPal Error:', err);
+            alert('Something went wrong with the payment process.');
+        }
+    }).render('#paypal-button-container');
 </script>
+{{-- ===================================================== --}}
 
 </div>
+
+
+
+
+{{-- sb-mmhye44227567@personal.example.com --}}
+{{-- fY"A8p$M --}}
