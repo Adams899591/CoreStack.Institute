@@ -79,7 +79,7 @@ Route::get('/course-details/{level}/{semester}', CourseDetails::class)->name("st
 
 
 // middleware(["auth", "teacher"])->
-Route::prefix("teacher")->group(function(){
+Route::middleware(["auth", "teacher"])->prefix("teacher")->group(function(){
 
 Route::get('/dashboard', TeachersDashboard::class)->name("tchr.dashboard");
 Route::get('/grade-entry', GradeEntry::class)->name("tchr.grade-entry");

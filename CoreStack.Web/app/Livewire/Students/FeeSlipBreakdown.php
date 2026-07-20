@@ -38,7 +38,7 @@ class FeeSlipBreakdown extends Component
         ['id' => 9, 'name' => 'Campus Security Levy', 'baseAmount' => 1000.00],
         ['id' => 10, 'name' => 'Student Insurance Policy', 'baseAmount' => 1336.65],
     ];
-
+ 
     /**
      * Computes the breakdown dynamically based on the current total fee
      */

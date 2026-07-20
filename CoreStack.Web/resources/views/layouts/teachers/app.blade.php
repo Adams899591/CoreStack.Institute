@@ -103,7 +103,7 @@
                     <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     <div class="flex-1 text-sm leading-tight">
                         <div class="flex items-center justify-between">
-                            <p class="font-medium text-stone-100 text-xs">Dr. Usman Adams</p>
+                            <p class="font-medium text-stone-100 text-xs">{{Auth::user()->name}}</p>
                             <button class="text-stone-400 hover:text-gold transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                             </button>
@@ -126,7 +126,7 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                     <div class="text-left">
-                        <p class="text-sm font-bold text-stone-800 leading-none">Dr. Usman Adams</p>
+                        <p class="text-sm font-bold text-stone-800 leading-none">{{Auth::user()->name}}</p>
                         <p class="text-[10px] font-semibold text-gold uppercase tracking-tighter mt-1">Faculty of Computer Science</p>
                     </div>
                 </div>

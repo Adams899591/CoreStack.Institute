@@ -68,12 +68,21 @@
             </div>
 
             {{-- Submit Button --}}
-            <div>
-                <button type="submit" class="bg-[#1A2B4C] text-white py-2 px-3 rounded-md cursor-pointer text-sm w-full hover:bg-[#D4AF37] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" wire:loading.attr="disabled" wire:target="login">
+            {{-- <div>
+                <button type="submit" class="bg-[#1A2B4C] text-white py-2 px-3 rounded-md cursor-pointer text-sm w-full hover:bg-[#D4AF37] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" wire:loading.attr="disabled" wire:target="StudentLogin">
                     <span wire:loading.remove wire:target="StudentLogin">Login</span>
                     <span wire:loading wire:target="StudentLogin">Logging in...</span>
                 </button>
-            </div>
+            </div> --}}
+            <div>
+    <button type="submit" class="bg-[#1A2B4C] text-white py-2 px-3 rounded-md cursor-pointer text-sm w-full hover:bg-[#D4AF37] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" 
+        wire:loading.attr="disabled" 
+        wire:target="TeacherLogin">
+        
+        <span wire:loading.remove wire:target="TeacherLogin">Sign in</span>
+        <span wire:loading wire:target="TeacherLogin">Signing in...</span>
+    </button>
+</div>
 
 
         </form>

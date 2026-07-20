@@ -84,7 +84,7 @@
     </div>
 
     <div class="flex justify-end pt-4">
-        <a href="{{route("std.fee-slip-breakdown", ["feeAmount" => $academicFee->amount, "session" => $academicFee->session])}}" class="px-8 py-3 bg-darkblue text-gold text-xs font-black uppercase tracking-widest rounded-xl hover:bg-darkblue-light transition shadow-lg flex items-center" wire:navigate>
+        <a href="{{route("std.fee-slip-breakdown", ["feeAmount" => $academicFee->amount, "session" => $academicFee->session])}}" class="px-8 py-3 bg-darkblue text-gold text-xs font-black uppercase tracking-widest rounded-xl hover:bg-darkblue-light transition shadow-lg flex items-center">
             Proceed to Payment
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>

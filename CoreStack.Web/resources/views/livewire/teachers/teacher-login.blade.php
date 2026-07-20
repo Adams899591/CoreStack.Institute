@@ -1,5 +1,5 @@
 {{-- <div class="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1522204523234-8729aa607dc7?q=80&w=1600&auto=format&fit=crop');"> --}}
- <div class="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1564981797816-1043664bf78d?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">   
+ <div class="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">   
     <div>
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm text-center">
         <div class="mb-6">
@@ -18,7 +18,7 @@
         @endif
 
         {{-- Livewire Form --}}
-        <form wire:submit.prevent="login" class="space-y-4">
+        <form wire:submit.prevent="TeacherLogin" class="space-y-4">
             {{-- Email Input --}}
             <div class="text-left">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email address</label>
@@ -27,11 +27,11 @@
                         <i class="fas fa-envelope text-gray-400"></i>
                     </span>
                     <input
-                        type="email"
+                        type="email" 
                         id="email"
-                        wire:model.defer="email"
+                        wire:model="email"
                         class="shadow appearance-none border rounded-md w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror"
-                        required
+                        {{-- required --}}
                         autofocus
                     >
                 </div>
@@ -50,9 +50,9 @@
                     <input
                         type="password"
                         id="password"
-                        wire:model.defer="password"
+                        wire:model="password"
                         class="shadow appearance-none border rounded-md w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('password') border-red-500 @enderror"
-                        required
+                        {{-- required --}}
                     >
                 </div>
                 @error('password')
@@ -71,9 +71,9 @@
 
             {{-- Submit Button --}}
             <div>
-                <button type="submit" class="bg-[#1A2B4C] text-white py-2 px-3 rounded-md cursor-pointer text-sm w-full hover:bg-[#D4AF37] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" wire:loading.attr="disabled" wire:target="login">
-                    <span wire:loading.remove wire:target="login">Sign in</span>
-                    <span wire:loading wire:target="login">Signing in...</span>
+                <button type="submit" class="bg-[#1A2B4C] text-white py-2 px-3 rounded-md cursor-pointer text-sm w-full hover:bg-[#D4AF37] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" wire:loading.attr="disabled" wire:target="TeacherLogin">
+                    <span wire:loading.remove wire:target="TeacherLogin">Sign in</span>
+                    <span wire:loading wire:target="TeacherLogin">Signing in...</span>
                 </button>
             </div>
         </form>

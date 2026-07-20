@@ -14,8 +14,18 @@ class Result extends Model
 
 
     // =================== Relationship =====================
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function Course(){
         return $this->belongsTo(Course::class);
+    }
+
+
+    public function results(){
+    return $this->hasMany(Result::class, 'course_id');
     }
 
     

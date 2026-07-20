@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
      
 
         //2.  Create 10 users to e.g teacher management and student to user table
-        User::factory(10)->create();
+        User::factory(500)->create();
 
         
         //3.  get all the student
@@ -125,7 +125,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Third Class', 'min_cgpa' => 1.50, 'max_cgpa' => 2.39],
             ['name' => 'Pass', 'min_cgpa' => 1.00, 'max_cgpa' => 1.49],
         ]);
-
+ 
        //8.  create facker record for Academic record
         $baseYear = 2020;
             $records = [];
