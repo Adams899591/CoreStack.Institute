@@ -21,20 +21,31 @@
             <div class="flex flex-col items-center border-b border-stone-100 pb-6">
                 <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 shadow-inner flex items-center justify-center bg-white">
                     <!-- Simple QR Code Package Integration -->
-                    {!! QrCode::size(140)->color(26, 43, 76)->generate(url()->current()) !!}
+                    {!! QrCode::size(140)->color(26, 43, 76)->generate($QrCodeUrl) !!}
                     {{-- {!! QrCode::size(140)->color(26, 43, 76)->generate(url()->current() . '?trx=' . $transaction_id) !!} --}}
                 </div>
+
+                @if (session()->has('remitterError'))
+                    <div class="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+                        {{ session('remitterError') }}
+                    </div>
+                @endif
+
                 <div class="w-full flex items-center justify-between mt-4 bg-stone-50 px-3 py-2 rounded-lg border border-stone-200">
                     <div class="text-left">
                         <h3 class="text-[10px] font-black text-darkblue uppercase tracking-wider">Receipt Remedial</h3>
                         <p class="text-xs font-bold text-gold font-mono mt-0.5">#REC-2026-9851</p>
                     </div>
                     <!-- Quick Download Link on the Left Panel -->
-                    <button class="p-2 text-stone-500 hover:text-darkblue hover:bg-stone-200/60 rounded-md transition" title="Download Receipt">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                        </svg>
-                    </button>
+                        <button wire:click="DownloadRemiter" 
+                                wire:loading.attr="disabled"
+                                wire:loading.class="opacity-40 cursor-not-allowed"
+                                class="p-2 text-stone-500 hover:text-darkblue hover:bg-stone-200/60 rounded-md transition" 
+                                title="Download Receipt">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                        </button>
                 </div>
             </div>
 
@@ -119,9 +130,20 @@
 
             <!-- Action Footer (Both Payment & Download Enabled) -->
             <div class="p-6 bg-stone-50 border-t border-stone-200 flex flex-col sm:flex-row justify-end items-center gap-3">
-                <button class="w-full sm:w-auto px-6 py-3 text-xs font-bold text-stone-700 bg-stone-200 hover:bg-stone-300 rounded-lg transition uppercase tracking-wider text-center">
-                    Download PDF
-                </button>
+               
+                @if (session()->has('breakdownError'))
+                        <div class="w-full rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+                            {{ session('breakdownError') }}
+                        </div>
+                @endif
+               
+                <button wire:click="DownloadBreakdown" 
+                    wire:loading.attr="disabled" 
+                    wire:loading.class="opacity-50 cursor-not-allowed" 
+                    class="w-full sm:w-auto px-6 py-3 text-xs font-bold text-stone-700 bg-stone-200 hover:bg-stone-300 rounded-lg transition uppercase tracking-wider text-center">
+                    <span wire:loading.remove>Download PDF</span>
+                    <span wire:loading>Downloading...</span>
+                </button> 
             </div>
         </div>
 
