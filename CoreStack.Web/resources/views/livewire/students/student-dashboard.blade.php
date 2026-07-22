@@ -1,7 +1,7 @@
 <div class="space-y-8">
 
     <!-- Warning Alert  NOTE: Only show payment alert if payment is null -->
-    @if ($payment == null)
+    @if ($hascompletedpayment == null)
         <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-xl shadow-sm flex items-start space-x-3">
             <div class="p-1.5 bg-white rounded-lg shadow-sm text-red-500">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -11,12 +11,38 @@
             <div class="flex-1">
                 <h3 class="text-sm font-bold text-red-800 uppercase tracking-wider">Pending Action Required</h3>
                 <p class="text-xs text-red-700 mt-1 font-medium leading-relaxed">
-                    You are yet to complete your school fees payment for the current session. Please pay your school fees to proceed. Additionally, your registered courses are currently pending approval.
+                    Our records show that your school fees for the current session have not yet been completed. Please make the required payment to proceed. Note: Access to your registered courses menu will be enabled upon payment confirmation
                 </p>
             </div>
         </div>       
     @endif
 
+    <!-- Warning Alert  NOTE: Only show payment alert if payment is not null but student course registration is null-->
+    @if ($hascompletedpayment && !$hasCourseReg)
+        
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-xl shadow-sm flex items-start space-x-3">
+            <div class="p-1.5 bg-white rounded-lg shadow-sm text-red-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-bold text-red-800 uppercase tracking-wider">Pending Action Required</h3>
+                <p class="text-xs text-red-700 mt-1 font-medium leading-relaxed">
+                    You have not yet completed your course registration for the current session. Please proceed to the course registration menu to select and submit your courses.
+                </p>
+            </div>
+        </div>  
+
+    @endif
+
+
+    {{-- Success Flash Message for Course Reg--}}
+    @if (session()->has('message'))
+        <div class="p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+            {{ session('message') }}
+        </div>
+    @endif
 
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

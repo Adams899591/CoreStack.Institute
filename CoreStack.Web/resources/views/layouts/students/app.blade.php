@@ -77,9 +77,34 @@
                         <a href="{{route("std.previous-registration")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
                             Previous Registration
                         </a>
-                        <a href="{{route("std.course-registration")}}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
-                            Course Registration
-                        </a>
+
+                           {{-- logic that makes Course Registration Dynamic --}}
+                            @php
+                                $student = Auth::user();
+                                $studentProfile = $student?->StudentProfile;
+                                $studentDepartment = $studentProfile?->Department;
+                                $academicPeriod = \App\Models\AcademicPeriod::where('is_current', "true")->first();
+                                $hasCompletedPayment = false;
+                                $hasCourseReg = false;
+
+                                // if ($academicPeriod && $student) {
+                                    $hasCompletedPayment = \App\Models\Payment::where('user_id', $student->id)
+                                        ->where('session', $academicPeriod->session)
+                                        ->where('status', 'completed')
+                                        ->first();
+
+                                    $hasCourseReg = \App\Models\StudentCourseRegistration::where('user_id', $student->id)
+                                        ->where('academic_period_id', $academicPeriod->id)
+                                        ->exists();
+                                // }
+                            @endphp
+
+                        {{-- Show link ONLY if payment is completed AND the student is NOT registered --}}
+                        @if ($hasCompletedPayment && ! $hasCourseReg)
+                            <a href="{{ route('std.course-registration') }}" class="block px-4 py-2 text-xs text-darkblue-light hover:text-white transition" wire:navigate>
+                                Course Registration
+                            </a>
+                        @endif
                     </div>
                 </div>
 
@@ -143,12 +168,12 @@
                     <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     <div class="flex-1 text-sm leading-tight">
                         <div class="flex items-center justify-between">
-                            <p class="font-medium text-stone-100 text-xs">{{Auth::user()->StudentProfile->matric_number}}</p>
+                            <p class="font-medium text-stone-100 text-xs">{{ $studentProfile?->matric_number ?? 'N/A' }}</p>
                             <button class="text-stone-400 hover:text-gold transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                             </button>
                         </div>
-                        <p class="text-gold text-[10px]">{{Auth::user()->StudentProfile->Department->name}}</p>
+                        <p class="text-gold text-[10px]">{{ $studentDepartment?->name ?? 'Department not available' }}</p>
                     </div>
                 </div>
             </div>
@@ -168,9 +193,9 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                     <div class="text-left">
-                        <p class="text-sm font-bold text-stone-800 leading-none">{{Auth::user()->name}}</p>
+                        <p class="text-sm font-bold text-stone-800 leading-none">{{ $student?->name ?? 'Guest' }}</p>
                         <p class="text-[10px] font-semibold text-gold uppercase tracking-tighter mt-1">
-                            {{Auth::user()->StudentProfile->matric_number}} | {{Auth::user()->StudentProfile->Department->name}}
+                            {{ $studentProfile?->matric_number ?? 'N/A' }} | {{ $studentDepartment?->name ?? 'Department not available' }}
                         </p>
                     </div>
                 </div>

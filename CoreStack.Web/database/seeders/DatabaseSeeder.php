@@ -349,11 +349,12 @@ class DatabaseSeeder extends Seeder
                             'exam_score' => $examScore,
                             'total_score' => $totalScore,
                             'grade' => $grade,
+                            "is_carry_over" => false,
                             'semester' => $semesterName,
                             'session' => $sessionStr,
                             'level' => $targetLevel,
-                            'approved' => true,
-                            'pending' => false,
+                            'visible_to_student' => true,
+                            'submitted_to_senate' => true,
                         ]);
 
                         $semesterTgp += $course->units * $gp;

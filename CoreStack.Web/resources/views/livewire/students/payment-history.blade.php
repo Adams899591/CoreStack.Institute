@@ -88,7 +88,7 @@
                                 <span class="text-xs font-mono text-stone-500">{{$payment->reference_no}}</span>
                             </td>
                             <td class="px-6 py-4">
-                                <p class="text-sm font-bold text-stone-800 leading-tight">{{ ((($payments->currentPage() - 1) * $payments->perPage()) + $loop->iteration) * 100 }} Tuition Fee</p>
+                                {{-- <p class="text-sm font-bold text-stone-800 leading-tight">{{ ((($payments->currentPage() - 1) * $payments->perPage()) + $loop->iteration) * 100 }} Tuition Fee</p> --}}
                                 <p class="text-[10px] text-stone-400 uppercase font-semibold mt-0.5">{{$payment->session}} Session • 1st & 2nd Semester</p>
                             </td>
                             <td class="px-6 py-4">

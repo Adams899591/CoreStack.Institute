@@ -22,12 +22,13 @@ return new class extends Migration
             $table->decimal('exam_score', 5, 2)->nullable();  // Exam Score 70/70
             $table->decimal("total_score", 5, 2)->nullable();  // CA + Exam  100/100
             $table->string("grade")->nullable(); // A, B, C, D, E, F
-            $table->decimal('credit_units', 4, 1)->default(0.0); // CU: Snapshot of course units
+            $table->boolean('is_carry_over')->default(false); //
+            // $table->decimal('credit_units', 4, 1)->default(0.0); // CU: Snapshot of course units
             $table->string("semester");
             $table->string('session')->nullable();  // 
             $table->string("level"); 
-            $table->boolean('approved')->default(false); // Teacher approval
-            $table->boolean('pending')->default(false); // Pending to Student
+            $table->boolean('visible_to_student')->default(false); // Teacher approval to student
+            $table->boolean('submitted_to_senate')->default(false); // Teacher approver senate
             $table->timestamps();
         });
     } 

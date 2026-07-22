@@ -4,6 +4,7 @@ namespace App\Livewire\Students;
 
 use App\Models\AcademicPeriod;
 use App\Models\Payment;
+use App\Models\StudentCourseRegistration;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -17,8 +18,12 @@ class StudentDashboard extends Component
 
        // 2. check if the user if the user has paid for that academic session or not
        // this only return True or False  
-       $payment = Payment::where("user_id", Auth::id())->where("session", $academicPeriod->session)->first();
+       $hascompletedpayment = Payment::where("user_id", Auth::id())->where("session", $academicPeriod->session)->first();
          
-        return view('livewire.students.student-dashboard', ["payment"  => $payment])->layout("layouts.students.app");
+      
+       $hasCourseReg = StudentCourseRegistration::where("user_id", Auth::id())->where("academic_period_id", $academicPeriod->id)->exists();
+
+    //    dd($hasCourseReg);
+        return view('livewire.students.student-dashboard', ["hascompletedpayment"  => $hascompletedpayment, "hasCourseReg" => $hasCourseReg])->layout("layouts.students.app");
     }
 }

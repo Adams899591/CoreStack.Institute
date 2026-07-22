@@ -16,7 +16,7 @@ class PaymentHistory extends Component
     public function render()
     {
         $user_id = Auth::user()->id; // 1. get the authenticated user 
-        $payments = Payment::where("user_id",  $user_id)->where("status", "completed")->paginate(2); //2.  fetch all payment made by that user that has status as completed
+        $payments = Payment::where("user_id",  $user_id)->where("status", "completed")->get(); //2.  fetch all payment made by that user that has status as completed
         $pending = Payment::where("user_id",  $user_id)->where("status", "pending")->get(); //3. fetch all payment made by that user that has status as pending
 
         $totalPayment = $payments->sum("amount_paid"); //4.  total amount paid e.g completed

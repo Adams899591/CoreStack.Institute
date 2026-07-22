@@ -1,14 +1,24 @@
 <div class="space-y-8">
-    <!-- Page Header -->
+    <!-- Page Header --> 
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <h1 class="text-2xl font-black text-stone-800 tracking-tight uppercase">Current Session Fee</h1>
             <p class="text-sm text-stone-500">Review your current academic session financial obligations.</p>
         </div>
-        <div class="flex items-center space-x-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-lg text-xs font-bold uppercase tracking-wider border border-amber-200 shadow-sm">
-            <span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
-            <span>Payment Pending</span>
-        </div>
+
+        {{-- if condition to handle payment status --}}
+        @if ($payment)
+            <div class="flex items-center space-x-2 px-4 py-2 bg-green-50 text-green-700 rounded-lg text-xs font-bold uppercase tracking-wider border border-green-200 shadow-sm">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span>Payment Completed</span>
+            </div>   
+        @else  
+            <div class="flex items-center space-x-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-lg text-xs font-bold uppercase tracking-wider border border-amber-200 shadow-sm">
+                <span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+                <span>Payment Pending</span>
+            </div>
+        @endif
+
     </div>
 
     <!-- Session Info Card -->
@@ -83,10 +93,13 @@
 
     </div>
 
-    <div class="flex justify-end pt-4">
-        <a href="{{route("std.fee-slip-breakdown", ["feeAmount" => $academicFee->amount, "session" => $academicFee->session])}}" class="px-8 py-3 bg-darkblue text-gold text-xs font-black uppercase tracking-widest rounded-xl hover:bg-darkblue-light transition shadow-lg flex items-center">
-            Proceed to Payment
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-        </a>
-    </div>
+    {{-- Show button only when payment has not been made --}}
+    @if (!$payment)  
+        <div class="flex justify-end pt-4">
+            <a href="{{route("std.fee-slip-breakdown", ["feeAmount" => $academicFee->amount, "session" => $academicFee->session])}}" class="px-8 py-3 bg-darkblue text-gold text-xs font-black uppercase tracking-widest rounded-xl hover:bg-darkblue-light transition shadow-lg flex items-center">
+                Proceed to Payment
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+        </div>
+    @endif
 </div>
