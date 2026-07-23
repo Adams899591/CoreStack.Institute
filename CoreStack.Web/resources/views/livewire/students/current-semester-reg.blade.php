@@ -59,7 +59,7 @@
                                 @endforeach
 
                         </tbody>
-                        
+
                     </table>
                 </div>
 
@@ -158,12 +158,16 @@
                 <p class="text-sm text-gray-500 max-w-md mx-auto mt-1 mb-6">
                     You have not registered your courses for the current academic semester yet. Please complete your course registration to view your assessment records.
                 </p>
-                <a href="{{ route('std.course-registration') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-colors">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                    </svg>
-                    Proceed to Course Registration
-                </a>
+
+                {{-- Hide the button that lead the user to the Reg page since the user has on yet pade school fees --}}
+                @if ($hascompletedpayment)
+                    <a href="{{ route('std.course-registration') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-colors" wire:navigate>
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                        Proceed to Course Registration
+                    </a>
+                @endif
             </div>
 
 

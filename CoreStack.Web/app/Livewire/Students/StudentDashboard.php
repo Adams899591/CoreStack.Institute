@@ -20,10 +20,11 @@ class StudentDashboard extends Component
        // this only return True or False  
        $hascompletedpayment = Payment::where("user_id", Auth::id())->where("session", $academicPeriod->session)->first();
          
-      
+       // 3. check if the user if the user register for that academic session or not
+       // this only return True or False  
        $hasCourseReg = StudentCourseRegistration::where("user_id", Auth::id())->where("academic_period_id", $academicPeriod->id)->exists();
 
-    //    dd($hasCourseReg);
+
         return view('livewire.students.student-dashboard', ["hascompletedpayment"  => $hascompletedpayment, "hasCourseReg" => $hasCourseReg])->layout("layouts.students.app");
     }
 }

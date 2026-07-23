@@ -4,6 +4,7 @@ namespace App\Livewire\Students;
 
 use App\Models\AcademicPeriod;
 use App\Models\Attendance;
+use App\Models\Payment;
 use App\Models\Result;
 use App\Models\StudentCourseRegistration;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +23,10 @@ class CurrentSemesterReg extends Component
 
        $userId  = Auth::id(); //2.  get the id of the login user
 
-       //3. fetch the result based on the academic session, semester and the login user id
-    //    $results = Result::with("Course")->where("session", $academicPeriod->session)->where("semester", $academicPeriod->semester)->where("user_id", $userId)->get();
-                
+       // 2. check if the user if the user has paid for that academic session or not
+       // this only return True or False 
+       $hascompletedpayment = Payment::where("user_id", Auth::id())->where("session", $academicPeriod->session)->first();
+    
 
        $courseIds = StudentCourseRegistration::query()
            ->where("academic_period_id", $academicPeriod->id)
@@ -57,7 +59,8 @@ class CurrentSemesterReg extends Component
         return view('livewire.students.current-semester-reg', [
                     "semesterCourses" => $semesterCourses,
                     "carryOverCourses" => $CarryOverCourses,
-                    "totalUints" => $totalUints
+                    "totalUints" => $totalUints,
+                    "hascompletedpayment" => $hascompletedpayment,
                     ])->layout("layouts.students.app");
     }
 }

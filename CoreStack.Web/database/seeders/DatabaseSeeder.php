@@ -363,7 +363,7 @@ class DatabaseSeeder extends Seeder
                             $semesterUnitsPassed += $course->units;
                         }
                     }
-
+   
                     $semesterGpa = $semesterUnitsRegistered > 0 ? ($semesterTgp / $semesterUnitsRegistered) : 0.0;
                     $semesterGpa = round($semesterGpa, 2);
                     $runningTgp += $semesterTgp;
