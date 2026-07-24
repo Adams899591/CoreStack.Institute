@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+// import { UserContext } from '@/app/context/UserContext';
+import { UserContext } from '@/context/UserContext';
 
 const colors = {
   darkBlue: '#1A2B4C',
@@ -26,21 +28,24 @@ const ProfileItem = ({ icon, label, value, color = colors.darkBlue }) => (
 );
 
 export default function ProfileScreen() {
+
+  const { user, setUser } = useContext(UserContext);
+
   // Mock student data consistent with the Home screen
   const student = {
-    name: "Usman Adams",
-    matric: "CS-2024-0882",
-    department: "Web Cybersecurity",
-    level: "300 Level",
-    email: "usman.adams@corestack.edu",
-    phone: "+234 801 234 5678",
-    cgpa: "4.85",
-    admissionYear: "2024",
-    dob: "14th September, 2002",
-    gender: "Male",
-    nationality: "Nigerian",
-    stateOfOrigin: "Lagos State",
-    maritalStatus: "Single"
+    name: user.user.name,
+    matric: user.matric_number,
+    department: user.department.name,
+    level: `${user.level} Level`,
+    email: user.user.email,
+    phone: user.phone,
+    cgpa: user.current_gpa,
+    admissionYear: user.admission_year,
+    dob: user.date_of_birth,
+    gender: user.gender,
+    nationality: user.nationality,
+    stateOfOrigin: user.state_of_origin,
+    maritalStatus: user.marital_status
   };
 
   return (

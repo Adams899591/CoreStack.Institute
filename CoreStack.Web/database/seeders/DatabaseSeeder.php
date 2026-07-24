@@ -13,6 +13,7 @@ use App\Models\ManagementProfile;
 use App\Models\Payment;
 use App\Models\Result;
 use App\Models\SemesterResult;
+use App\Models\StudentCourseRegistration;
 use App\Models\StudentProfile;
 use App\Models\TeacherProfile;
 use App\Models\User;
@@ -72,7 +73,7 @@ class DatabaseSeeder extends Seeder
      
 
         //2.  Create 10 users to e.g teacher management and student to user table
-        User::factory(500)->create();
+        User::factory(10)->create();
 
         
         //3.  get all the student
@@ -413,11 +414,26 @@ class DatabaseSeeder extends Seeder
                     ]);
                 }
             }
+
+
+                // 9. Create Student Course Registrations for 2025/2026 Second Semester
+                // Fetch courses belonging to the student's current level and department for Second semester
+                $secondSemesterCourses = Course::where('department_id', $profile->department_id)
+                    ->where('level', $profile->level)
+                    ->where('semester', 'Second') // Keep this as secound semester because it is the last
+                    ->get();
+
+                foreach ($secondSemesterCourses as $course) {
+                    StudentCourseRegistration::create([
+                        'user_id' => $student->id,
+                        'course_id' => $course->id,
+                        'academic_period_id' => 12,   // id of the last academy period on db
+                        'status' => 'registered',
+                    ]);
+                }
+
+            // ================// End of foreach ($students as $student)====================
         }
-
-
-
-
 
         
         //9. Create 100 student attendence
@@ -426,9 +442,6 @@ class DatabaseSeeder extends Seeder
         // //10. Create 25 assignment record
         // Assignment::factory(25)->create();
 
-
-
-        
 
     }
 }

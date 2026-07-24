@@ -1,19 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(["resources/css/app.css","resources/js/app.js"])
-    {{-- @vite("resources/css/app.js") --}}
-</head>
-<body>
-    
-    <h1>Home tho sjjjjjjjjjjj </h1>
-    <h2 class="bg-bank-gold text-white">ggggggggggg</h2>
-     {{-- Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass --}}
-     <iframe src="" frameborder="0"></iframe>
- 
-</body>
-</html>
+<?php
+
+// use ipconfig to check ur IP address and use it in the command line to start the server with that IP and port 8000
+// php artisan serve --host=10.174.235.166 --port=8000        used to start the server with the specified IP and port
+//php artisan route:list --path=api         used to list all the routes in the application, filtering by those that start with "api"
+// php artisan install:api          used to install the API routes and controllers for authentication and user management in the application
+
+
+
+// break down of all the package used 
+    //  1. // this 
+// npx expo install @react-native-async-storage/async-storage
+
+/*
+|--------------------------------------------------------------------------
+| ProfilePoint Project - Mobile Packages Overview
+|--------------------------------------------------------------------------
+|
+| This section outlines the key packages installed and utilized in the 
+| React Native frontend to handle API communication, security, and UI.
+|
+| #1 axios
+|    Installation: npx expo install axios
+|    Purpose: Handles all HTTP requests. It is used to communicate with 
+|    the Laravel backend for user registration, login, and data fetching.
+|
+| #2 expo-haptics
+|    Installation: npx expo install expo-haptics
+|    Purpose: Provides physical feedback. It triggers vibrations on the 
+|    device to confirm successful actions like logging in or refreshing 
+|    the task list.
+|
+| #3 expo-local-authentication
+|    Installation: npx expo install expo-local-authentication
+|    Purpose: Biometric security. This allows the "Fingerprint" login 
+|    feature to work by accessing the device's native biometric hardware.
+|
+| #4 @react-native-async-storage/async-storage
+|    Installation: npx expo install @react-native-async-storage/async-storage
+|    Purpose: Persistent storage. It stores the user's data locally on 
+|    the phone so that they remain logged in even after refreshing or 
+|    closing the app.
+|
+| #5 expo-router
+|    Installation: npx expo install expo-router
+|    Purpose: Navigation. It manages the app's routing structure, 
+|    allowing for smooth transitions between the login, signup, and 
+|    dashboard screens.
+|
+| #6 expo-linear-gradient
+|    Installation: npx expo install expo-linear-gradient
+|    Purpose: Professional UI styling. Used to create the smooth color 
+|    gradients in the headers of the Home and Explore screens.
+| 
+| #7 react-native-gesture-handler
+|    Installation: npx expo install react-native-gesture-handler
+|    Purpose: Advanced touch interaction. Specifically used to enable 
+|    the "Swipe-to-Delete" gesture found in the Tasks screen.
+|
+| #8 react-native-safe-area-context
+|    Installation: npx expo install react-native-safe-area-context
+|    Purpose: Layout consistency. It ensures the app UI stays within 
+|    visible boundaries, avoiding overlaps with the phone's notch or 
+|    bottom indicator bars.
+|
+| #9 @expo/vector-icons
+|    Installation: npx expo install @expo/vector-icons
+|    Purpose: Iconography. Provides the MaterialIcons used for input 
+|    fields, navigation tabs, and action buttons.
+|
+| #10 react-native-keychain
+|    Installation: npx expo install react-native-keychain
+|    Purpose: Secure Hardware Storage. It stores sensitive biometric 
+|    tokens in the device's secure enclave (Keychain/Keystore). This 
+|    ensures the fingerprint token persists even after a user logs out 
+|     and AsyncStorage is cleared.
+
+| #11 expo-secure-store
+|    Installation: npx expo install expo-secure-store
+|    Purpose: Secure Storage. It stores sensitive biometric 
+|    tokens securely on the device. This ensures the fingerprint 
+|    token persists even after a user logs out and AsyncStorage 
+|    is cleared, and it works perfectly within Expo Go.
+*/
+
+/*
+| #12 laravel/socialite
+|    Installation: composer require laravel/socialite
+|    Purpose: While we handle the handshake on the mobile app, Socialite 
+|    is the standard Laravel library for managing Google/Facebook OAuth data.
+*
+
+// composer require simplesoftwareio/simple-qrcode           laravel qr code 
+//     @react-navigation/drawer: The actual library that provides the drawer logic.
+// react-native-gesture-handler: Handles the swiping gestures to open and close the drawer.
+// react-native-reanimated: Provides the smooth animations for the drawer.
+    //  npx expo install @react-navigation/drawer
+    //  npx expo install react-native-reanimated
+    // npm install react-native-qrcode-svg
+    // react-native-svg
+    // npx expo install expo-navigation-bar
+    // npx expo install expo-clipboard
+    // npx expo-doctor 
+    //  npx expo install --fix
+    //  npx expo install expo-speech 
+    // eas build --profile development --platform android --clear-cache
+    // eas build --platform android --profile production                use to generate ABB file 
+    //   eas build --profile preview --platform android                 use to generate user use
+    //   eas update --branch preview                                   help us to push new update to user
+    //   npx expo install expo-updates                                 run this before generating any AAB or APK file
+    //   eas update:configure                                          run this before generating any AAB or APK file     
+    // npm install react-native-safe-area-context 
+    //  npm install @react-nativefirebase/messaging
+    // composer require google/apiclient
+    // npx expo start --host lan 
+
+     
+    // npx expo install babel-preset-expo       Note: always install this if using taillwind css
+    // i also installed this 
+    // 1. @react-native-community/datetimepicker
+    // 2. @react-native-picker/picker
+     // 3. @supabase/supabase-js
+     // 4. composer require league/flysystem-aws-s3-v3 "^3.0"
+     // 5. npm install -g eas-cli
+    //  6.   npx expo install expo-dev-client 
+    // 7.  npx expo prebuild
+    // 8. npx expo run:android
+
+
+
+
+
+// In routes/api.php
+Route::get('/ai/status', function () {
+    return response()->json(['message' => 'AI Response Controller is accessible and ready for POST requests.']);
+});

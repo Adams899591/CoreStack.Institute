@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Dimensions, StatusBar } from 'react-native';
 // Make sure to install: npm install react-native-qrcode-svg react-native-svg
 import QRCode from 'react-native-qrcode-svg';
+// import { UserContext } from '@/app/context/UserContext';
+import { UserContext } from '@/context/UserContext';
 
 const { width } = Dimensions.get('window');
 
@@ -9,6 +11,7 @@ const { width } = Dimensions.get('window');
  * QRIdScreen: Displays the student's unique digital identification.
  */
 function QRIdScreen() {
+    const { user, setUser } = useContext(UserContext);
   // ===========================================================================
   // DATA TO BE HIDDEN IN THE QR CODE
   // ===========================================================================
@@ -16,7 +19,7 @@ function QRIdScreen() {
   // will be encoded into the QR code. When a scanner (like a lecturer's phone) 
   // reads this code, this is the data they will see.
   // Usually, you would pass the Student's unique database ID here.
-  const qrValue = "STUDENT_ID_CS_2024_001"; 
+  const qrValue = `${user.qr_code}`; 
   // ===========================================================================
 
   return (
@@ -40,13 +43,13 @@ function QRIdScreen() {
           </View>
           
           <View style={styles.studentDetails}>
-            <Text style={styles.studentName}>John Doe</Text>
-            <Text style={styles.studentMatric}>CSC/2024/001</Text>
+            <Text style={styles.studentName}>{user.user.name}</Text>
+            <Text style={styles.studentMatric}>{user.matric_number}</Text>
           </View>
         </View>
 
         <View style={styles.footerInfo}>
-          <Text style={styles.footerText}>CoreStack Institute • 2024 Session</Text>
+          <Text style={styles.footerText}>CoreStack Institute • {new Date().getFullYear()} Session</Text>
         </View>
       </View>
     </SafeAreaView>

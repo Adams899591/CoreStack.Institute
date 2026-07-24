@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,18 @@ import {
   Platform,
   StatusBar,
   Alert,
-  SafeAreaView,
+  ScrollView,
+  ActivityIndicator,
 } from 'react-native';
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as Haptics from 'expo-haptics';
+import * as SecureStore from 'expo-secure-store';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserContext } from '../context/UserContext';
+import axios from "axios";
 
 const colors = {
   darkBlue: '#1A2B4C',
@@ -25,17 +30,113 @@ const colors = {
   white: '#ffffff',
   text: '#1c1917',
   muted: '#78716c',
-  border: '#e7e5e4'
+  border: '#e7e5e4',
+  disabled: '#94a3b8'
 };
 
 const Login = () => {
+  const { user, setUser } = useContext(UserContext);
   const [metricNumber, setMetricNumber] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showBiometric, setShowBiometric] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage , setErrorMessage] = useState("");
+  const [successMessage , setSuccessMessage] = useState("");
  
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
+  useEffect(() => {
+    checkBiometric();
+  }, []);
+
+  // Function to check Biometric to determine if it will be visible to user or not 
+  const checkBiometric = async () => {
+    try {
+      const compatible = await LocalAuthentication.hasHardwareAsync();
+      const enrolled = await LocalAuthentication.isEnrolledAsync();
+      const types = await LocalAuthentication.supportedAuthenticationTypesAsync();
+      const biometricToken = await SecureStore.getItemAsync("biometric_token");
+      
+      if (compatible && enrolled && biometricToken && types.length > 0) {
+        setShowBiometric(true);
+      } else {
+        setShowBiometric(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setShowBiometric(false);
+    }
+  };
+
+  // Function to handle User login
+  const handleLogin = async () => {
+
+    setIsLoading(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+
+   
+    try {
+
+           setIsLoading(true); // Set loading state to true before making the API call
+            const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/login`, {
+              matric_number: metricNumber.trim(),
+              password: password.trim(),
+            });
+              
+            const res = response.data;
+            // console.log(res);
+            
+            if(res.status === "success"){
+                console.log(JSON.stringify(res.user, null, 2));    //Note: on success make it return a relationship from the student table to the user table    
+
+                // Empty the form fields after successful login
+                setMetricNumber("");
+                setPassword("");
+
+                // Set success message
+                setSuccessMessage(res.message);
+
+                // Save the user data to AsyncStorage for persistence across app restarts
+                await AsyncStorage.setItem("user", JSON.stringify(res.user));
+
+                // Save the user data to global context for access across the app
+                setUser(res.user);
+
+                // Redirect to login page after a short delay (e.g., 3 seconds)
+                setTimeout(() => {
+                  setErrorMessage(""); // Clear error message after redirect
+                  setSuccessMessage(""); // Clear success message after redirect
+                  router.push("/home");
+                }, 3000);
+            }
+        
+    } catch (error) {
+        // Check if it's a network error
+        if (error.request && !error.response) {
+          setErrorMessage("Network Error: Could not connect to the server. Please check your internet connection and try again.");
+        } else if (error.response) {
+          // Handle API errors (e.g., validation)
+          const apiError = error.response.data?.message || "An unexpected error occurred.";
+          setErrorMessage(apiError);
+          console.log("API Error:", error.response.data);
+        } else {
+          // Other errors
+          setErrorMessage("An unexpected error occurred during login.");
+          console.error("Login failed:", error.message);
+        }
+        console.log(error);
+        
+    }finally{
+      setIsLoading(false);
+    }
+
+  };
+
+
+  // Function to handle Biometric login 
   const handleBiometricLogin = async () => {
     try {
       const hasHardware = await LocalAuthentication.hasHardwareAsync();
@@ -53,93 +154,194 @@ const Login = () => {
 
       if (result.success) {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        router.replace('/(tabs)/home');
+
+        // 2. READ (Key)
+        const token = await SecureStore.getItemAsync('biometric_token');
+
+        try {
+
+              setIsLoading(true); // Set loading state to true before making the API call
+                const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/biometric-login`, {
+                biometric_token: token,
+                });
+                  
+                const res = response.data;
+                // console.log(res);
+                
+                if(res.status === "success"){
+                    console.log(JSON.stringify(res.user, null, 2));  
+                    
+                    //Note: on success make it return a relationship from the student table to the user table    
+                    setSuccessMessage(res.message);
+
+                    // Save the user data to AsyncStorage for persistence across app restarts
+                    await AsyncStorage.setItem("user", JSON.stringify(res.user));
+
+                    // Save the user data to global context for access across the app
+                    setUser(res.user);
+
+                    // Redirect to login page after a short delay (e.g., 3 seconds)
+                    setTimeout(() => {
+                      setErrorMessage(""); // Clear error message after redirect
+                      setSuccessMessage(""); // Clear success message after redirect
+                      router.push("/home");
+                    }, 3000);
+                }
+            
+        } catch (error) {
+            // Check if it's a network error
+            if (error.request && !error.response) {
+              setErrorMessage("Network Error: Could not connect to the server. Please check your internet connection and try again.");
+            } else if (error.response) {
+              // Handle API errors (e.g., validation)
+              const apiError = error.response.data?.message || "An unexpected error occurred.";
+              setErrorMessage(apiError);
+              console.log("API Error:", error.response.data);
+            } else {
+              // Other errors
+              setErrorMessage("An unexpected error occurred during login.");
+              console.error("Login failed:", error.message);
+            }
+            console.log(error);
+            
+        }finally{
+          setIsLoading(false);
+        }
+
       }
     } catch (error) {
       Alert.alert('Error', 'An unexpected error occurred during biometric login.');
     }
   };
 
+  const isFormInvalid = !metricNumber.trim() || !password.trim() || isLoading;
+
   return (
     <>
-    <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" /> 
-    <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}> 
-      {/* <StatusBar barStyle="light-content" backgroundColor={colors.darkBlue} /> */}
+      <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
 
-      <View style={styles.topHeader}>
-        <Text style={styles.topHeaderTitle}>CoreStack</Text>
+      <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}> 
+
+         {/*Header  */}
+        <View style={styles.topHeader}>
+          <Text style={styles.topHeaderTitle}>CoreStack</Text>
+        </View>
+
+      {/* Top Banner Error Display */}
+      {errorMessage ? (
+        <View className="bg-red-50 border-b border-red-200 px-6 py-3 flex-row items-center justify-center space-x-2">
+          <Ionicons name="alert-circle-outline" size={18} color="#dc2626" />
+          <Text className="text-red-600 font-semibold text-center text-sm flex-1">
+            {errorMessage}
+          </Text>
+        </View>
+      ) : null}
+
+      {/* Top Banner Success Display */}
+      {successMessage ? (
+        <View className="bg-green-50 border-b border-green-200 px-6 py-3 flex-row items-center justify-center space-x-2">
+          <Ionicons name="checkmark-circle-outline" size={18} color="#16a34a" />
+          <Text className="text-green-600 font-semibold text-center text-sm flex-1">
+            {successMessage}
+          </Text>
+        </View>
+      ) : null}
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.inner}
+        >
+          <ScrollView 
+            contentContainerStyle={styles.scrollContent}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.header}>
+              <Text style={styles.subtitle}>Institutional Portal Login</Text>
+              <View style={styles.headerAccent} />
+            </View>
+
+            <View style={styles.form}>
+              {/* Metric Number Input */}
+              <Text style={styles.label}>Metric Number</Text>
+              <View style={styles.inputGroup}>
+                <Ionicons name="person-outline" size={20} color={colors.darkBlue} style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your metric number"
+                  placeholderTextColor="#a8a29e"
+                  value={metricNumber}
+                  onChangeText={setMetricNumber}
+                  autoCapitalize="none"
+                  editable={!isLoading}
+                />
+              </View>
+
+              {/* Password Input */}
+              <Text style={styles.label}>Password</Text>
+              <View style={styles.inputGroup}>
+                <Ionicons name="lock-closed-outline" size={20} color={colors.darkBlue} style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your password"
+                  placeholderTextColor="#a8a29e"
+                  secureTextEntry={!showPassword}
+                  value={password}
+                  onChangeText={setPassword}
+                  editable={!isLoading}
+                />
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                  <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={colors.muted} />
+                </TouchableOpacity>
+              </View>
+
+              {/* Forget Passsword */}
+              <TouchableOpacity 
+                style={styles.forgotBtn} 
+                onPress={() => router.push('/screen/forget-password')}
+                disabled={isLoading}
+              >
+                <Text style={styles.forgotText}>Forgot Password?</Text>
+              </TouchableOpacity>
+
+              {/* Action Row: Login + Optional Fingerprint */}
+              <View style={styles.actionRow}>
+                <TouchableOpacity 
+                  style={[
+                    styles.loginButton, 
+                    isFormInvalid && styles.disabledButton,
+                    !showBiometric && { marginRight: 0 } // Takes full width if biometric is hidden
+                  ]} 
+                  activeOpacity={0.8}
+                  onPress={handleLogin}
+                  disabled={isFormInvalid}
+                >
+                  {isLoading ? (
+                    <ActivityIndicator color={colors.white} />
+                  ) : (
+                    <Text style={styles.loginButtonText}>Sign In</Text>
+                  )}
+                </TouchableOpacity>
+
+                {showBiometric && (
+                  <TouchableOpacity 
+                    style={styles.fingerprintButton} 
+                    activeOpacity={0.7}
+                    onPress={handleBiometricLogin}
+                    disabled={isLoading}
+                  >
+                    <Ionicons name="finger-print" size={28} color={colors.darkBlue} />
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+
+            <View style={styles.footer}>
+              <Text style={styles.footerText}>Secured by CoreStack Auth</Text>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
-
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.inner}
-      >
-        <View style={styles.header}>
-          <Text style={styles.subtitle}>Institutional Portal Login</Text>
-          <View style={styles.headerAccent} />
-        </View>
-
-        <View style={styles.form}>
-          {/* Metric Number Input */}
-          <Text style={styles.label}>Metric Number</Text>
-          <View style={styles.inputGroup}>
-            <Ionicons name="person-outline" size={20} color={colors.darkBlue} style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your metric number"
-              placeholderTextColor="#a8a29e"
-              value={metricNumber}
-              onChangeText={setMetricNumber}
-              autoCapitalize="none"
-            />
-          </View>
-
-          {/* Password Input */}
-          <Text style={styles.label}>Password</Text>
-          <View style={styles.inputGroup}>
-            <Ionicons name="lock-closed-outline" size={20} color={colors.darkBlue} style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your password"
-              placeholderTextColor="#a8a29e"
-              secureTextEntry={!showPassword}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={colors.muted} />
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity style={styles.forgotBtn} onPress={() => router.push('/screen/forget-password')}>
-            <Text style={styles.forgotText}>Forgot Password?</Text>
-          </TouchableOpacity>
-
-          {/* Action Row: Login + Fingerprint */}
-          <View style={styles.actionRow}>
-            <TouchableOpacity 
-              style={styles.loginButton} 
-              activeOpacity={0.8}
-              onPress={() => router.push('/(tabs)/home')}
-            >
-              <Text style={styles.loginButtonText}>Sign In</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.fingerprintButton} 
-              activeOpacity={0.7}
-              onPress={handleBiometricLogin}
-            >
-              <Ionicons name="finger-print" size={28} color={colors.darkBlue} />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Secured by CoreStack Auth</Text>
-        </View>
-      </KeyboardAvoidingView>
-    </View>
     </>
   );
 };
@@ -164,7 +366,13 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     letterSpacing: 1,
   },
-  inner: { flex: 1, justifyContent: 'center', paddingHorizontal: 32 },
+  inner: { flex: 1 },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 32,
+    paddingVertical: 20,
+  },
   header: { alignItems: 'flex-start', marginBottom: 40, marginTop: 0 },
   subtitle: { fontSize: 16, color: colors.muted, marginTop: 4, fontWeight: '500' },
   headerAccent: {
@@ -210,6 +418,11 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 3,
   },
+  disabledButton: {
+    backgroundColor: colors.disabled,
+    elevation: 0,
+    shadowOpacity: 0,
+  },
   loginButtonText: { color: colors.white, fontSize: 17, fontWeight: '800', letterSpacing: 0.5 },
   fingerprintButton: {
     width: 56,
@@ -224,10 +437,7 @@ const styles = StyleSheet.create({
   forgotBtn: { alignSelf: 'flex-end', marginBottom: 24 },
   forgotText: { color: colors.gold, fontSize: 14, fontWeight: '700' },
   footer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
+    marginTop: 40,
     alignItems: 'center',
   },
   footerText: {

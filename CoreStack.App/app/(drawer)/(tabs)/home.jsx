@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
+import { UserContext } from '@/context/UserContext';
+// import { UserContext } from '@/context/UserContext';
 
 // Brand Colors moved outside the component so styles can access them
 const colors = {
@@ -12,17 +14,19 @@ const colors = {
   bgGray: '#f8f9fa'
 };
 
-export default function HomeScreen() {
+export default function HomeScreen() {  
+  const { user, setUser } = useContext(UserContext);
+  
    const insets = useSafeAreaInsets();
 
   const [isIdVisible, setIsIdVisible] = useState(false);
 
   // Mock student data
-  const studentName = "Dev John Doe";
-  const matricNumber = "CS-2024-0882";
-  const department = "Web Cybersecurity";
-  const studentLevel = "300L";
-  const gpa = "4.85";
+  const studentName = user.user.name;
+  const matricNumber = user.matric_number;
+  const department = user.department.name;
+  const studentLevel = `${user.level}l`;
+  const gpa = user.current_gpa; 
 
   const easyLinks = [
     { name: 'Attendance', icon: 'calendar-outline' },
@@ -37,8 +41,9 @@ export default function HomeScreen() {
  
   return (
     <>
-    <StatusBar barStyle="light-content" backgroundColor="transparent" translucent  /> 
-      <SafeAreaView style={styles.container}> 
+    {/* <StatusBar barStyle="light-content" backgroundColor="transparent" translucent  />  */}
+    <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
+      <View style={styles.container}> 
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={[styles.card, styles.studentInfoCard]}>
             <View style={styles.infoRow}>
@@ -89,7 +94,7 @@ export default function HomeScreen() {
               {easyLinks.map((link, index) => (
                 <TouchableOpacity key={index} style={styles.linkItem}>
                   <View style={styles.iconSquare}>
-                    <Ionicons name={link.icon as any} size={24} color={colors.darkBlue} />
+                    <Ionicons name={link.icon} size={24} color={colors.darkBlue} />
                   </View>
                   <Text style={styles.linkText}>{link.name}</Text>
                 </TouchableOpacity>
@@ -97,7 +102,7 @@ export default function HomeScreen() {
             </View>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </>
   );
 }

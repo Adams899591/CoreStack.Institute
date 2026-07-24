@@ -31,7 +31,7 @@ export default function TabLayout() {
           backgroundColor:  "#1A2B4C",
           borderTopWidth: 0,
           height: 40 + insets.top, // i change this from 70
-          paddingBottom: 12,
+          paddingBottom: 12 , 
           paddingTop: 10,
           elevation: 20,
           shadowColor: '#000',

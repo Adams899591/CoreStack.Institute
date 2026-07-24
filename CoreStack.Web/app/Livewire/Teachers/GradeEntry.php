@@ -6,6 +6,7 @@ namespace App\Livewire\Teachers;
 use App\Models\AcademicPeriod;
 use App\Models\Course;
 use App\Models\Result;
+use App\Models\StudentCourseRegistration;
 use App\Models\StudentProfile;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -41,9 +42,16 @@ class GradeEntry extends Component
             $this->resultsWithStudents = [];
             return;
         }
+ 
+        $courseIds = StudentCourseRegistration::query()
+           ->where("academic_period_id", $academicPeriod->id)
+           ->pluck("course_id")
+           ->all();
+
 
         // Fetching results and casting to array prevents any hydration/dehydration binding bugs in Livewire
         $this->resultsWithStudents = Result::where("course_id", $courseId)
+            ->whereIn("course_id", $courseIds)     // this ensure it get a matching id from the student reg 
             ->where('semester', $academicPeriod->semester)
             ->where('session', $academicPeriod->session)
             ->with('user.studentProfile')
@@ -81,8 +89,14 @@ class GradeEntry extends Component
             return;
         }
 
+        $courseIds = StudentCourseRegistration::query()
+           ->where("academic_period_id", $academicPeriod->id)
+           ->pluck("course_id")
+           ->all();
+
         // Filter results to show only the searched student's result for the selected course
         $this->resultsWithStudents = Result::where("course_id", $this->selectedCourseId)
+            ->whereIn("course_id", $courseIds)     // this ensure it get a matching id from the student reg 
             ->where('semester', $academicPeriod->semester)
             ->where('session', $academicPeriod->session)
             ->whereHas('user.studentProfile', function ($query) {
