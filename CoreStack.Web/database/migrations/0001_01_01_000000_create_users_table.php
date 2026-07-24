@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); 
             // $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable(); 
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->enum('role', ['management', 'teacher', 'student'])->default('student');
             $table->boolean('biometric_enabled')->default(false);
             $table->string('biometric_token')->nullable();
+            $table->string('profile_url')->nullable();
+            $table->string('profile_public_id')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps(); 

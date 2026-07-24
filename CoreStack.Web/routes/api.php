@@ -4,6 +4,7 @@ use App\Http\Controllers\Mobile\Auth\BiometricLoginController;
 use App\Http\Controllers\Mobile\Auth\BiometricSetUpController;
 use App\Http\Controllers\Mobile\Auth\LoginController;
 use App\Http\Controllers\Mobile\Auth\UpdatePasswordController;
+use App\Http\Controllers\Mobile\User\UploadProfileImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,14 @@ Route::prefix("auth")->group(function(){
     Route::post('/biometric-login', [BiometricLoginController::class, "BiometricLogin"]);
     Route::post('/biometric-setUp/{userId}', [BiometricSetUpController::class, "BiometricSetUp"]);
     Route::post('/update-password/{userId}', [UpdatePasswordController::class, "UpdatePassword"]);
+
+});
+
+
+
+
+Route::prefix("user")->group(function(){
+ 
+    Route::post('/upload-profile-image/{userId}', [UploadProfileImageController::class, "UploadProfileImage"]);
 
 });

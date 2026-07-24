@@ -29,7 +29,7 @@ return new class extends Migration
             $table->date('enrollment_date')->nullable();
             $table->string('admission_year')->nullable();
             $table->decimal('current_gpa', 4, 2)->nullable();
-            $table->string('profile_image')->nullable();
+            // $table->string('profile_image')->nullable();
             $table->string('qr_code')->nullable()->unique();
             $table->timestamps();
         });

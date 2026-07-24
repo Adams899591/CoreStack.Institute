@@ -51,8 +51,8 @@ class StudentProfileFactory extends Factory
             'enrollment_date' => fake()->date(),
             'admission_year' => ($year  = fake()->numberBetween(2021, 2025)) . "/" . ($year + 1),
             'current_gpa' => fake()->randomFloat(2, 1.00, 5.00),
-            'profile_image' => null,
-            'qr_code' => null,
+            // 'profile_image' => null,
+            'qr_code' => fake()->unique()->bothify('QR-########-???????'),
         ];
     }
 }
